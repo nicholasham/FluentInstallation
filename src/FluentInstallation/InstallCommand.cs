@@ -1,48 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.IO;
 using System.Management.Automation;
 using System.Reflection;
 
 namespace FluentInstallation
 {
-    public interface IInstallerFinder
-    {
-        IEnumerable<IInstaller> FindInAssembly(Assembly assembly);
-    }
-
-    public class InstallerFinder : IInstallerFinder
-    {
-        public IEnumerable<IInstaller> FindInAssembly(Assembly assembly)
-        {
-            return new List<IInstaller>();
-        }
-    }
-
-    public abstract class InstallationCommand :Cmdlet
-    {
-        protected InstallationCommand(IInstallerFinder installerFinder)
-        {
-            Finder = installerFinder;
-        }
-
-        protected InstallationCommand() : this(new InstallerFinder())
-        {
-            
-        }
-
-        public IInstallerFinder Finder { get; set; }
-
-
-        public string AssemblyFile { get; set; }
-    }
-
     /// <summary>
     /// Installs
     /// </summary>
     [Cmdlet(VerbsLifecycle.Install, "Fluent")]
-    public class InstallCommand : InstallationCommand
+    public class InstallCommand : BaseCommand
     {
-        public InstallCommand(IInstallerFinder installerFinder) : base(installerFinder)
+        public InstallCommand(IInstallerFactory installerFactory) : base(installerFactory)
         {
         }
 
@@ -53,17 +22,12 @@ namespace FluentInstallation
         protected override void BeginProcessing()
         {
             base.BeginProcessing();
-
-            if (!File.Exists(AssemblyFile))
-            {
-                throw Errors.AssemblyNotFound(AssemblyFile);
-            }
-
-            var assembly = Assembly.LoadFile(AssemblyFile);
-            var installers = Finder.FindInAssembly(assembly);
-
+            
+            var installers = Factory.Create();
+            
             foreach (var installer in installers)
             {
+                installer.Install(null);
             }
 
         }

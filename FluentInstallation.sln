@@ -1,11 +1,25 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentInstallation", "src\FluentInstallation\FluentInstallation.csproj", "{E3CBFFCA-62C8-482F-B85A-437B09F4CC64}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentInstallation.UnitTests", "FluentInstallation.UnitTests\FluentInstallation.UnitTests.csproj", "{BAE643DF-4CD8-42ED-BE17-03381009920E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentInstallation.UnitTests", "src\FluentInstallation.UnitTests\FluentInstallation.UnitTests.csproj", "{BAE643DF-4CD8-42ED-BE17-03381009920E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3530FBEF-F0A8-44C8-8809-741519656853} = {3530FBEF-F0A8-44C8-8809-741519656853}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestInstallerAssembly", "TestInstallerAssembly\TestInstallerAssembly.csproj", "{5FC35DE3-2118-497B-A799-49DFFEF8D1F6}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{58E2362A-F1AD-45DA-8430-8F6DF4A72CCC}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentInstallation.TestAssembly", "src\FluentInstallation.TestAssembly\FluentInstallation.TestAssembly.csproj", "{3530FBEF-F0A8-44C8-8809-741519656853}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentInstallation.TestEmptyAssembly", "src\FluentInstallation.TestEmptyAssembly\FluentInstallation.TestEmptyAssembly.csproj", "{FF90AF60-EAB1-44A6-A9C7-542BDA5C7DC6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,10 +35,14 @@ Global
 		{BAE643DF-4CD8-42ED-BE17-03381009920E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BAE643DF-4CD8-42ED-BE17-03381009920E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BAE643DF-4CD8-42ED-BE17-03381009920E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5FC35DE3-2118-497B-A799-49DFFEF8D1F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5FC35DE3-2118-497B-A799-49DFFEF8D1F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5FC35DE3-2118-497B-A799-49DFFEF8D1F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5FC35DE3-2118-497B-A799-49DFFEF8D1F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3530FBEF-F0A8-44C8-8809-741519656853}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3530FBEF-F0A8-44C8-8809-741519656853}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3530FBEF-F0A8-44C8-8809-741519656853}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3530FBEF-F0A8-44C8-8809-741519656853}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF90AF60-EAB1-44A6-A9C7-542BDA5C7DC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF90AF60-EAB1-44A6-A9C7-542BDA5C7DC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF90AF60-EAB1-44A6-A9C7-542BDA5C7DC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF90AF60-EAB1-44A6-A9C7-542BDA5C7DC6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
