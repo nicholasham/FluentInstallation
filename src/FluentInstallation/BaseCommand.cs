@@ -5,20 +5,21 @@ namespace FluentInstallation
     /// <summary>
     /// Base assemblyContext for install commands
     /// </summary>
-    public abstract class BaseCommand :Cmdlet, IAssemblyContext
+    public abstract class BaseCommand :Cmdlet, ICommand
     {
-        protected BaseCommand(IInstallerFactory installerFactory)
+        protected BaseCommand(IInstallerFactoryFinder finder)
         {
-            Factory = installerFactory;
+            Finder = finder;
         }
 
         protected BaseCommand() 
         {
-            Factory = new InstallerFactory(this);
+            Finder = new AssemblyInstallerFactoryFinder(this);
         }
 
-        protected IInstallerFactory Factory { get; set; }
-        
+        protected IInstallerFactoryFinder Finder { get; set; }
+
+        [Parameter(Mandatory = true)]
         public string AssemblyFile { get; set; }
     }
 }

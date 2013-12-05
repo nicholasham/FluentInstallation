@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text;
 
 namespace FluentInstallation.TestAssembly
 {
@@ -6,7 +7,7 @@ namespace FluentInstallation.TestAssembly
     {
         public IEnumerable<IInstaller> Create()
         {
-            return new List<IInstaller>();
+            return new[] {new ProjectInstaller()};
         }
     }
 }

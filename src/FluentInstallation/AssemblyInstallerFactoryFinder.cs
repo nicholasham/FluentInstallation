@@ -5,24 +5,24 @@ using System.Reflection;
 
 namespace FluentInstallation
 {
-    class AssemblyInstallerFactoryLoader : IInstallerFactoryLoader
+    class AssemblyInstallerFactoryFinder : IInstallerFactoryFinder
     {
-        private readonly IAssemblyContext _assemblyContext;
+        private readonly ICommand _command;
 
-        public AssemblyInstallerFactoryLoader(IAssemblyContext assemblyContext)
+        public AssemblyInstallerFactoryFinder(ICommand command)
         {
-            _assemblyContext = assemblyContext;
+            _command = command;
         }
 
-        public IInstallerFactory Load()
+        public IInstallerFactory Find()
         {
 
-            if (!File.Exists(_assemblyContext.AssemblyFile))
+            if (!File.Exists(_command.AssemblyFile))
             {
-                throw Exceptions.AssemblyNotFound(_assemblyContext.AssemblyFile);
+                throw Exceptions.AssemblyNotFound(_command.AssemblyFile);
             }
 
-            var assembly = Assembly.LoadFile(_assemblyContext.AssemblyFile);
+            var assembly = Assembly.LoadFile(_command.AssemblyFile);
 
             var factory = assembly
                 .GetTypes()

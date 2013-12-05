@@ -1,17 +1,16 @@
-﻿using System;
-using System.IO;
+﻿using System.Collections.Generic;
 using System.Management.Automation;
-using System.Reflection;
+using Debugger = System.Diagnostics.Debugger;
 
 namespace FluentInstallation
 {
     /// <summary>
-    /// Installs
+    ///     Installs
     /// </summary>
     [Cmdlet(VerbsLifecycle.Install, "Fluent")]
     public class InstallCommand : BaseCommand
     {
-        public InstallCommand(IInstallerFactory installerFactory) : base(installerFactory)
+        public InstallCommand(IInstallerFactoryFinder finder) : base(finder)
         {
         }
 
@@ -22,20 +21,21 @@ namespace FluentInstallation
         protected override void BeginProcessing()
         {
             base.BeginProcessing();
-            
-            var installers = Factory.Create();
-            
-            foreach (var installer in installers)
-            {
-                installer.Install(null);
-            }
-
         }
 
         protected override void ProcessRecord()
         {
             base.ProcessRecord();
             
+            IInstallerFactory factory = Finder.Find();
+            IEnumerable<IInstaller> installers = factory.Create();
+
+            var context = new InstallerContext {Command = this};
+
+            foreach (IInstaller installer in installers)
+            {
+                installer.Install(context);
+            }
         }
     }
 }

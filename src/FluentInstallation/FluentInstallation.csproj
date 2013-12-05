@@ -44,19 +44,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssemblyInstallerFactoryLoader.cs" />
+    <Compile Include="AssemblyInstallerFactoryFinder.cs" />
     <Compile Include="Exceptions.cs" />
     <Compile Include="IFluentSyntax.cs" />
-    <Compile Include="IAssemblyContext.cs" />
+    <Compile Include="ICommand.cs" />
     <Compile Include="IInstaller.cs" />
     <Compile Include="IInstallerContext.cs" />
     <Compile Include="IInstallerFactory.cs" />
-    <Compile Include="ILogger.cs" />
     <Compile Include="BaseCommand.cs" />
     <Compile Include="InstallationException.cs" />
     <Compile Include="InstallCommand.cs" />
-    <Compile Include="InstallerFactory.cs" />
-    <Compile Include="IInstallerFactoryLoader.cs" />
+    <Compile Include="InstallerContext.cs" />
+    <Compile Include="IInstallerFactoryFinder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
