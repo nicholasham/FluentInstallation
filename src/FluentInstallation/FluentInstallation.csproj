@@ -45,6 +45,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInstallerFactoryFinder.cs" />
+    <Compile Include="Builders\ConfigureExtensions.cs" />
+    <Compile Include="Builders\IApplicationOptions.cs" />
+    <Compile Include="Builders\IApplicationPoolOptions.cs" />
+    <Compile Include="Builders\IBindingOptions.cs" />
+    <Compile Include="Builders\IVirtualDirectoryOptions.cs" />
+    <Compile Include="Builders\IConfigureOptions.cs" />
+    <Compile Include="Builders\ICustomIdentityOptions.cs" />
+    <Compile Include="Builders\IDeleteApplicationOptions.cs" />
+    <Compile Include="Builders\IIisConfigurationOptions.cs" />
+    <Compile Include="Builders\IWebsiteOptions.cs" />
     <Compile Include="Exceptions.cs" />
     <Compile Include="IFluentSyntax.cs" />
     <Compile Include="ICommand.cs" />
