@@ -46,13 +46,12 @@
   <ItemGroup>
     <Compile Include="AssemblyInstallerFactoryFinder.cs" />
     <Compile Include="ConfigureExtensions.cs" />
-    <Compile Include="IIS\ApplicationPoolOptions.cs" />
+    <Compile Include="IIS\ApplicationPoolConfigurer.cs" />
     <Compile Include="IIS\IApplicationOptions.cs" />
-    <Compile Include="IIS\IApplicationPoolOptions.cs" />
+    <Compile Include="IIS\IApplicationPoolConfigurer.cs" />
     <Compile Include="IIS\IBindingOptions.cs" />
     <Compile Include="IIS\IVirtualDirectoryOptions.cs" />
-    <Compile Include="IConfigurer.cs" />
-    <Compile Include="IIS\ICustomIdentityOptions.cs" />
+    <Compile Include="IRootConfigurer.cs" />
     <Compile Include="IIS\IDeleteApplicationOptions.cs" />
     <Compile Include="IIS\IWebServerConfigurer.cs" />
     <Compile Include="IIS\IWebsiteOptions.cs" />

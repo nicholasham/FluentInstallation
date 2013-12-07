@@ -17,10 +17,11 @@ namespace FluentInstallation.IIS
             throw new NotImplementedException();
         }
 
-        public IWebServerConfigurer CreateApplicationPool(Action<IApplicationPoolOptions> options)
+        public IWebServerConfigurer CreateApplicationPool(Action<IApplicationPoolConfigurer> options)
         {
-            var applicationPool = ServerManager.ApplicationPools.Add(Guid.NewGuid().ToString());
-            options(new ApplicationPoolOptions(applicationPool));
+            var defaultName = string.Format("ApplicationPool{0}", ServerManager.ApplicationPools.Count + 1);
+            var applicationPool = ServerManager.ApplicationPools.Add(defaultName);
+            options(new ApplicationPoolConfigurer(applicationPool));
             return this;
         }
 

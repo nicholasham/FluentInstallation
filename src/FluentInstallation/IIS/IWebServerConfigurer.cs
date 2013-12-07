@@ -2,9 +2,9 @@ using System;
 
 namespace FluentInstallation.IIS
 {
-    public interface IWebServerConfigurer : IConfigurer
+    public interface IWebServerConfigurer : IRootConfigurer
     {
-        IWebServerConfigurer CreateApplicationPool(Action<IApplicationPoolOptions> options);
+        IWebServerConfigurer CreateApplicationPool(Action<IApplicationPoolConfigurer> options);
         IWebServerConfigurer CreateWebsite(Action<IWebsiteOptions> options);
 
         IWebServerConfigurer DeleteApplicationPool(string name);

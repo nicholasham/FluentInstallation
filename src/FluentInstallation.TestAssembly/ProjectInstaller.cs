@@ -4,6 +4,7 @@ using FluentInstallation.IIS;
 namespace FluentInstallation.TestAssembly
 {
     
+    
     public class ProjectInstaller : IInstaller
     {
         public void Install(IInstallerContext context)
@@ -22,12 +23,7 @@ namespace FluentInstallation.TestAssembly
                     {
                         applicationPool.Named("mysite.com");
                         applicationPool.UsingClassicPipelineMode();
-                        applicationPool.UsingCustomIdentity(identity =>
-                        {
-                            identity.WithUsername("nick");
-                            identity.WithPassword("password");
-                        });
-
+                        applicationPool.UsingCustomIdentity("Nick", "password");
                     })
                     .Commit();
 

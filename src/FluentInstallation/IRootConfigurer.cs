@@ -1,6 +1,6 @@
 namespace FluentInstallation
 {
-    public interface IConfigurer
+    public interface IRootConfigurer
     {
         void Commit();
     }

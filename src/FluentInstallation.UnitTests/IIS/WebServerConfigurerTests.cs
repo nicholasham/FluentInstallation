@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Microsoft.Web.Administration;
 using Xunit;
 using Xunit.Sdk;
@@ -31,7 +32,7 @@ namespace FluentInstallation.IIS
             var sut = new WebServerConfigurer();
             var actual = false;
 
-            Action<IApplicationPoolOptions> action = (options) =>
+            Action<IApplicationPoolConfigurer> action = (options) =>
             {
                 actual = options != null;
             };
@@ -44,7 +45,7 @@ namespace FluentInstallation.IIS
         }
 
         [Fact]
-        public void CreateApplicationPool_CreatesANewApplicationPoolInServerManager()
+        public void CreateApplicationPool_AddsNewApplicationPoolToServerManager()
         {
             var sut = new WebServerConfigurer();
             
@@ -55,7 +56,9 @@ namespace FluentInstallation.IIS
             var actual = sut.ServerManager.ApplicationPools.Count;
             
             Assert.Equal(expected, actual);
+            Assert.Equal("ApplicationPool" + expected, sut.ServerManager.ApplicationPools.Last().Name);
 
         }
+        
     }
 }
