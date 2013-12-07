@@ -1,6 +1,6 @@
 ﻿namespace FluentInstallation.IIS
 {
-    public interface IDeleteApplicationOptions
+    public interface IDeleteApplicationConfigurer
     {
         IWebServerConfigurer ContainedInWebsite(string name);
     }

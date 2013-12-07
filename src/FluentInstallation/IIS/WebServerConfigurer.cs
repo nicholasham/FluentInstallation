@@ -25,7 +25,7 @@ namespace FluentInstallation.IIS
             return this;
         }
 
-        public IWebServerConfigurer CreateWebsite(Action<IWebsiteOptions> options)
+        public IWebServerConfigurer CreateWebsite(Action<IWebsiteConfigurer> options)
         {
             throw new NotImplementedException();
         }
@@ -40,12 +40,12 @@ namespace FluentInstallation.IIS
             throw new NotImplementedException();
         }
 
-        public IDeleteApplicationOptions DeleteApplication(string name)
+        public IDeleteApplicationConfigurer DeleteApplication(string name)
         {
             throw new NotImplementedException();
         }
 
-        public IWebServerConfigurer AlterWebsite(string name, Action<IWebsiteOptions> options)
+        public IWebServerConfigurer AlterWebsite(string name, Action<IWebsiteConfigurer> options)
         {
             throw new NotImplementedException();
         }
