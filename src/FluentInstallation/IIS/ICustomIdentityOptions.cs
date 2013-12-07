@@ -1,4 +1,4 @@
-﻿namespace FluentInstallation.Builders
+﻿namespace FluentInstallation.IIS
 {
     public interface ICustomIdentityOptions : IFluentSyntax
     {

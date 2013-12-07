@@ -45,16 +45,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInstallerFactoryFinder.cs" />
-    <Compile Include="Builders\ConfigureExtensions.cs" />
-    <Compile Include="Builders\IApplicationOptions.cs" />
-    <Compile Include="Builders\IApplicationPoolOptions.cs" />
-    <Compile Include="Builders\IBindingOptions.cs" />
-    <Compile Include="Builders\IVirtualDirectoryOptions.cs" />
-    <Compile Include="Builders\IConfigureOptions.cs" />
-    <Compile Include="Builders\ICustomIdentityOptions.cs" />
-    <Compile Include="Builders\IDeleteApplicationOptions.cs" />
-    <Compile Include="Builders\IIisConfigurationOptions.cs" />
-    <Compile Include="Builders\IWebsiteOptions.cs" />
+    <Compile Include="ConfigureExtensions.cs" />
+    <Compile Include="IIS\ApplicationPoolOptions.cs" />
+    <Compile Include="IIS\IApplicationOptions.cs" />
+    <Compile Include="IIS\IApplicationPoolOptions.cs" />
+    <Compile Include="IIS\IBindingOptions.cs" />
+    <Compile Include="IIS\IVirtualDirectoryOptions.cs" />
+    <Compile Include="IConfigurer.cs" />
+    <Compile Include="IIS\ICustomIdentityOptions.cs" />
+    <Compile Include="IIS\IDeleteApplicationOptions.cs" />
+    <Compile Include="IIS\IWebServerConfigurer.cs" />
+    <Compile Include="IIS\IWebsiteOptions.cs" />
     <Compile Include="Exceptions.cs" />
     <Compile Include="IFluentSyntax.cs" />
     <Compile Include="ICommand.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="IInstallerContext.cs" />
     <Compile Include="IInstallerFactory.cs" />
     <Compile Include="BaseCommand.cs" />
+    <Compile Include="IIS\WebServerConfigurer.cs" />
     <Compile Include="InstallationException.cs" />
     <Compile Include="InstallCommand.cs" />
     <Compile Include="InstallerContext.cs" />

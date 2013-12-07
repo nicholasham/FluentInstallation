@@ -1,9 +1,8 @@
 ﻿using System.IO;
-using System.Linq;
 using NSubstitute;
 using Xunit;
 
-namespace FluentInstallation.UnitTests
+namespace FluentInstallation
 {
     public class AssemblyInstallerFactoryFinderTests
     {

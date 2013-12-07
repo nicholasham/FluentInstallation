@@ -1,4 +1,5 @@
-﻿using System.Management.Automation;
+﻿using System.Collections;
+using System.Management.Automation;
 
 namespace FluentInstallation
 {
@@ -21,5 +22,8 @@ namespace FluentInstallation
 
         [Parameter(Mandatory = true)]
         public string AssemblyFile { get; set; }
+
+        [Parameter(Mandatory = false)]
+        public Hashtable Parameters { get; set; }
     }
 }

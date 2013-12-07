@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace FluentInstallation.UnitTests
+namespace FluentInstallation
 {
     public static class TestContext
     {

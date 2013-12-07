@@ -1,14 +1,15 @@
 ﻿using System;
-using FluentInstallation.Builders;
+using FluentInstallation.IIS;
 
 namespace FluentInstallation.TestAssembly
 {
+    
     public class ProjectInstaller : IInstaller
     {
         public void Install(IInstallerContext context)
         {
             context
-                .ConfigureIIS()
+                .ConfigureWebServer()
                     .DeleteApplicationPool("mysite.com")
                     .DeleteApplication("assets")
                         .ContainedInWebsite("mysite.com")
@@ -16,7 +17,7 @@ namespace FluentInstallation.TestAssembly
                     .Commit();
 
             context
-                .ConfigureIIS()
+                .ConfigureWebServer()
                     .CreateApplicationPool(applicationPool =>
                     {
                         applicationPool.Named("mysite.com");
@@ -31,7 +32,7 @@ namespace FluentInstallation.TestAssembly
                     .Commit();
 
             context
-                .ConfigureIIS()
+                .ConfigureWebServer()
                     .CreateWebsite(site =>
                     {
                         site.Named("mysite.com");

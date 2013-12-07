@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Management.Automation;
 using Microsoft.Web.Administration;
 
-namespace FluentInstallation.Builders
+namespace FluentInstallation.IIS
 {
     public interface IVirtualDirectoryOptions : IFluentSyntax
     {

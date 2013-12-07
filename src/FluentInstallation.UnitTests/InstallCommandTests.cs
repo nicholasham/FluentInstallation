@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Management.Automation;
-using System.Reflection;
+﻿using System.Management.Automation;
 using NSubstitute;
 using Xunit;
 
-namespace FluentInstallation.UnitTests
+namespace FluentInstallation
 {
     public class InstallCommandTests
     {

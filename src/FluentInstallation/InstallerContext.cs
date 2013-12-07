@@ -11,13 +11,7 @@ namespace FluentInstallation
         {
             
         }
-
         
-        public void Progress(string message)
-        {
-            Command.WriteProgress(new ProgressRecord(1, "Installing", message));
-        }
-
         public void WriteDebug(string message)
         {
             Command.WriteDebug(message);
