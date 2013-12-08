@@ -32,7 +32,7 @@ namespace FluentInstallation.TestAssembly
                     .CreateWebsite(site =>
                     {
                         site.Named("mysite.com");
-                        site.UsingThisAssemblyDirectoryAsPath();
+                        site.OnPhysicalPath(@"C:\");
                         site.UsingApplicationPool("mysite.com");
 
                         site.AddBinding(binding =>

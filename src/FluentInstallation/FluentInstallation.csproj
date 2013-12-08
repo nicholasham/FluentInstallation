@@ -44,13 +44,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssemblyExtensions.cs" />
     <Compile Include="AssemblyInstallerFactoryFinder.cs" />
     <Compile Include="ConfigureExtensions.cs" />
+    <Compile Include="IIS\ApplicationConfigurer.cs" />
     <Compile Include="IIS\ApplicationPoolConfigurer.cs" />
+    <Compile Include="IIS\BindingConfigurer.cs" />
     <Compile Include="IIS\IApplicationConfigurer.cs" />
     <Compile Include="IIS\IApplicationPoolConfigurer.cs" />
     <Compile Include="IIS\IBindingConfigurer.cs" />
     <Compile Include="IIS\IVirtualDirectoryConfigurer.cs" />
+    <Compile Include="IIS\VirtualDirectoryConfigurer.cs" />
+    <Compile Include="IIS\WebsiteConfigurer.cs" />
     <Compile Include="IRootConfigurer.cs" />
     <Compile Include="IIS\IDeleteApplicationConfigurer.cs" />
     <Compile Include="IIS\IWebServerConfigurer.cs" />

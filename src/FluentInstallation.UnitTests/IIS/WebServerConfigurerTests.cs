@@ -43,7 +43,7 @@ namespace FluentInstallation.IIS
             Assert.True(actual);
             
         }
-
+        
         [Fact]
         public void CreateApplicationPool_AddsNewApplicationPoolToServerManager()
         {
