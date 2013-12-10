@@ -5,24 +5,43 @@ namespace FluentInstallation.IIS
 {
     public class BindingConfigurer : IBindingConfigurer
     {
+        private readonly Binding _binding;
+
         public BindingConfigurer(Binding binding)
         {
-            
+            if (binding == null)
+            {
+                throw new ArgumentNullException("binding");
+            }
+
+            _binding = binding;
+
         }
 
-        public IBindingConfigurer UsingProtocol(string protocol)
+        public IBindingConfigurer UseProtocol(string protocol)
         {
-            throw new NotImplementedException();
+            return Configure(binding => binding.Protocol = protocol);
         }
 
         public IBindingConfigurer OnPort(int port)
         {
-            throw new NotImplementedException();
+
+            return Configure(binding =>
+                {
+                    var information = BindingInformation.Parse(binding.BindingInformation);
+                    information.Port = port;
+                    binding.BindingInformation = information.ToString();
+                } );
         }
 
-        public IBindingConfigurer UsingHostName(string hostName)
+        public IBindingConfigurer UseHostName(string hostName)
         {
-            throw new NotImplementedException();
+            return Configure(binding =>
+            {
+                var information = BindingInformation.Parse(binding.BindingInformation);
+                information.HostName = hostName;
+                binding.BindingInformation = information.ToString();
+            });
         }
 
         public IBindingConfigurer UseSslCertificate(string thumbprint)
@@ -30,9 +49,20 @@ namespace FluentInstallation.IIS
             throw new NotImplementedException();
         }
 
-        public IBindingConfigurer ConfigureAdvancedOptions(Action<Binding> options)
+        public IBindingConfigurer OnIpAddress(string ipAddress)
         {
-            throw new NotImplementedException();
+            return Configure(binding =>
+            {
+                var information = BindingInformation.Parse(binding.BindingInformation);
+                information.IpAddress = ipAddress;
+                binding.BindingInformation = information.ToString();
+            });
+        }
+
+        public IBindingConfigurer Configure(Action<Binding> action)
+        {
+            action(_binding);
+            return this;
         }
     }
 }

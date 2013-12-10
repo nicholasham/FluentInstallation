@@ -16,5 +16,10 @@ namespace FluentInstallation.IIS
             var serverManager = new ServerManager();
             return serverManager.Sites.Add(Guid.NewGuid().ToString(), string.Empty, 80);
         }
+
+        public static Binding CreateBinding()
+        {
+            return CreateWebsite().Bindings.CreateElement();
+        }
     }
 }

@@ -50,6 +50,7 @@
     <Compile Include="IIS\ApplicationConfigurer.cs" />
     <Compile Include="IIS\ApplicationPoolConfigurer.cs" />
     <Compile Include="IIS\BindingConfigurer.cs" />
+    <Compile Include="IIS\BindingInformation.cs" />
     <Compile Include="IIS\IApplicationConfigurer.cs" />
     <Compile Include="IIS\IApplicationPoolConfigurer.cs" />
     <Compile Include="IIS\IBindingConfigurer.cs" />

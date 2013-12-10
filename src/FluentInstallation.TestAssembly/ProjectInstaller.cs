@@ -37,9 +37,9 @@ namespace FluentInstallation.TestAssembly
 
                         site.AddBinding(binding =>
                         {
-                            binding.UsingProtocol("https");
+                            binding.UseProtocol("https");
                             binding.OnPort(80);
-                            binding.UsingHostName("local.site.com");
+                            binding.UseHostName("local.site.com");
                             binding.UseSslCertificate("ddsddssds");
                         });
 
