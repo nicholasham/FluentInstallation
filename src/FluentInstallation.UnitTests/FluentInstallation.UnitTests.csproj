@@ -49,6 +49,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Certificates\CertificateFinderTests.cs" />
+    <Compile Include="DisposableAction.cs" />
+    <Compile Include="DisposableTestFixture.cs" />
     <Compile Include="IIS\ApplicationPoolConfigurerTests.cs" />
     <Compile Include="IIS\BindingConfigurerTests.cs" />
     <Compile Include="IIS\BindingInformationTests.cs" />
@@ -61,6 +64,7 @@
     <Compile Include="TestContext.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Certificates\MyTestCertificate.pfx" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

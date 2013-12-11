@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Cryptography.X509Certificates;
 using FluentInstallation.IIS;
 
 namespace FluentInstallation.TestAssembly
@@ -40,7 +41,7 @@ namespace FluentInstallation.TestAssembly
                             binding.UseProtocol("https");
                             binding.OnPort(80);
                             binding.UseHostName("local.site.com");
-                            binding.UseSslCertificate("ddsddssds");
+                            binding.UseCertificateWithThumbprint("8e6e3cc19bf5abfe01c7ee12ea23f20f4a1d513c");
                         });
 
                         site.AddApplication(application =>

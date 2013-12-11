@@ -1,17 +1,43 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Security;
+using System.Security.Cryptography.X509Certificates;
+using FluentInstallation.Certificates;
 using Microsoft.Web.Administration;
+using NSubstitute;
 using Xunit;
 
 namespace FluentInstallation.IIS
 {
+
+    public class CertificateFactory
+    {
+        public static X509Certificate2 CreateCertificate()
+        {
+            return new X509Certificate2(TestContext.GetResourceBytes("MyTestCertificate.pfx"), "test");
+        }
+
+    }
+
     public class BindingConfigurerTests
     {
         
+
+
         [Fact]
         public void SutIsBindingConfigurer()
         {
             var sut = new BindingConfigurer(WebAdministrationFactory.CreateBinding());
             Assert.IsAssignableFrom<IBindingConfigurer>(sut);
+        }
+
+        [Fact]
+        public void Constructor_InitializesCertificateFinder()
+        {
+            var sut = new BindingConfigurer(WebAdministrationFactory.CreateBinding());
+            Assert.IsType<CertificateFinder>(sut.CertificateFinder);
         }
 
         [Fact]
@@ -23,9 +49,9 @@ namespace FluentInstallation.IIS
         [Fact]
         public void Configure_GivesDirectAccessToTheWebsite()
         {
-            var expected = WebAdministrationFactory.CreateBinding();
+            Binding expected = WebAdministrationFactory.CreateBinding();
             var sut = new BindingConfigurer(expected);
-            var actual = default(Binding);
+            Binding actual = default(Binding);
 
             sut.Configure(x => actual = x);
 
@@ -35,9 +61,9 @@ namespace FluentInstallation.IIS
         [Fact]
         public void UseProtocol_SetsTheBindingInformationCorrectly()
         {
-            var binding = WebAdministrationFactory.CreateBinding();
+            Binding binding = WebAdministrationFactory.CreateBinding();
             var sut = new BindingConfigurer(binding);
-            
+
             sut.UseProtocol("https");
 
             Assert.Equal("https", binding.Protocol);
@@ -47,7 +73,7 @@ namespace FluentInstallation.IIS
         [Fact]
         public void OnPort_SetsTheBindingInformationCorrectly()
         {
-            var binding = WebAdministrationFactory.CreateBinding();
+            Binding binding = WebAdministrationFactory.CreateBinding();
             var sut = new BindingConfigurer(binding);
 
             sut.OnPort(99);
@@ -58,7 +84,7 @@ namespace FluentInstallation.IIS
         [Fact]
         public void OnIpAddress_SetsTheBindingInformationCorrectly()
         {
-            var binding = WebAdministrationFactory.CreateBinding();
+            Binding binding = WebAdministrationFactory.CreateBinding();
             var sut = new BindingConfigurer(binding);
 
             sut.OnIpAddress("172.168.7.9");
@@ -69,7 +95,7 @@ namespace FluentInstallation.IIS
         [Fact]
         public void UseHostName_SetsTheBindingInformationCorrectly()
         {
-            var binding = WebAdministrationFactory.CreateBinding();
+            Binding binding = WebAdministrationFactory.CreateBinding();
             var sut = new BindingConfigurer(binding);
 
             sut.UseHostName("mytestsite.com");
@@ -77,5 +103,45 @@ namespace FluentInstallation.IIS
             Assert.Equal("*:80:mytestsite.com", binding.BindingInformation);
         }
 
+        [Fact]
+        public void UseCertificateWithThumbprint_SetsTheCertificateInformationCorrectly()
+        {
+            Binding binding = WebAdministrationFactory.CreateBinding();
+
+            var finder = Substitute.For<ICertificateFinder>();
+            var certificate = CertificateFactory.CreateCertificate();
+            
+            var result = new CertificateFindResult(StoreLocation.LocalMachine, StoreName.My, certificate);
+
+            finder.Find(X509FindType.FindByThumbprint, certificate.Thumbprint).Returns(result);
+
+            var sut = new BindingConfigurer(binding) {CertificateFinder = finder};
+
+            sut.UseCertificateWithThumbprint(certificate.Thumbprint);
+
+            Assert.Equal("https", binding.Protocol);
+            Assert.Equal(certificate.GetCertHash(), binding.CertificateHash);
+            Assert.Equal("My", binding.CertificateStoreName);
+            
+
+        }
+
+        [Fact]
+        public void UseCertificateWithThumbprint_ThrowsWhenNoCertificateExistsWIthTheThumbprint()
+        {
+            Binding binding = WebAdministrationFactory.CreateBinding();
+
+            var finder = Substitute.For<ICertificateFinder>();
+            
+            var result = new CertificateFindResult();
+
+            var thumbprint = "notfoundthumprint";
+
+            finder.Find(X509FindType.FindByThumbprint, thumbprint).Returns(result);
+
+            var sut = new BindingConfigurer(binding) { CertificateFinder = finder };
+
+            Assert.Throws<InstallationException>(() => sut.UseCertificateWithThumbprint(thumbprint));
+        }
     }
 }
