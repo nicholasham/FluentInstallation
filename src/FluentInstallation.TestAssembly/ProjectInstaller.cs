@@ -4,25 +4,33 @@ using FluentInstallation.IIS;
 
 namespace FluentInstallation.TestAssembly
 {
-    
+
+    public class ProjectParameters
+    {
+        public string SiteName { get; set; }
+    }
+
     
     public class ProjectInstaller : IInstaller
     {
         public void Install(IInstallerContext context)
         {
+
+            var parameters = context.GetParameters<ProjectParameters>();
+
             context
                 .ConfigureWebServer()
-                    .DeleteApplicationPool("mysite.com")
+                    .DeleteApplicationPool(parameters.SiteName)
                     .DeleteApplication("assets")
-                        .ContainedInWebsite("mysite.com")
-                    .DeleteWebsite("mysite.com")
+                        .ContainedInWebsite(parameters.SiteName)
+                    .DeleteWebsite(parameters.SiteName)
                     .Commit();
 
             context
                 .ConfigureWebServer()
                     .CreateApplicationPool(applicationPool =>
                     {
-                        applicationPool.Named("mysite.com");
+                        applicationPool.Named(parameters.SiteName);
                         applicationPool.UsingClassicPipelineMode();
                         applicationPool.UsingCustomIdentity("Nick", "password");
                     })
@@ -32,9 +40,9 @@ namespace FluentInstallation.TestAssembly
                 .ConfigureWebServer()
                     .CreateWebsite(site =>
                     {
-                        site.Named("mysite.com");
+                        site.Named(parameters.SiteName);
                         site.OnPhysicalPath(@"C:\");
-                        site.UsingApplicationPool("mysite.com");
+                        site.UsingApplicationPool(parameters.SiteName);
 
                         site.AddBinding(binding =>
                         {

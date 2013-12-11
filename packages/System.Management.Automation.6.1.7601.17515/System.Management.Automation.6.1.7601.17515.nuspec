@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>System.Management.Automation</id>
+    <version>6.1.7601.17515</version>
+    <title>System.Management.Automation.dll</title>
+    <authors>Microsoft</authors>
+    <owners>Microsoft</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>System.Management.Automation.dll</description>
+    <releaseNotes />
+    <copyright>Microsoft Corporation</copyright>
+    <language />
+  </metadata>
+</package>
