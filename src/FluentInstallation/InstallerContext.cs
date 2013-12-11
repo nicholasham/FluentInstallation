@@ -1,5 +1,7 @@
-﻿using System.Linq.Expressions;
+﻿using System;
+using System.Linq.Expressions;
 using System.Management.Automation;
+using System.Linq;
 
 namespace FluentInstallation
 {
@@ -11,7 +13,45 @@ namespace FluentInstallation
         {
             
         }
-        
+
+        public T GetParameters<T>() where T : class, new()
+        {
+            var result = new T();
+            
+
+            foreach (var property in typeof (T).GetProperties())
+            {
+                var required = property.GetCustomAttributes(false).Any(a => a.GetType() == typeof (RequiredAttribute));
+
+                object keyValue = Command.Parameters.GetValueWithLowerInvariantKey(property.Name);
+
+                if (required && keyValue == null)
+                    throw new RequiredParameterNotGivenException(property.Name);
+
+                if (keyValue != null)
+                {
+                    if (property.PropertyType != typeof(string))
+                    {
+                        try
+                        {
+                            keyValue = Convert.ChangeType(keyValue, property.PropertyType);
+                        }
+                        catch (FormatException)
+                        {
+                            throw new ParameterCastException(property.Name, property.PropertyType);
+                        }
+                    }
+                    property.SetValue(result, keyValue, null);
+                }
+
+
+            }
+
+
+
+            return result;
+        }
+
         public void WriteDebug(string message)
         {
             Command.WriteDebug(message);
@@ -32,6 +72,4 @@ namespace FluentInstallation
             Command.WriteCommandDetail(message);
         }
     }
-
-
 }
