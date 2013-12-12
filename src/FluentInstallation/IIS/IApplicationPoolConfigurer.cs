@@ -6,15 +6,15 @@ namespace FluentInstallation.IIS
     public interface IApplicationPoolConfigurer : IFluentSyntax
     {
         IApplicationPoolConfigurer Named(string name);
-        IApplicationPoolConfigurer UsingNetworkServiceIdentity();
-        IApplicationPoolConfigurer UsingApplicationPoolIdentity();
+        IApplicationPoolConfigurer UseNetworkServiceIdentity();
+        IApplicationPoolConfigurer UseApplicationPoolIdentity();
 
-        IApplicationPoolConfigurer UsingCustomIdentity(string userName, string password);
-        IApplicationPoolConfigurer UsingClassicPipelineMode();
+        IApplicationPoolConfigurer UseCustomIdentity(string userName, string password);
+        IApplicationPoolConfigurer UseClassicPipelineMode();
 
-        IApplicationPoolConfigurer UsingLocalServiceIdentity();
-        IApplicationPoolConfigurer UsingLocalSystemIdentity();
-        IApplicationPoolConfigurer UsingIntegratedPipelineMode();
+        IApplicationPoolConfigurer UseLocalServiceIdentity();
+        IApplicationPoolConfigurer UseLocalSystemIdentity();
+        IApplicationPoolConfigurer UseIntegratedPipelineMode();
 
         IApplicationPoolConfigurer Configure(Action<ApplicationPool> action);
     }

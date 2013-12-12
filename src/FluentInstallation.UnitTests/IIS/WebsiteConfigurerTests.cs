@@ -51,7 +51,7 @@ namespace FluentInstallation.IIS
             var website = WebAdministrationFactory.CreateWebsite();
             var sut = new WebsiteConfigurer(website);
             
-            sut.UsingApplicationPool("TestApplicationPool");
+            sut.UseApplicationPool("TestApplicationPool");
 
             Assert.Equal("TestApplicationPool", website.Applications[0].ApplicationPoolName);
 

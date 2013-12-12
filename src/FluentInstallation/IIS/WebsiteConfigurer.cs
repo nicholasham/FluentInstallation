@@ -28,7 +28,7 @@ namespace FluentInstallation.IIS
             return Configure(site => site.Name = name);
         }
 
-        public IWebsiteConfigurer UsingApplicationPool(string applicationPoolName)
+        public IWebsiteConfigurer UseApplicationPool(string applicationPoolName)
         {
             return Configure(site => site.Applications.First().ApplicationPoolName = applicationPoolName);
         }

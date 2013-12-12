@@ -7,7 +7,7 @@ namespace FluentInstallation.IIS
     {
         IWebsiteConfigurer Named(string name);
 
-        IWebsiteConfigurer UsingApplicationPool(string applicationPoolName);
+        IWebsiteConfigurer UseApplicationPool(string applicationPoolName);
 
         IWebsiteConfigurer OnPhysicalPath(string path);
 

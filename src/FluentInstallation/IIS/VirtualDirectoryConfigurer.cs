@@ -12,7 +12,7 @@ namespace FluentInstallation.IIS
             _virtualDirectory = virtualDirectory;
         }
 
-        public IVirtualDirectoryConfigurer UsingAlias(string alias)
+        public IVirtualDirectoryConfigurer UseAlias(string alias)
         {
             return ConfigureAdvancedOptions(x => x.Path = alias);
         }

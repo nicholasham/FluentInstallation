@@ -23,27 +23,27 @@ namespace FluentInstallation.IIS
             return Configure(x =>  x.Name = name);
         }
 
-        public IApplicationPoolConfigurer UsingNetworkServiceIdentity()
+        public IApplicationPoolConfigurer UseNetworkServiceIdentity()
         {
             return Configure(x => x.ProcessModel.IdentityType = ProcessModelIdentityType.NetworkService );
         }
 
-        public IApplicationPoolConfigurer UsingApplicationPoolIdentity()
+        public IApplicationPoolConfigurer UseApplicationPoolIdentity()
         {
             return Configure(x => x.ProcessModel.IdentityType = ProcessModelIdentityType.ApplicationPoolIdentity);
         }
 
-        public IApplicationPoolConfigurer UsingLocalServiceIdentity()
+        public IApplicationPoolConfigurer UseLocalServiceIdentity()
         {
             return Configure(x => x.ProcessModel.IdentityType = ProcessModelIdentityType.LocalService);
         }
         
-        public IApplicationPoolConfigurer UsingLocalSystemIdentity()
+        public IApplicationPoolConfigurer UseLocalSystemIdentity()
         {
             return Configure(x => x.ProcessModel.IdentityType = ProcessModelIdentityType.LocalSystem);
         }
 
-        public IApplicationPoolConfigurer UsingCustomIdentity(string userName, string password)
+        public IApplicationPoolConfigurer UseCustomIdentity(string userName, string password)
         {
             return Configure(x =>
             {
@@ -53,12 +53,12 @@ namespace FluentInstallation.IIS
             });
         }
 
-        public IApplicationPoolConfigurer UsingClassicPipelineMode()
+        public IApplicationPoolConfigurer UseClassicPipelineMode()
         {
             return Configure(x => x.ManagedPipelineMode = ManagedPipelineMode.Classic);
         }
 
-        public IApplicationPoolConfigurer UsingIntegratedPipelineMode()
+        public IApplicationPoolConfigurer UseIntegratedPipelineMode()
         {
             return Configure(x => x.ManagedPipelineMode = ManagedPipelineMode.Integrated);
         }
