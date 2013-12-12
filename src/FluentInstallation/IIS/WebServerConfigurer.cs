@@ -1,5 +1,4 @@
 using System;
-using Microsoft.Web.Administration;
 using System.Linq;
 
 namespace FluentInstallation.IIS
@@ -7,15 +6,20 @@ namespace FluentInstallation.IIS
     internal class WebServerConfigurer : IWebServerConfigurer
     {
         public WebServerConfigurer()
-        {
-            ServerManager = new ServerManager();
+            : this(new WrappedServerManager())
+        {            
         }
 
-        public ServerManager ServerManager { get; private set; }
+        internal WebServerConfigurer(IServerManager serverManager)
+        {
+            ServerManager = serverManager;
+        }
+
+        public IServerManager ServerManager { get; private set; }
 
         public void Commit()
         {            
-            throw new NotImplementedException();
+            ServerManager.CommitChanges();
         }
 
         public IWebServerConfigurer CreateApplicationPool(Action<IApplicationPoolConfigurer> options)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using NSubstitute;
 using Xunit;
 
 namespace FluentInstallation.IIS
@@ -95,6 +96,17 @@ namespace FluentInstallation.IIS
             sut.DeleteWebsite(webSite.Name);
 
             Assert.Equal(0, sut.ServerManager.Sites.Count(site => site.Name == webSite.Name));
+        }
+
+        [Fact]
+        public void Commit_AppliesChangesOnServerManager()
+        {
+            var serverManager = Substitute.For<IServerManager>();
+            var sut = new WebServerConfigurer(serverManager);
+
+            sut.Commit();
+
+            serverManager.Received().CommitChanges();
         }
     }
 }
