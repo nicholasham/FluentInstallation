@@ -12,17 +12,17 @@ namespace FluentInstallation.IIS
             _application = application;
         }
 
-        public IApplicationConfigurer UsingAlias(string alias)
+        public IApplicationConfigurer UseAlias(string alias)
         {
             throw new NotImplementedException();
         }
 
-        public IApplicationConfigurer OnPath(string path)
+        public IApplicationConfigurer OnPhysicalPath(string path)
         {
             throw new NotImplementedException();
         }
 
-        public IApplicationConfigurer UsingApplicationPool(string applicationPoolName)
+        public IApplicationConfigurer UseApplicationPool(string applicationPoolName)
         {
             throw new NotImplementedException();
         }

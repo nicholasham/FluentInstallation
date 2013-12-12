@@ -5,9 +5,9 @@ namespace FluentInstallation.IIS
 {
     public interface IApplicationConfigurer : IFluentSyntax
     {
-        IApplicationConfigurer UsingAlias(string alias);
-        IApplicationConfigurer OnPath(string path);
-        IApplicationConfigurer UsingApplicationPool(string applicationPoolName);
+        IApplicationConfigurer UseAlias(string alias);
+        IApplicationConfigurer OnPhysicalPath(string path);
+        IApplicationConfigurer UseApplicationPool(string applicationPoolName);
         IApplicationConfigurer ConfigureAdvancedOptions(Action<Application> options);
     }
 }

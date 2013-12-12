@@ -32,58 +32,58 @@ namespace FluentInstallation.IIS
         }
 
         [Fact]
-        public void UsingNetworkServiceIdentity_SetsIndentityCorrectly()
+        public void UseNetworkServiceIdentity_SetsIndentityCorrectly()
         {
             var applicationPool = WebAdministrationFactory.CreateApplicationPool();
             var sut = new ApplicationPoolConfigurer(applicationPool);
 
-            sut.UsingNetworkServiceIdentity();
+            sut.UseNetworkServiceIdentity();
 
             Assert.Equal(ProcessModelIdentityType.NetworkService, applicationPool.ProcessModel.IdentityType);
         }
 
         [Fact]
-        public void UsingApplicationPoolIdentity_SetsIndentityCorrectly()
+        public void UseApplicationPoolIdentity_SetsIndentityCorrectly()
         {
             var applicationPool = WebAdministrationFactory.CreateApplicationPool();
             var sut = new ApplicationPoolConfigurer(applicationPool);
 
-            sut.UsingApplicationPoolIdentity();
+            sut.UseApplicationPoolIdentity();
 
             Assert.Equal(ProcessModelIdentityType.ApplicationPoolIdentity, applicationPool.ProcessModel.IdentityType);
         }
 
         [Fact]
-        public void UsingLocalServiceIdentity_SetsIndentityCorrectly()
+        public void UseLocalServiceIdentity_SetsIndentityCorrectly()
         {
             var applicationPool = WebAdministrationFactory.CreateApplicationPool();
             var sut = new ApplicationPoolConfigurer(applicationPool);
 
-            sut.UsingLocalServiceIdentity();
+            sut.UseLocalServiceIdentity();
 
             Assert.Equal(ProcessModelIdentityType.LocalService, applicationPool.ProcessModel.IdentityType);
         }
 
 
         [Fact]
-        public void UsingLocalSystemIdentity_SetsIndentityCorrectly()
+        public void UseLocalSystemIdentity_SetsIndentityCorrectly()
         {
             var applicationPool = WebAdministrationFactory.CreateApplicationPool();
             var sut = new ApplicationPoolConfigurer(applicationPool);
 
-            sut.UsingLocalSystemIdentity();
+            sut.UseLocalSystemIdentity();
 
             Assert.Equal(ProcessModelIdentityType.LocalSystem, applicationPool.ProcessModel.IdentityType);
 
         }
 
         [Fact]
-        public void UsingCustomIdentity_SetsIndentityCorrectly()
+        public void UseCustomIdentity_SetsIndentityCorrectly()
         {
             var applicationPool = WebAdministrationFactory.CreateApplicationPool();
             var sut = new ApplicationPoolConfigurer(applicationPool);
 
-            sut.UsingCustomIdentity("TestUser","TestPassword");
+            sut.UseCustomIdentity("TestUser","TestPassword");
 
             Assert.Equal(ProcessModelIdentityType.SpecificUser, applicationPool.ProcessModel.IdentityType);
             Assert.Equal("TestUser", applicationPool.ProcessModel.UserName);
@@ -103,23 +103,23 @@ namespace FluentInstallation.IIS
         }
 
         [Fact]
-        public void UsingClassicPipelineMode_SetsPipelineModeCorrectly()
+        public void UseClassicPipelineMode_SetsPipelineModeCorrectly()
         {
             var applicationPool = WebAdministrationFactory.CreateApplicationPool();
             var sut = new ApplicationPoolConfigurer(applicationPool);
 
-            sut.UsingClassicPipelineMode();
+            sut.UseClassicPipelineMode();
 
             Assert.Equal(ManagedPipelineMode.Classic, applicationPool.ManagedPipelineMode);
         }
 
         [Fact]
-        public void UsingIntegratedPipelineMode_SetsPipelineModeCorrectly()
+        public void UseIntegratedPipelineMode_SetsPipelineModeCorrectly()
         {
             var applicationPool = WebAdministrationFactory.CreateApplicationPool();
             var sut = new ApplicationPoolConfigurer(applicationPool);
 
-            sut.UsingIntegratedPipelineMode();
+            sut.UseIntegratedPipelineMode();
 
             Assert.Equal(ManagedPipelineMode.Integrated, applicationPool.ManagedPipelineMode);
         }

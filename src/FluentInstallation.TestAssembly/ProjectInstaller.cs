@@ -31,8 +31,8 @@ namespace FluentInstallation.TestAssembly
                     .CreateApplicationPool(applicationPool =>
                     {
                         applicationPool.Named(parameters.SiteName);
-                        applicationPool.UsingClassicPipelineMode();
-                        applicationPool.UsingCustomIdentity("Nick", "password");
+                        applicationPool.UseClassicPipelineMode();
+                        applicationPool.UseCustomIdentity("Nick", "password");
                     })
                     .Commit();
 
@@ -42,7 +42,7 @@ namespace FluentInstallation.TestAssembly
                     {
                         site.Named(parameters.SiteName);
                         site.OnPhysicalPath(@"C:\");
-                        site.UsingApplicationPool(parameters.SiteName);
+                        site.UseApplicationPool(parameters.SiteName);
 
                         site.AddBinding(binding =>
                         {
@@ -54,13 +54,13 @@ namespace FluentInstallation.TestAssembly
 
                         site.AddApplication(application =>
                         {
-                            application.UsingAlias("funkyapi");
-                            application.OnPath(@".\api");
+                            application.UseAlias("funkyapi");
+                            application.OnPhysicalPath(@".\api");
                         });
 
                         site.AddVirtualDirectory(virtualDirectory =>
                         {
-                            virtualDirectory.UsingAlias("assets");
+                            virtualDirectory.UseAlias("assets");
                             virtualDirectory.OnPhysicalPath(@".\Assets");
                         });
                     })

@@ -63,9 +63,11 @@
     <Compile Include="IIS\IApplicationConfigurer.cs" />
     <Compile Include="IIS\IApplicationPoolConfigurer.cs" />
     <Compile Include="IIS\IBindingConfigurer.cs" />
+    <Compile Include="IIS\IServerManager.cs" />
     <Compile Include="IIS\IVirtualDirectoryConfigurer.cs" />
     <Compile Include="IIS\VirtualDirectoryConfigurer.cs" />
     <Compile Include="IIS\WebsiteConfigurer.cs" />
+    <Compile Include="IIS\WrappedServerManager.cs" />
     <Compile Include="IRootConfigurer.cs" />
     <Compile Include="IIS\IDeleteApplicationConfigurer.cs" />
     <Compile Include="IIS\IWebServerConfigurer.cs" />
