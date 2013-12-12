@@ -101,6 +101,28 @@ namespace FluentInstallation.IIS
 
             Assert.Equal(expected, actual);
         }
+
+        [Fact]
+        public void UsingClassicPipelineMode_SetsPipelineModeCorrectly()
+        {
+            var applicationPool = WebAdministrationFactory.CreateApplicationPool();
+            var sut = new ApplicationPoolConfigurer(applicationPool);
+
+            sut.UsingClassicPipelineMode();
+
+            Assert.Equal(ManagedPipelineMode.Classic, applicationPool.ManagedPipelineMode);
+        }
+
+        [Fact]
+        public void UsingIntegratedPipelineMode_SetsPipelineModeCorrectly()
+        {
+            var applicationPool = WebAdministrationFactory.CreateApplicationPool();
+            var sut = new ApplicationPoolConfigurer(applicationPool);
+
+            sut.UsingIntegratedPipelineMode();
+
+            Assert.Equal(ManagedPipelineMode.Integrated, applicationPool.ManagedPipelineMode);
+        }
     }
   
 }

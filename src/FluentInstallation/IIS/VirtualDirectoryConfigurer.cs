@@ -5,7 +5,7 @@ namespace FluentInstallation.IIS
 {
     public class VirtualDirectoryConfigurer : IVirtualDirectoryConfigurer
     {
-        private VirtualDirectory _virtualDirectory;
+        private readonly VirtualDirectory _virtualDirectory;
 
         public VirtualDirectoryConfigurer(VirtualDirectory virtualDirectory)
         {
@@ -14,22 +14,18 @@ namespace FluentInstallation.IIS
 
         public IVirtualDirectoryConfigurer UsingAlias(string alias)
         {
-            throw new NotImplementedException();
+            return ConfigureAdvancedOptions(x => x.Path = alias);
         }
 
-        public IVirtualDirectoryConfigurer OnPath(string path)
+        public IVirtualDirectoryConfigurer OnPhysicalPath(string path)
         {
-            throw new NotImplementedException();
+            return ConfigureAdvancedOptions(x => x.PhysicalPath = path);
         }
-
-        public IVirtualDirectoryConfigurer UsingApplicationPool(string applicationPoolName)
-        {
-            throw new NotImplementedException();
-        }
-
+        
         public IVirtualDirectoryConfigurer ConfigureAdvancedOptions(Action<VirtualDirectory> options)
         {
-            throw new NotImplementedException();
+            options(_virtualDirectory);
+            return this;
         }
     }
 }

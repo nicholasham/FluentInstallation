@@ -21,5 +21,15 @@ namespace FluentInstallation.IIS
         {
             return CreateWebsite().Bindings.CreateElement();
         }
+
+        public static Application CreateApplication()
+        {
+            return CreateWebsite().Applications.Add(string.Format("/{0}", Guid.NewGuid()), string.Empty);
+        }
+
+        public static VirtualDirectory CreateVirtualDirectory()
+        {
+            return CreateApplication().VirtualDirectories.Add(string.Format("/{0}", Guid.NewGuid()), string.Empty);
+        }
     }
 }

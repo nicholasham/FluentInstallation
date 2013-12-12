@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Linq;
-using Microsoft.Web.Administration;
+using NSubstitute;
 using Xunit;
-using Xunit.Sdk;
 
 namespace FluentInstallation.IIS
 {
@@ -49,7 +48,7 @@ namespace FluentInstallation.IIS
         {
             var sut = new WebServerConfigurer();
             
-            var expected= sut.ServerManager.ApplicationPools.Count + 1;
+            var expected = sut.ServerManager.ApplicationPools.Count + 1;
 
             sut.CreateApplicationPool((options)=>{});
 
@@ -59,6 +58,55 @@ namespace FluentInstallation.IIS
             Assert.Equal("ApplicationPool" + expected, sut.ServerManager.ApplicationPools.Last().Name);
 
         }
+
+        [Fact]
+        public void DeleteApplicationPool_DeletesApplicationPoolFromServerManager()
+        {
+            var sut = new WebServerConfigurer();
+            var applicationPool = WebAdministrationFactory.CreateApplicationPool();
+            sut.ServerManager.ApplicationPools.Add(applicationPool);
+
+            sut.DeleteApplicationPool(applicationPool.Name);
+
+            Assert.Equal(0, sut.ServerManager.ApplicationPools.Count(appPool => appPool.Name == applicationPool.Name));
+
+        }
+
+        [Fact]
+        public void CreateWebsite_CreatesWebsiteOnServerManager()
+        {
+            var sut = new WebServerConfigurer();
+
+            var expected = sut.ServerManager.Sites.Count + 1;
+
+            sut.CreateWebsite(options => { });
+
+            var actual = sut.ServerManager.Sites.Count;
+
+            Assert.Equal(expected, actual);
+        }
         
+        [Fact]
+        public void DeleteWebsite_DeletesWebSiteFromTheServerManager()
+        {
+            var sut = new WebServerConfigurer();
+            var webSite = WebAdministrationFactory.CreateWebsite();
+            sut.ServerManager.Sites.Add(webSite);
+
+            sut.DeleteWebsite(webSite.Name);
+
+            Assert.Equal(0, sut.ServerManager.Sites.Count(site => site.Name == webSite.Name));
+        }
+
+        [Fact]
+        public void Commit_AppliesChangesOnServerManager()
+        {
+            var serverManager = Substitute.For<IServerManager>();
+            var sut = new WebServerConfigurer(serverManager);
+
+            sut.Commit();
+
+            serverManager.Received().CommitChanges();
+        }
     }
 }

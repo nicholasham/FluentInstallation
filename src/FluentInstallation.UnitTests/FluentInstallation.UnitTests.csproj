@@ -59,6 +59,7 @@
     <Compile Include="IIS\ApplicationPoolConfigurerTests.cs" />
     <Compile Include="IIS\BindingConfigurerTests.cs" />
     <Compile Include="IIS\BindingInformationTests.cs" />
+    <Compile Include="IIS\VirtualDirectoryConfigurerTests.cs" />
     <Compile Include="IIS\WebAdministrationFactory.cs" />
     <Compile Include="IIS\WebServerConfigurerTests.cs" />
     <Compile Include="IIS\WebsiteConfigurerTests.cs" />
