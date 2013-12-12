@@ -6,8 +6,7 @@ namespace FluentInstallation.IIS
     public interface IVirtualDirectoryConfigurer : IFluentSyntax
     {
         IVirtualDirectoryConfigurer UsingAlias(string alias);
-        IVirtualDirectoryConfigurer OnPath(string path);
-        IVirtualDirectoryConfigurer UsingApplicationPool(string applicationPoolName);
+        IVirtualDirectoryConfigurer OnPhysicalPath(string path);        
         IVirtualDirectoryConfigurer ConfigureAdvancedOptions(Action<VirtualDirectory> options);
     }
 

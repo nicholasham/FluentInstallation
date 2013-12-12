@@ -5,7 +5,7 @@ namespace FluentInstallation.IIS
 {
     class ApplicationPoolConfigurer : IApplicationPoolConfigurer
     {
-        private ApplicationPool _applicationPool;
+        private readonly ApplicationPool _applicationPool;
 
         public ApplicationPoolConfigurer(ApplicationPool applicationPool)
         {
@@ -55,12 +55,12 @@ namespace FluentInstallation.IIS
 
         public IApplicationPoolConfigurer UsingClassicPipelineMode()
         {
-            throw new NotImplementedException();
+            return Configure(x => x.ManagedPipelineMode = ManagedPipelineMode.Classic);
         }
 
         public IApplicationPoolConfigurer UsingIntegratedPipelineMode()
         {
-            throw new NotImplementedException();
+            return Configure(x => x.ManagedPipelineMode = ManagedPipelineMode.Integrated);
         }
 
         public IApplicationPoolConfigurer Configure(Action<ApplicationPool> action)

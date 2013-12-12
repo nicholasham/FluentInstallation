@@ -61,7 +61,7 @@ namespace FluentInstallation.TestAssembly
                         site.AddVirtualDirectory(virtualDirectory =>
                         {
                             virtualDirectory.UsingAlias("assets");
-                            virtualDirectory.OnPath(@".\Assets");
+                            virtualDirectory.OnPhysicalPath(@".\Assets");
                         });
                     })
                     .Commit();

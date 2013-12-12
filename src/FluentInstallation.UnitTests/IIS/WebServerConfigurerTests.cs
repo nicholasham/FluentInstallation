@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Linq;
-using Microsoft.Web.Administration;
 using Xunit;
-using Xunit.Sdk;
 
 namespace FluentInstallation.IIS
 {
