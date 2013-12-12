@@ -17,12 +17,19 @@ namespace FluentInstallation
         public IInstallerFactory Find()
         {
 
-            if (!File.Exists(_command.AssemblyFile))
+            var path = _command.AssemblyFile;
+
+            if (!Directory.Exists(path))
+            {
+                path = Path.Combine(this.Assembly().DirectoryPath(), _command.AssemblyFile);
+            }
+
+            if (!File.Exists(path))
             {
                 throw Exceptions.AssemblyNotFound(_command.AssemblyFile);
             }
 
-            var assembly = Assembly.LoadFile(_command.AssemblyFile);
+            var assembly = Assembly.LoadFile(path);
 
             var factory = assembly
                 .GetTypes()

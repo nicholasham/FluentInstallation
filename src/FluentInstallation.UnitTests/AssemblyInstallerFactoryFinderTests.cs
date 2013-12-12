@@ -26,7 +26,7 @@ namespace FluentInstallation
         }
 
         [Fact]
-        public void Create_ThrowsWhenResolverNotFoundInAssembly()
+        public void Create_ThrowsWhenFactoryNotFoundInAssembly()
         {
             var context = Substitute.For<ICommand>();
             var assemblyFile = Path.Combine(TestContext.OutputDirectoryPath, "FluentInstallation.TestEmptyAssembly.dll");
@@ -39,7 +39,7 @@ namespace FluentInstallation
         }
 
         [Fact]
-        public void Create_LoadsInstallerResolverCorrectly()
+        public void Create_LoadsFactoryCorrectlyWhenGivenFullPathToAssembly()
         {
             var context = Substitute.For<ICommand>();
             var assemblyFile = Path.Combine(TestContext.OutputDirectoryPath, "FluentInstallation.TestAssembly.dll");
@@ -49,6 +49,25 @@ namespace FluentInstallation
 
             var actual = sut.Find();
             
+            Assert.IsAssignableFrom<IInstallerFactory>(actual);
+        }
+
+
+        /// <summary>
+        /// NCrunch Note: Set copy reference assemblies to workspace to true otherwise this test will fail
+        /// </summary>
+
+        [Fact]
+        public void Create_LoadsFactoryCorrectlyWhenGivenAssemblyFileNameAndAssemblyIsInSameDirectory()
+        {
+            var context = Substitute.For<ICommand>();
+            var assemblyFile = "FluentInstallation.TestAssembly.dll";
+            context.AssemblyFile.Returns(assemblyFile);
+
+            var sut = new AssemblyInstallerFactoryFinder(context);
+
+            var actual = sut.Find();
+
             Assert.IsAssignableFrom<IInstallerFactory>(actual);
         }
 
