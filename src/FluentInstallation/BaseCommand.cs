@@ -17,6 +17,7 @@ namespace FluentInstallation
         protected BaseCommand() 
         {
             Finder = new AssemblyInstallerFactoryFinder(this);
+            Parameters = new Hashtable();
         }
 
         protected IInstallerFactoryFinder Finder { get; set; }

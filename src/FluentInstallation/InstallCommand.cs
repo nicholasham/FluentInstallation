@@ -14,7 +14,7 @@ namespace FluentInstallation
         {
         }
 
-        public InstallCommand()
+        public InstallCommand() 
         {
         }
 

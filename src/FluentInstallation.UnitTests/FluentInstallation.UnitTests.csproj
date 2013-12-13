@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="Catch.cs" />
     <Compile Include="Certificates\CertificateFinderTests.cs" />
+    <Compile Include="ConfigureExtensionsTests.cs" />
     <Compile Include="DisposableAction.cs" />
     <Compile Include="DisposableTestFixture.cs" />
     <Compile Include="IIS\ApplicationPoolConfigurerTests.cs" />

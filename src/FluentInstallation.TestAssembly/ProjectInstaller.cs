@@ -18,6 +18,8 @@ namespace FluentInstallation.TestAssembly
 
             var parameters = context.GetParameters<ProjectParameters>();
 
+            System.Diagnostics.Debugger.Break();
+
             context
                 .ConfigureWebServer()
                     .DeleteApplicationPool(parameters.SiteName)

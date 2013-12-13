@@ -11,4 +11,4 @@ $DebugPreference = 'Continue'
 $WarningPreference = 'Continue' 
 $VerbosePreference = 'Continue' 
 
-Install-Fluent -AssemblyFile "FluentInstallation.TestAssembly.dll"  
+Install-Fluent -AssemblyFile "FluentInstallation.TestAssembly.dll"  -Parameters @{}

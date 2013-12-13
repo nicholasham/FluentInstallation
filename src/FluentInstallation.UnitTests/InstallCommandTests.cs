@@ -35,5 +35,12 @@ namespace FluentInstallation
 
         }
 
+        [Fact]
+        public void DefaultConstructor_SetsDefaults()
+        {
+            var sut = new InstallCommand();
+            Assert.NotNull(sut.Parameters);
+        }
+
     }
 }
