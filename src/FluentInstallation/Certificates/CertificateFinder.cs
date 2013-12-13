@@ -6,22 +6,22 @@ using System.Security.Cryptography.X509Certificates;
 namespace FluentInstallation.Certificates
 {
     /// <summary>
-    /// Does a search on the local computer looking for the first certificate matching the search criteria
+    ///     Does a search on the local computer looking for the first certificate matching the search criteria
     /// </summary>
     public class CertificateFinder : ICertificateFinder
     {
         public CertificateFindResult Find(X509FindType findType, object findValue)
         {
-            string[] storeLocations = Enum.GetNames(typeof(StoreLocation));
-            string[] storeNames = Enum.GetNames(typeof(StoreName));
+            string[] storeLocations = Enum.GetNames(typeof (StoreLocation));
+            string[] storeNames = Enum.GetNames(typeof (StoreName));
 
-            foreach (var storeLocation in storeLocations)
+            foreach (string storeLocation in storeLocations)
             {
-                var location = (StoreLocation)Enum.Parse(typeof(StoreLocation), storeLocation);
+                var location = (StoreLocation) Enum.Parse(typeof (StoreLocation), storeLocation);
 
                 foreach (string storeName in storeNames)
                 {
-                    var name = (StoreName)Enum.Parse(typeof(StoreName), storeName);
+                    var name = (StoreName) Enum.Parse(typeof (StoreName), storeName);
 
                     var store = new X509Store(name, location);
 
@@ -29,21 +29,14 @@ namespace FluentInstallation.Certificates
 
                     try
                     {
-
-                        foreach (var certificate in store.Certificates)
-                        {
-                            Console.WriteLine(certificate.Thumbprint);
-                        }
-
                         IEnumerable<X509Certificate2> result =
                             store.Certificates.Find(findType, findValue, false)
-                                .Cast<X509Certificate2>().ToArray();
+                                 .Cast<X509Certificate2>().ToArray();
 
                         if (result.Any())
                         {
                             return new CertificateFindResult(location, name, result.First());
                         }
-
                     }
                     finally
                     {
