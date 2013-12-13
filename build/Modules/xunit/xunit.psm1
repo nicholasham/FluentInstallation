@@ -9,5 +9,5 @@ function Run-Xunit {
 	)
 	
 	Write-Output "Launching xunit for $file"
-	exec { & $xunit "$file"}
+	exec { & $xunit "$file" /noshadow}
 }

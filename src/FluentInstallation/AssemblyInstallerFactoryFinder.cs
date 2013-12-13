@@ -26,7 +26,7 @@ namespace FluentInstallation
 
             if (!File.Exists(path))
             {
-                throw Exceptions.AssemblyNotFound(_command.AssemblyFile);
+                throw Exceptions.AssemblyNotFound(path);
             }
 
             var assembly = Assembly.LoadFile(path);
