@@ -30,7 +30,7 @@ namespace FluentInstallation
             IInstallerFactory factory = Finder.Find();
             IEnumerable<IInstaller> installers = factory.Create();
 
-            var context = new InstallerContext {Command = this};
+            var context = new InstallerContext(this);
 
             foreach (IInstaller installer in installers)
             {

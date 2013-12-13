@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using NSubstitute;
 using Xunit;
 
@@ -13,11 +14,36 @@ namespace FluentInstallation
         }
 
         [Fact]
+        public void SutIsIInstallerContext()
+        {
+            var command = Substitute.For<ICommand>();
+            command.Parameters.Returns(new Hashtable());
+
+            Assert.IsAssignableFrom<InstallerContext>(new InstallerContext(command));
+        }
+
+        [Fact]
+        public void Contructor_ThrowsWhenCommandIsNull()
+        {
+            Assert.Throws<ArgumentNullException>(() => new InstallerContext(null));
+        }
+
+        [Fact]
+        public void Contructor_ThrowsWhenCommandHasNullParameters()
+        {
+            var command = Substitute.For<ICommand>();
+            command.Parameters.Returns(null as Hashtable);
+
+            Assert.Throws<ArgumentException>(() => new InstallerContext(command));
+        }
+
+
+        [Fact]
         public void GetParameters_GivesParametersWhenSuppliedUsingCorrectCasing()
         {
             var command = Substitute.For<ICommand>();
             command.Parameters.Returns(new Hashtable { { "SiteName", "MySite" } });
-            var installerContext = new InstallerContext { Command = command };
+            var installerContext = new InstallerContext(command);
 
             var sut = installerContext.GetParameters<SingleStringParameter>();
 
@@ -29,7 +55,7 @@ namespace FluentInstallation
         {
             var command = Substitute.For<ICommand>();
             command.Parameters.Returns(new Hashtable { { "sitename", "MySite" } });
-            var installerContext = new InstallerContext { Command = command };
+            var installerContext = new InstallerContext(command);
 
             var sut = installerContext.GetParameters<SingleStringParameter>();
 
@@ -41,7 +67,7 @@ namespace FluentInstallation
         {
             var command = Substitute.For<ICommand>();
             command.Parameters.Returns(new Hashtable { { "SiteName", "MySite" }, {"ApplicationPoolName", "AppPool1"} });
-            var installerContext = new InstallerContext { Command = command };
+            var installerContext = new InstallerContext(command);
 
             var sut = installerContext.GetParameters<SingleStringParameter>();
 
@@ -58,7 +84,7 @@ namespace FluentInstallation
         {
             var command = Substitute.For<ICommand>();
             command.Parameters.Returns(new Hashtable { { "Port", "80" }});
-            var installerContext = new InstallerContext { Command = command };
+            var installerContext = new InstallerContext(command);
 
             var sut = installerContext.GetParameters<SingleIntParameter>();
 
@@ -70,13 +96,16 @@ namespace FluentInstallation
         {
             var command = Substitute.For<ICommand>();
             command.Parameters.Returns(new Hashtable { { "Port", "blah" } });
-            var installerContext = new InstallerContext { Command = command };
+            var installerContext = new InstallerContext(command);
 
             var sut = Catch.Exception(() => installerContext.GetParameters<SingleIntParameter>());
 
             Assert.IsType<ParameterCastException>(sut);
             Assert.Equal("Cannot cast to type System.Int32 for parameter name Port", sut.Message);
         }
+
+
+      
 
         public class SingleShortParameter
         {
@@ -88,7 +117,7 @@ namespace FluentInstallation
         {
             var command = Substitute.For<ICommand>();
             command.Parameters.Returns(new Hashtable { { "Port", "80" } });
-            var installerContext = new InstallerContext { Command = command };
+            var installerContext = new InstallerContext(command);
 
             var sut = installerContext.GetParameters<SingleShortParameter>();
 
@@ -100,7 +129,7 @@ namespace FluentInstallation
         {
             var command = Substitute.For<ICommand>();
             command.Parameters.Returns(new Hashtable { { "Port", "blah" } });
-            var installerContext = new InstallerContext { Command = command };
+            var installerContext = new InstallerContext(command);
             
             var sut = Catch.Exception(() => installerContext.GetParameters<SingleShortParameter>());
 
@@ -118,7 +147,7 @@ namespace FluentInstallation
         {
             var command = Substitute.For<ICommand>();
             command.Parameters.Returns(new Hashtable { { "Port", "80" } });
-            var installerContext = new InstallerContext { Command = command };
+            var installerContext = new InstallerContext(command);
 
             var sut = installerContext.GetParameters<SingleLongParameter>();
 
@@ -130,7 +159,7 @@ namespace FluentInstallation
         {
             var command = Substitute.For<ICommand>();
             command.Parameters.Returns(new Hashtable { { "Port", "blah" } });
-            var installerContext = new InstallerContext { Command = command };
+            var installerContext = new InstallerContext(command);
             
             var sut = Catch.Exception(() => installerContext.GetParameters<SingleLongParameter>());
 
@@ -148,7 +177,7 @@ namespace FluentInstallation
         {
             var command = Substitute.For<ICommand>();
             command.Parameters.Returns(new Hashtable { { "NetFramework", "4.5" } });
-            var installerContext = new InstallerContext { Command = command };
+            var installerContext = new InstallerContext(command);
 
             var sut = installerContext.GetParameters<SingleDoubleParameter>();
 
@@ -160,7 +189,7 @@ namespace FluentInstallation
         {
             var command = Substitute.For<ICommand>();
             command.Parameters.Returns(new Hashtable { { "NetFramework", "blah" } });
-            var installerContext = new InstallerContext { Command = command };
+            var installerContext = new InstallerContext(command);
 
             
             var sut = Catch.Exception(() => installerContext.GetParameters<SingleDoubleParameter>());
@@ -179,7 +208,7 @@ namespace FluentInstallation
         {
             var command = Substitute.For<ICommand>();
             command.Parameters.Returns(new Hashtable { { "NetFramework", "4.5" } });
-            var installerContext = new InstallerContext { Command = command };
+            var installerContext = new InstallerContext(command);
 
             var sut = installerContext.GetParameters<SingleFloatParameter>();
 
@@ -191,7 +220,7 @@ namespace FluentInstallation
         {
             var command = Substitute.For<ICommand>();
             command.Parameters.Returns(new Hashtable { { "NetFramework", "blah" } });
-            var installerContext = new InstallerContext { Command = command };
+            var installerContext = new InstallerContext(command);
 
             var sut = Catch.Exception(() => installerContext.GetParameters<SingleFloatParameter>());
 
@@ -209,7 +238,7 @@ namespace FluentInstallation
         {
             var command = Substitute.For<ICommand>();
             command.Parameters.Returns(new Hashtable { { "NetFramework", "4.5" } });
-            var installerContext = new InstallerContext { Command = command };
+            var installerContext = new InstallerContext(command);
 
             var sut = installerContext.GetParameters<SingleDecimalParameter>();
 
@@ -221,7 +250,7 @@ namespace FluentInstallation
         {
             var command = Substitute.For<ICommand>();
             command.Parameters.Returns(new Hashtable { { "NetFramework", "blah" } });
-            var installerContext = new InstallerContext { Command = command };
+            var installerContext = new InstallerContext(command);
 
             var sut = Catch.Exception(() => installerContext.GetParameters<SingleDecimalParameter>());
 
@@ -241,7 +270,7 @@ namespace FluentInstallation
         {
             var command = Substitute.For<ICommand>();
             command.Parameters.Returns(new Hashtable { { "Port", "80"}, {"SiteName", "MySite"}, {"AppPoolName", "AppPool1"}  });
-            var installerContext = new InstallerContext { Command = command };
+            var installerContext = new InstallerContext(command);
 
             var sut = installerContext.GetParameters<MultipleParameters>();
 
@@ -263,7 +292,7 @@ namespace FluentInstallation
         {
             var command = Substitute.For<ICommand>();
             command.Parameters.Returns(new Hashtable { { "SiteName", "MySite" } });
-            var installerContext = new InstallerContext { Command = command };
+            var installerContext = new InstallerContext(command);
 
             var sut = installerContext.GetParameters<RequiredParameters>();
 
@@ -275,7 +304,7 @@ namespace FluentInstallation
         {
             var command = Substitute.For<ICommand>();
             command.Parameters.Returns(new Hashtable { { "Port", "80" } });
-            var installerContext = new InstallerContext { Command = command };
+            var installerContext = new InstallerContext(command);
 
             var sut = Catch.Exception(() => installerContext.GetParameters<RequiredParameters>());
 

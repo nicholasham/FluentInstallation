@@ -7,11 +7,22 @@ namespace FluentInstallation
 {
     public class InstallerContext : IInstallerContext
     {
-        internal ICommand Command { get; set; }
-
-        public InstallerContext()
+        private ICommand Command { get; set; }
+        
+        public InstallerContext(ICommand command)
         {
+            if (command == null)
+            {
+                throw new ArgumentNullException("command");
+            }
+
+            if (command.Parameters == null)
+            {
+                throw new ArgumentException("The command parameters can not be null", "command");
+            }
             
+            
+            Command = command;
         }
 
         public T GetParameters<T>() where T : class, new()
