@@ -7,6 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentInstallation", "src\F
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentInstallation.UnitTests", "src\FluentInstallation.UnitTests\FluentInstallation.UnitTests.csproj", "{BAE643DF-4CD8-42ED-BE17-03381009920E}"
 	ProjectSection(ProjectDependencies) = postProject
+		{FF90AF60-EAB1-44A6-A9C7-542BDA5C7DC6} = {FF90AF60-EAB1-44A6-A9C7-542BDA5C7DC6}
 		{3530FBEF-F0A8-44C8-8809-741519656853} = {3530FBEF-F0A8-44C8-8809-741519656853}
 	EndProjectSection
 EndProject
