@@ -19,8 +19,8 @@ namespace FluentInstallation
             var command = Substitute.For<ICommand>();
             command.Parameters.Returns(new Hashtable());
 
-            //Assert.IsAssignableFrom<InstallerContext>(new InstallerContext(command));
-            Assert.True(false);
+            Assert.IsAssignableFrom<InstallerContext>(new InstallerContext(command));
+            
         }
 
         [Fact]
