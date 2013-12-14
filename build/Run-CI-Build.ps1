@@ -12,7 +12,9 @@ if ( !($env:PSModulePath -match  [regex]::escape($buildModulePath)))
 Remove-Module psake -ErrorAction SilentlyContinue
 Import-Module psake
 
+$psake.use_exit_on_error = $true
+
 $buildFile = (Join-Path $path Build.ps1)
 Invoke-psake -buildFile $buildFile -taskList Run-CI-Build 
 
-
+if ($psake.build_success -eq $false) { exit 1 } else { exit 0 }
