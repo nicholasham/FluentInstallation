@@ -1,0 +1,18 @@
+﻿<?xml version="1.0"?>
+<package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <id>FluentInstallation</id>
+	<title>Fluent Installation</title>
+    <version>0.0.0</version> <!-- The real version will be added by psake -->
+    <authors>Nicholas Hammond, Kevin Holditch and contributors</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <summary>A .Net library / powershell module that makes it easy to setup applications under IIS</summary>
+	<description>Fluent installation is a server installation framework for .net that lets you write installers fluently in C#  and then invoke them directly through powershell cmdlets.</description>
+    <language>en-US</language>
+        <copyright>Nicholas Hammond, Kevin Holditch and contributors</copyright>
+        <iconUrl>https://github.com/nicholasham/blob/master/Fluent-Installation-Nuget.png</iconUrl>
+    <licenseUrl>https://github.com/nicholasham/blob/master/license.txt</licenseUrl>
+    <projectUrl>https://github.com/nicholasham/FluentInstallation</projectUrl>
+    <tags>FluentInstallation Web.Administration IIS</tags>
+  </metadata>
+</package>
