@@ -9,9 +9,7 @@ namespace FluentInstallation.IIS
 
         IWebServerConfigurer DeleteApplicationPool(string name);
         IWebServerConfigurer DeleteWebsite(string name);
-
-        IDeleteApplicationConfigurer DeleteApplication(string name);
-
+        
         IWebServerConfigurer AlterWebsite(string name, Action<IWebsiteConfigurer> options);
     }
 }

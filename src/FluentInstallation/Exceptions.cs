@@ -16,6 +16,11 @@ namespace FluentInstallation
             return new InstallationException(Format("Unable to find any type implementing IInstallerFactory in Assembly {0}. Did you forget to implement the interface?", assembly.FullName));
         }
 
+        public static Exception NoSiteFoundMatchingName(string name)
+        {
+            return new InstallationException(Format("Unable to find any site on the server with a name matching {0}. ",name));
+        }
+
         public static Exception NoCertificateFoundMatchingThumbprint(string thumbprint)
         {
             return new InstallationException(Format("Unable to find a certificate on machine {0} with a certificate matching thumbprint {1}", Environment.MachineName, thumbprint));

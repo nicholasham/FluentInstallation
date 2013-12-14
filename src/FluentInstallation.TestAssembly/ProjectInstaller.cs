@@ -23,8 +23,6 @@ namespace FluentInstallation.TestAssembly
             context
                 .ConfigureWebServer()
                     .DeleteApplicationPool(parameters.SiteName)
-                    .DeleteApplication("assets")
-                        .ContainedInWebsite(parameters.SiteName)
                     .DeleteWebsite(parameters.SiteName)
                     .Commit();
 

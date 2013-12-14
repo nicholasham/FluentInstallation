@@ -1,10 +1,16 @@
 using System;
 using System.Linq;
+using Microsoft.Web.Administration;
 
 namespace FluentInstallation.IIS
 {
     internal class WebServerConfigurer : IWebServerConfigurer
     {
+        
+        public static Func<Site, IWebsiteConfigurer> CreateWebsiteConfigurer = (configurer) =>  new WebsiteConfigurer(configurer);
+        public static Func<ApplicationPool, IApplicationPoolConfigurer> CreateApplicationPoolConfigurer = (configurer) => new ApplicationPoolConfigurer(configurer);
+        public static Func<Application, IApplicationConfigurer> CreateApplicationConfigurer = (configurer) => new ApplicationConfigurer(configurer);
+        
         public WebServerConfigurer()
             : this(new WrappedServerManager())
         {            
@@ -26,7 +32,7 @@ namespace FluentInstallation.IIS
         {
             var defaultName = string.Format("ApplicationPool{0}", ServerManager.ApplicationPools.Count + 1);
             var applicationPool = ServerManager.ApplicationPools.Add(defaultName);
-            options(new ApplicationPoolConfigurer(applicationPool));
+            options(CreateApplicationPoolConfigurer(applicationPool));
             return this;
         }
 
@@ -35,7 +41,7 @@ namespace FluentInstallation.IIS
             var defaultSiteName = string.Format("Site{0}", ServerManager.Sites.Count + 1);
             var uniquePath = string.Format("/{0}", Guid.NewGuid().ToString("N"));
             var site = ServerManager.Sites.Add(defaultSiteName, uniquePath, 80);
-            options(new WebsiteConfigurer(site));
+            options(CreateWebsiteConfigurer(site));
             return this;
         }
 
@@ -61,14 +67,18 @@ namespace FluentInstallation.IIS
             return this;
         }
 
-        public IDeleteApplicationConfigurer DeleteApplication(string name)
-        {                        
-            throw new NotImplementedException();
-        }
-
         public IWebServerConfigurer AlterWebsite(string name, Action<IWebsiteConfigurer> options)
         {
-            throw new NotImplementedException();
+            var foundSite = ServerManager.Sites.FirstOrDefault(site => site.Name == name);
+
+            if (foundSite == null)
+            {
+                throw Exceptions.NoSiteFoundMatchingName(name);
+            }
+
+            options(CreateWebsiteConfigurer(foundSite));
+
+            return this;
         }
 
     }

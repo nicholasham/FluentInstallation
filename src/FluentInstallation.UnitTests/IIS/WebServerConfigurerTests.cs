@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Microsoft.Web.Administration;
 using NSubstitute;
 using Xunit;
 
@@ -107,6 +108,36 @@ namespace FluentInstallation.IIS
             sut.Commit();
 
             serverManager.Received().CommitChanges();
+        }
+
+        [Fact]
+        public void AlterWebsite_FindsFirstMatchingSiteAndPassesItToANewConfigurer()
+        {
+            var sut = new WebServerConfigurer();
+            var configurer = Substitute.For<IWebsiteConfigurer>();
+
+           
+            var expected = WebAdministrationFactory.CreateWebsite();
+            sut.ServerManager.Sites.Add(expected);
+
+            Site actual = default(Site);
+            WebServerConfigurer.CreateWebsiteConfigurer = (x) => { actual = x; return configurer; };  
+            
+            sut.AlterWebsite(expected.Name, website => {});
+
+            Assert.Equal(expected.Name, actual.Name);
+
+        }
+        
+        [Fact]
+        public void AlterWebsite_ThrowsWhenUnableToMatchASiteWithTheSameName()
+        {
+            var sut = new WebServerConfigurer();
+
+            var randomName = Guid.NewGuid().ToString();
+
+            Assert.Throws<InstallationException>(() => sut.AlterWebsite(randomName, (x) => { }));
+
         }
     }
 }

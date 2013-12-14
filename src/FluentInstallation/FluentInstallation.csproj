@@ -69,7 +69,6 @@
     <Compile Include="IIS\WebsiteConfigurer.cs" />
     <Compile Include="IIS\WrappedServerManager.cs" />
     <Compile Include="IRootConfigurer.cs" />
-    <Compile Include="IIS\IDeleteApplicationConfigurer.cs" />
     <Compile Include="IIS\IWebServerConfigurer.cs" />
     <Compile Include="IIS\IWebsiteConfigurer.cs" />
     <Compile Include="Exceptions.cs" />

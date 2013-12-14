@@ -14,11 +14,9 @@ namespace FluentInstallation.IIS
         IWebsiteConfigurer AddBinding(Action<IBindingConfigurer> binding);
 
         IWebsiteConfigurer AddApplication(Action<IApplicationConfigurer> application);
-
-
+        
         IWebsiteConfigurer AddVirtualDirectory(Action<IVirtualDirectoryConfigurer> virtualDirectory);
-
-
+        
         IWebsiteConfigurer Configure(Action<Site> action);
 
       
