@@ -1,6 +1,9 @@
 ﻿
-$path = Join-Path (Split-Path -Parent $MyInvocation.MyCommand.path) Bin
+$path = Split-Path -Parent $MyInvocation.MyCommand.path
 $moduleFile = @(Get-ChildItem $path  -Filter FluentInstallation.dll -Recurse )[0].FullName
+
+$projectName = (Get-Item $path).Name 
+$projectAssemblyFile = @(Get-ChildItem $path  -Filter "$($projectName).dll" -Recurse )[0].FullName
 
 Remove-Module FluentInstallation -ErrorAction SilentlyContinue
 Import-Module $moduleFile
@@ -11,4 +14,4 @@ $DebugPreference = 'Continue'
 $WarningPreference = 'Continue' 
 $VerbosePreference = 'Continue' 
 
-Install-Fluent -AssemblyFile "FluentInstallation.TestAssembly.dll"  -Parameters @{}
+Install-Fluent -AssemblyFile $projectAssemblyFile  -Parameters @{}

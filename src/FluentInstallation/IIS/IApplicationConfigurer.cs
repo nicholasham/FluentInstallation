@@ -8,6 +8,6 @@ namespace FluentInstallation.IIS
         IApplicationConfigurer UseAlias(string alias);
         IApplicationConfigurer OnPhysicalPath(string path);
         IApplicationConfigurer UseApplicationPool(string applicationPoolName);
-        IApplicationConfigurer ConfigureAdvancedOptions(Action<Application> options);
+        IApplicationConfigurer Configure(Action<Application> application);
     }
 }

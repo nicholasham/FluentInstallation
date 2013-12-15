@@ -56,6 +56,7 @@
     <Compile Include="Certificates\ICertificateFinder.cs" />
     <Compile Include="ConfigureExtensions.cs" />
     <Compile Include="HashTableExtensions.cs" />
+    <Compile Include="IIS\AdministrationExtensions.cs" />
     <Compile Include="IIS\ApplicationConfigurer.cs" />
     <Compile Include="IIS\ApplicationPoolConfigurer.cs" />
     <Compile Include="IIS\BindingConfigurer.cs" />

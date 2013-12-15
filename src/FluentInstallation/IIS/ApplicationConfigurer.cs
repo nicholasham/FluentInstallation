@@ -5,7 +5,7 @@ namespace FluentInstallation.IIS
 {
     public class ApplicationConfigurer : IApplicationConfigurer
     {
-        private Application _application;
+        private readonly Application _application;
 
         public ApplicationConfigurer(Application application)
         {
@@ -14,22 +14,34 @@ namespace FluentInstallation.IIS
 
         public IApplicationConfigurer UseAlias(string alias)
         {
-            throw new NotImplementedException();
+
+            return Configure(application =>
+            {
+                application.Path = alias.StartsWith("/") ? alias : "/" + alias;        
+            });
+            
         }
 
         public IApplicationConfigurer OnPhysicalPath(string path)
         {
-            throw new NotImplementedException();
+            return Configure(application =>
+            {
+                application.VirtualDirectory().PhysicalPath = path ;
+            });
         }
 
         public IApplicationConfigurer UseApplicationPool(string applicationPoolName)
         {
-            throw new NotImplementedException();
+            return Configure(application =>
+            {
+                application.ApplicationPoolName = applicationPoolName;
+            });
         }
 
-        public IApplicationConfigurer ConfigureAdvancedOptions(Action<Application> options)
+        public IApplicationConfigurer Configure(Action<Application> application)
         {
-            throw new NotImplementedException();
+            application(_application);
+            return this;
         }
     }
 }
