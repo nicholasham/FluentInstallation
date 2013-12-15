@@ -170,6 +170,59 @@ namespace FluentInstallation.IIS
 
         }
 
+
+        [Fact]
+        public void RemoveApplication_ThrowsWhenApplicationDoesNotExist()
+        {
+            var website = WebAdministrationFactory.CreateWebsite();
+            var sut = new WebsiteConfigurer(website);
+
+            Assert.Throws<InstallationException>(() => { sut.RemoveApplication("somemissingapplication"); });
+            
+        }
+
+        [Fact]
+        public void RemoveApplication_RemovesApplicationFromSite()
+        {
+            var website = WebAdministrationFactory.CreateWebsite();
+            website.Applications.Add("/SomeAlias", @"C:\");
+
+            var sut = new WebsiteConfigurer(website);
+
+            sut.RemoveApplication("SomeAlias");
+
+            Assert.Equal(0, website.Applications.Count(application => application.Path.Equals("/SomeAlias")));
+
+        }
+
+
+        [Fact]
+        public void RemoveVirtualDirectory_ThrowsWhenApplicationDoesNotExist()
+        {
+            var website = WebAdministrationFactory.CreateWebsite();
+            var sut = new WebsiteConfigurer(website);
+
+            Assert.Throws<InstallationException>(() => { sut.RemoveVirtualDirectory("somemissingapplication"); });
+
+        }
+
+
+        [Fact]
+        public void RemoveVirtualDirectory_RemovesVirtualDirectoryFromSite()
+        {
+
+            var website = WebAdministrationFactory.CreateWebsite();
+            website.Application().VirtualDirectories.Add("/SomeAlias", @"C:\");
+
+            var sut = new WebsiteConfigurer(website);
+
+            sut.RemoveVirtualDirectory("SomeAlias");
+
+            Assert.Equal(0, website.Application().VirtualDirectories.Count(x => x.Path.Equals("/SomeAlias")));
+
+        }
+
+
                 
     }
 }

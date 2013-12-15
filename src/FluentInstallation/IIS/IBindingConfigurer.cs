@@ -13,7 +13,7 @@ namespace FluentInstallation.IIS
         IBindingConfigurer UseHostName(string hostName);
         IBindingConfigurer UseCertificateWithThumbprint(string thumbprint);
         IBindingConfigurer OnIpAddress(string ipAddress);
-        IBindingConfigurer Configure(Action<Binding> options);
+        IBindingConfigurer Configure(Action<Binding> binding);
 
     }
 }

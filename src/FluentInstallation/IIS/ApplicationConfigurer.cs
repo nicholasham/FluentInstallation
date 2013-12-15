@@ -17,7 +17,7 @@ namespace FluentInstallation.IIS
 
             return Configure(application =>
             {
-                application.Path = alias.StartsWith("/") ? alias : "/" + alias;        
+                application.Path = alias.ToPath();        
             });
             
         }

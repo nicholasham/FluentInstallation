@@ -13,5 +13,20 @@ namespace FluentInstallation.IIS
         {
             return virtualDirectories["/"];
         }
+
+        public static Application DefaultApplication(this ApplicationCollection applications)
+        {
+            return applications["/"];
+        }
+
+        public static Application Application(this Site site)
+        {
+            return site.Applications.DefaultApplication();
+        }
+
+        public static string ToPath(this string alias)
+        {
+            return alias.StartsWith("/") ? alias : "/" + alias;
+        }
     }
 }

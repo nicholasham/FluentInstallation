@@ -14,15 +14,15 @@ namespace FluentInstallation.IIS
 
         public IVirtualDirectoryConfigurer UseAlias(string alias)
         {
-            return ConfigureAdvancedOptions(x => x.Path = alias);
+            return Configure(x => x.Path = alias.ToPath());
         }
 
         public IVirtualDirectoryConfigurer OnPhysicalPath(string path)
         {
-            return ConfigureAdvancedOptions(x => x.PhysicalPath = path);
+            return Configure(x => x.PhysicalPath = path);
         }
         
-        public IVirtualDirectoryConfigurer ConfigureAdvancedOptions(Action<VirtualDirectory> options)
+        public IVirtualDirectoryConfigurer Configure(Action<VirtualDirectory> options)
         {
             options(_virtualDirectory);
             return this;

@@ -5,6 +5,7 @@ namespace FluentInstallation.IIS
 {
     public class VirtualDirectoryConfigurerTests
     {
+        
         [Fact]
         public void UseAlias_SetsThePath()
         {
@@ -12,6 +13,17 @@ namespace FluentInstallation.IIS
             var sut = new VirtualDirectoryConfigurer(virtualDirectory);
 
             sut.UseAlias("/mySite");
+
+            Assert.Equal("/mySite", virtualDirectory.Path);
+        }
+
+        [Fact]
+        public void UseAlias_SetsThePathWhenTheAliasHasNoForwardSlash()
+        {
+            var virtualDirectory = WebAdministrationFactory.CreateVirtualDirectory();
+            var sut = new VirtualDirectoryConfigurer(virtualDirectory);
+
+            sut.UseAlias("mySite");
 
             Assert.Equal("/mySite", virtualDirectory.Path);
         }

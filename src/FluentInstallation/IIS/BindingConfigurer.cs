@@ -79,9 +79,9 @@ namespace FluentInstallation.IIS
             });
         }
 
-        public IBindingConfigurer Configure(Action<Binding> action)
+        public IBindingConfigurer Configure(Action<Binding> binding)
         {
-            action(_binding);
+            binding(_binding);
             return this;
         }
     }

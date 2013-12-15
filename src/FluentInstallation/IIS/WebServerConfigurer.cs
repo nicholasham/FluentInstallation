@@ -28,26 +28,27 @@ namespace FluentInstallation.IIS
             ServerManager.CommitChanges();
         }
 
-        public IWebServerConfigurer CreateApplicationPool(Action<IApplicationPoolConfigurer> options)
+        public IWebServerConfigurer CreateApplicationPool(Action<IApplicationPoolConfigurer> configurer)
         {
             var defaultName = string.Format("ApplicationPool{0}", ServerManager.ApplicationPools.Count + 1);
             var applicationPool = ServerManager.ApplicationPools.Add(defaultName);
-            options(CreateApplicationPoolConfigurer(applicationPool));
+            configurer(CreateApplicationPoolConfigurer(applicationPool));
             return this;
         }
 
-        public IWebServerConfigurer CreateWebsite(Action<IWebsiteConfigurer> options)
+        public IWebServerConfigurer CreateWebsite(Action<IWebsiteConfigurer> configurer)
         {
             var defaultSiteName = string.Format("Site{0}", ServerManager.Sites.Count + 1);
             var uniquePath = string.Format("/{0}", Guid.NewGuid().ToString("N"));
             var site = ServerManager.Sites.Add(defaultSiteName, uniquePath, 80);
-            options(CreateWebsiteConfigurer(site));
+            configurer(CreateWebsiteConfigurer(site));
             return this;
         }
 
         public IWebServerConfigurer DeleteApplicationPool(string name)
         {
             var applicationPool = ServerManager.ApplicationPools.FirstOrDefault(appPool => appPool.Name == name);
+
             if (applicationPool != null)
             {
                 ServerManager.ApplicationPools.Remove(applicationPool);
@@ -67,7 +68,7 @@ namespace FluentInstallation.IIS
             return this;
         }
 
-        public IWebServerConfigurer AlterWebsite(string name, Action<IWebsiteConfigurer> options)
+        public IWebServerConfigurer AlterWebsite(string name, Action<IWebsiteConfigurer> configurer)
         {
             var foundSite = ServerManager.Sites.FirstOrDefault(site => site.Name == name);
 
@@ -76,7 +77,7 @@ namespace FluentInstallation.IIS
                 throw Exceptions.NoSiteFoundMatchingName(name);
             }
 
-            options(CreateWebsiteConfigurer(foundSite));
+            configurer(CreateWebsiteConfigurer(foundSite));
 
             return this;
         }

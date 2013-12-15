@@ -35,7 +35,7 @@ namespace FluentInstallation.IIS
 
         public IWebsiteConfigurer OnPhysicalPath(string path)
         {
-            return Configure(site => site.Applications["/"].VirtualDirectories["/"].PhysicalPath = path);
+            return Configure(site => site.Application().VirtualDirectory().PhysicalPath = path);
         }
 
         public IWebsiteConfigurer AddBinding(Action<IBindingConfigurer> binding)
@@ -44,6 +44,39 @@ namespace FluentInstallation.IIS
             {
                 var configurer = new BindingConfigurer(site.Bindings.CreateElement());
                 binding(configurer);
+            });
+        }
+
+        public IWebsiteConfigurer RemoveApplication(string alias)
+        {
+
+            return Configure(site =>
+            {
+                var foundApplication = site.Applications.FirstOrDefault(x => x.Path.Equals(alias.ToPath()));
+
+                if (foundApplication == null)
+                {
+                    throw Exceptions.ApplicationNotFoundInSite(site, alias);
+                }
+
+                site.Applications.Remove(foundApplication);
+
+            });
+        }
+
+        public IWebsiteConfigurer RemoveVirtualDirectory(string alias)
+        {
+            return Configure(site =>
+            {
+                var foundVirtualDirectory = site.Application().VirtualDirectories.FirstOrDefault(x => x.Path.Equals(alias.ToPath()));
+
+                if (foundVirtualDirectory == null)
+                {
+                    throw Exceptions.VirtualDirectoryNotFoundInSite(site, alias);
+                }
+
+                site.Application().VirtualDirectories.Remove(foundVirtualDirectory);
+
             });
         }
 
@@ -60,7 +93,7 @@ namespace FluentInstallation.IIS
         {
             return Configure(site =>
             {
-                var configurer = new VirtualDirectoryConfigurer(site.Applications["/"].VirtualDirectories.CreateElement());
+                var configurer = new VirtualDirectoryConfigurer(site.Application().VirtualDirectories.CreateElement());
                 virtualDirectory(configurer);
             });
         }
