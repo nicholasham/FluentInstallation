@@ -2,47 +2,25 @@
 using System.Collections;
 using System.Management.Automation;
 using System.Management.Automation.Runspaces;
-using NSubstitute;
 using Xunit;
 
 namespace FluentInstallation.IntegrationTests
 {
-
-    
-    public class TestInstallerContext : InstallerContext
-    {
-        public TestInstallerContext(Hashtable hashtable) : base(CreateCommand(hashtable))
-        {
-
-        }
-
-        private static ICommand CreateCommand(Hashtable hashtable)
-        {
-            var command = Substitute.For<ICommand>();
-            command.Parameters.Returns(hashtable);
-            return command;
-        }
-    }
-
-    
     public class InstallerTests
     {
 
-        public IInstallerContext CreateInstallerContext(Hashtable parameters)
+        public IInstallerContext CreateSut(Hashtable parameters)
         {
             return new TestInstallerContext(parameters);
         }
-
-
-
         
         [Fact]
         public void CanInstallWebsiteCorrectly()
         {
 
-            var context = CreateInstallerContext(new Hashtable());
+            var sut = CreateSut(new Hashtable());
             
-            context
+            sut
                 .ConfigureWebServer()
                 .DeleteWebsite("Test")
                 .CreateWebsite(website =>
@@ -55,7 +33,11 @@ namespace FluentInstallation.IntegrationTests
                         binding.OnPort(9090);
                         binding.UseProtocol("http");
                     });
-                })
+
+                    website.AddApplication(x => x.UseAlias("App1").OnPhysicalPath(@"C:\"));
+                    website.AddApplication(x => x.UseAlias("App1/App2").OnPhysicalPath(@"C:\"));
+
+                })  
                 .Commit();
 
          }

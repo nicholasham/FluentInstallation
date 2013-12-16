@@ -84,7 +84,7 @@ namespace FluentInstallation.IIS
         {
             return Configure(site =>
             {
-                var configurer = new ApplicationConfigurer(site.Applications.CreateElement());
+                var configurer = new ApplicationConfigurer(site.Applications.CreateDefaultApplication());
                 application(configurer);
             });
         }
@@ -93,7 +93,7 @@ namespace FluentInstallation.IIS
         {
             return Configure(site =>
             {
-                var configurer = new VirtualDirectoryConfigurer(site.Application().VirtualDirectories.CreateElement());
+                var configurer = new VirtualDirectoryConfigurer(site.Application().VirtualDirectories.CreateDefaultVirtualDirectory());
                 virtualDirectory(configurer);
             });
         }

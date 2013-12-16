@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="InstallCommandTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestInstallerContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

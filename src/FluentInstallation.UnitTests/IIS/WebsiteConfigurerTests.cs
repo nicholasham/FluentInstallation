@@ -135,7 +135,7 @@ namespace FluentInstallation.IIS
 
             var actual = website.Applications.Count;
 
-            Assert.Equal(1, actual);
+            Assert.Equal(2, actual);
 
         }
 

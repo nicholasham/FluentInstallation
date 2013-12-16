@@ -1,9 +1,13 @@
 ﻿using System;
+using System.Linq;
+using Microsoft.Web.Administration;
 
 namespace FluentInstallation.IIS
 {
     internal class BindingInformation
     {
+
+        public static Func<int> NextAvailablePort = () => new ServerManager().GetHighestPort().Increment();
         public int Port { get; set; }
         public string IpAddress { get; set; }
         public string HostName { get; set; }
@@ -16,10 +20,9 @@ namespace FluentInstallation.IIS
         }
         
 
-        public BindingInformation IncrementPort()
+        public BindingInformation AssignNextAvailablePort()
         {
-            Port ++;
-
+            Port = NextAvailablePort();
             return this;
         }
 
