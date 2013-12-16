@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Web.Administration;
 
-namespace FluentInstallation.IIS
+namespace FluentInstallation.Web
 {
     public class VirtualDirectoryConfigurer : IVirtualDirectoryConfigurer
     {

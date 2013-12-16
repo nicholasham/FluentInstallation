@@ -1,6 +1,6 @@
 using Microsoft.Web.Administration;
 
-namespace FluentInstallation.IIS
+namespace FluentInstallation.Web
 {
     internal class WrappedServerManager : IServerManager
     {

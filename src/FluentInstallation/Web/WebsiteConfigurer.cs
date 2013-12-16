@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Configuration;
-using System.Diagnostics.Contracts;
 using System.Linq;
-using System.Reflection;
 using Microsoft.Web.Administration;
 
-namespace FluentInstallation.IIS
+namespace FluentInstallation.Web
 {
     public class WebsiteConfigurer : IWebsiteConfigurer
     {

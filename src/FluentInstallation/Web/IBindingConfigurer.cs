@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Security.Cryptography.X509Certificates;
 using Microsoft.Web.Administration;
 
-namespace FluentInstallation.IIS
+namespace FluentInstallation.Web
 {
 
 

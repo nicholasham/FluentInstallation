@@ -1,7 +1,6 @@
-﻿using Microsoft.Web.Administration;
-using Xunit;
+﻿using Xunit;
 
-namespace FluentInstallation.IIS
+namespace FluentInstallation.Web
 {
     public class VirtualDirectoryConfigurerTests
     {

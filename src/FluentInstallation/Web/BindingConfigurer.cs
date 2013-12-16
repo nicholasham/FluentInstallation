@@ -3,7 +3,7 @@ using System.Security.Cryptography.X509Certificates;
 using FluentInstallation.Certificates;
 using Microsoft.Web.Administration;
 
-namespace FluentInstallation.IIS
+namespace FluentInstallation.Web
 {
 
     public class BindingConfigurer : IBindingConfigurer

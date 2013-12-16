@@ -4,7 +4,7 @@ using Microsoft.Web.Administration;
 using NSubstitute;
 using Xunit;
 
-namespace FluentInstallation.IIS
+namespace FluentInstallation.Web
 {
     public class WebServerConfigurerTests
     {

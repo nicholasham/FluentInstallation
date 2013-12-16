@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Linq;
 using Microsoft.Web.Administration;
 
-namespace FluentInstallation.IIS
+namespace FluentInstallation.Web
 {
     internal class BindingInformation
     {

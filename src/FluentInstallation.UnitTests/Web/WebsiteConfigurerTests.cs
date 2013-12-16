@@ -4,7 +4,7 @@ using System.Linq;
 using Microsoft.Web.Administration;
 using Xunit;
 
-namespace FluentInstallation.IIS
+namespace FluentInstallation.Web
 {
     public class WebsiteConfigurerTests
     {

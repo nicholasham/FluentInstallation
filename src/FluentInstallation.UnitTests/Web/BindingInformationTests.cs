@@ -1,6 +1,6 @@
 ﻿using Xunit;
 
-namespace FluentInstallation.IIS
+namespace FluentInstallation.Web
 {
     public class BindingInformationTests
     {

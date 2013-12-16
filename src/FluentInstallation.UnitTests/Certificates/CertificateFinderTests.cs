@@ -1,5 +1,5 @@
 ﻿using System.Security.Cryptography.X509Certificates;
-using FluentInstallation.IIS;
+using FluentInstallation.Web;
 using Xunit;
 
 namespace FluentInstallation.Certificates

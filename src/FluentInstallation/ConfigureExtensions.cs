@@ -1,4 +1,4 @@
-using FluentInstallation.IIS;
+using FluentInstallation.Web;
 
 namespace FluentInstallation
 {

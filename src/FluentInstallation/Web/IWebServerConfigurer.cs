@@ -1,6 +1,6 @@
 using System;
 
-namespace FluentInstallation.IIS
+namespace FluentInstallation.Web
 {
     public interface IWebServerConfigurer : IRootConfigurer
     {
