@@ -22,6 +22,11 @@ namespace FluentInstallation
             return new InstallationException(Message("Unable to find any site on the server with a name matching {0}. ",name));
         }
 
+        public static Exception NoApplicationPoolFoundMatchingName(string name)
+        {
+            return new InstallationException(Message("Unable to find any application pool on the server with a name matching {0}. ", name));
+        }
+
         public static Exception NoCertificateFoundMatchingThumbprint(string thumbprint)
         {
             return new InstallationException(Message("Unable to find a certificate on machine {0} with a certificate matching thumbprint {1}", Environment.MachineName, thumbprint));

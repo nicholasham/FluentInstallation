@@ -68,6 +68,22 @@ namespace FluentInstallation.IIS
             return this;
         }
 
+
+        public IWebServerConfigurer AlterApplicationPool(string name, Action<IApplicationPoolConfigurer> configurer)
+        {
+            var foundApplicationPool = ServerManager.ApplicationPools.FirstOrDefault(site => site.Name == name);
+
+            if (foundApplicationPool == null)
+            {
+                throw Exceptions.NoSiteFoundMatchingName(name);
+            }
+
+            configurer(CreateApplicationPoolConfigurer(foundApplicationPool));
+
+            return this;
+        }
+
+
         public IWebServerConfigurer AlterWebsite(string name, Action<IWebsiteConfigurer> configurer)
         {
             var foundSite = ServerManager.Sites.FirstOrDefault(site => site.Name == name);

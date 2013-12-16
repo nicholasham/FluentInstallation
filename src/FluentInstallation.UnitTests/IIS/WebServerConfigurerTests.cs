@@ -139,5 +139,36 @@ namespace FluentInstallation.IIS
             Assert.Throws<InstallationException>(() => sut.AlterWebsite(randomName, (x) => { }));
 
         }
+
+        [Fact]
+        public void AlterAppPool_FindsFirstMatchingAppPoolAndPassesItToANewConfigurer()
+        {
+            var sut = new WebServerConfigurer();
+            var configurer = Substitute.For<IApplicationPoolConfigurer>();
+
+
+            var expected = WebAdministrationFactory.CreateApplicationPool();
+            sut.ServerManager.ApplicationPools.Add(expected);
+
+            ApplicationPool actual = default(ApplicationPool);
+            WebServerConfigurer.CreateApplicationPoolConfigurer = (x) => { actual = x; return configurer; };
+
+            sut.AlterApplicationPool(expected.Name, applicationPool => { });
+
+            Assert.Equal(expected.Name, actual.Name);
+
+        }
+
+
+        [Fact]
+        public void AlterAppPool_ThrowsWhenUnableToMatchAnAppPoolWithTheSameName()
+        {
+            var sut = new WebServerConfigurer();
+
+            var randomName = Guid.NewGuid().ToString();
+
+            Assert.Throws<InstallationException>(() => sut.AlterApplicationPool(randomName, (x) => { }));
+
+        }
     }
 }
