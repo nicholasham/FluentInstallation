@@ -5,7 +5,7 @@ namespace FluentInstallation.IIS
     public interface IWebServerConfigurer : IRootConfigurer
     {
         IWebServerConfigurer CreateApplicationPool(Action<IApplicationPoolConfigurer> configurer);
-        IWebServerConfigurer CreateWebsite(Action<IWebsiteConfigurer> configurer);
+        IWebServerConfigurer CreateWebsite(Action<IWebsiteConfigurer> website);
 
         IWebServerConfigurer DeleteApplicationPool(string name);
         IWebServerConfigurer DeleteWebsite(string name);

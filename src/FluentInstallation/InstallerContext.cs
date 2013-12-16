@@ -62,25 +62,6 @@ namespace FluentInstallation
 
             return result;
         }
-
-        public void WriteDebug(string message)
-        {
-            Command.WriteDebug(message);
-        }
-
-        public void WriteVerbose(string message)
-        {
-            Command.WriteVerbose(message);
-        }
-
-        public void WriteWarning(string message)
-        {
-            Command.WriteWarning(message);
-        }
-
-        public void WriteCommandDetail(string message)
-        {
-            Command.WriteCommandDetail(message);
-        }
+        
     }
 }

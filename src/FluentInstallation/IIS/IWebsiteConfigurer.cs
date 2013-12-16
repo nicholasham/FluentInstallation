@@ -11,7 +11,7 @@ namespace FluentInstallation.IIS
 
         IWebsiteConfigurer OnPhysicalPath(string path);
 
-        IWebsiteConfigurer AddBinding(Action<IBindingConfigurer> binding);
+        IWebsiteConfigurer AddBinding(Action<IBindingConfigurer> action);
 
         IWebsiteConfigurer RemoveApplication(string alias);
         

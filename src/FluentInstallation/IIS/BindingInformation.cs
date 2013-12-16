@@ -12,9 +12,21 @@ namespace FluentInstallation.IIS
         {
             Port = 80;
             IpAddress = "*";
-            HostName = string.Empty;
+            HostName = null;
+        }
+        
+
+        public BindingInformation IncrementPort()
+        {
+            Port ++;
+
+            return this;
         }
 
+        public static BindingInformation Default()
+        {
+            return new BindingInformation();
+        }
         public static BindingInformation Parse(string value)
         {
 
@@ -49,7 +61,7 @@ namespace FluentInstallation.IIS
 
         public override string ToString()
         {
-            return string.IsNullOrEmpty(HostName) ? string.Format("{0}:{1}", IpAddress, Port) : string.Format("{0}:{1}:{2}", IpAddress, Port, HostName);
+            return string.IsNullOrEmpty(HostName) ? string.Format("{0}:{1}:", IpAddress, Port) : string.Format("{0}:{1}:{2}", IpAddress, Port, HostName);
         }
     }
 }

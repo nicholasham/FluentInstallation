@@ -78,7 +78,7 @@ namespace FluentInstallation.IIS
 
             sut.OnPort(99);
 
-            Assert.Equal("*:99", binding.BindingInformation);
+            Assert.Equal("*:99:", binding.BindingInformation);
         }
 
         [Fact]
@@ -89,7 +89,7 @@ namespace FluentInstallation.IIS
 
             sut.OnIpAddress("172.168.7.9");
 
-            Assert.Equal("172.168.7.9:80", binding.BindingInformation);
+            Assert.Equal("172.168.7.9:80:", binding.BindingInformation);
         }
 
         [Fact]

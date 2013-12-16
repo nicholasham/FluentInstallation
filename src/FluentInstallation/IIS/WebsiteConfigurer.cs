@@ -20,7 +20,7 @@ namespace FluentInstallation.IIS
             }
 
             _website = website;
-
+            
         }
 
         public IWebsiteConfigurer Named(string name)
@@ -38,12 +38,12 @@ namespace FluentInstallation.IIS
             return Configure(site => site.Application().VirtualDirectory().PhysicalPath = path);
         }
 
-        public IWebsiteConfigurer AddBinding(Action<IBindingConfigurer> binding)
+        public IWebsiteConfigurer AddBinding(Action<IBindingConfigurer> action)
         {
             return Configure(site =>
             {
-                var configurer = new BindingConfigurer(site.Bindings.CreateElement());
-                binding(configurer);
+                var configurer = new BindingConfigurer(site.Bindings.CreateDefaultBinding());
+                action(configurer);
             });
         }
 

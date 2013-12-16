@@ -11,7 +11,7 @@ namespace FluentInstallation.IIS
 
             Assert.Equal("*", information.IpAddress);
             Assert.Equal(80, information.Port);
-            Assert.Equal(string.Empty, information.HostName);
+            Assert.Equal(null, information.HostName);
 
         }
 
@@ -32,7 +32,7 @@ namespace FluentInstallation.IIS
 
             Assert.Equal("*", information.IpAddress);
             Assert.Equal(80, information.Port);
-            Assert.Equal(string.Empty, information.HostName);
+            Assert.Equal(null, information.HostName);
         }
 
         [Fact]

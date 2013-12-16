@@ -15,7 +15,7 @@ namespace FluentInstallation.IIS
             var sut = new WebsiteConfigurer(website);
             Assert.IsAssignableFrom<IWebsiteConfigurer>(sut);
         }
-
+        
         [Fact]
         public void Constructor_ThrowsWhenWebsiteIsNull()
         {
@@ -97,7 +97,9 @@ namespace FluentInstallation.IIS
             var website = WebAdministrationFactory.CreateWebsite();
             var sut = new WebsiteConfigurer(website);
 
-            sut.AddBinding((binding) => { });
+            website.Bindings.Clear();
+
+            sut.AddBinding((binding) => { binding.OnPort(81); });
 
             var actual = website.Bindings.Count;
             

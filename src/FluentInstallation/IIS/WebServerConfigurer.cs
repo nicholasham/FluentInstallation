@@ -36,12 +36,12 @@ namespace FluentInstallation.IIS
             return this;
         }
 
-        public IWebServerConfigurer CreateWebsite(Action<IWebsiteConfigurer> configurer)
+        public IWebServerConfigurer CreateWebsite(Action<IWebsiteConfigurer> website)
         {
             var defaultSiteName = string.Format("Site{0}", ServerManager.Sites.Count + 1);
             var uniquePath = string.Format("/{0}", Guid.NewGuid().ToString("N"));
             var site = ServerManager.Sites.Add(defaultSiteName, uniquePath, 80);
-            configurer(CreateWebsiteConfigurer(site));
+            website(CreateWebsiteConfigurer(site));
             return this;
         }
 

@@ -22,6 +22,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentInstallation.TestAsse
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentInstallation.TestEmptyAssembly", "src\FluentInstallation.TestEmptyAssembly\FluentInstallation.TestEmptyAssembly.csproj", "{FF90AF60-EAB1-44A6-A9C7-542BDA5C7DC6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentInstallation.IntegrationTests", "..\src\FluentInstallation\FluentInstallation.IntegrationTests\FluentInstallation.IntegrationTests.csproj", "{4F7D7C26-F57A-48DC-9BC5-ADC401EB7857}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +46,10 @@ Global
 		{FF90AF60-EAB1-44A6-A9C7-542BDA5C7DC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF90AF60-EAB1-44A6-A9C7-542BDA5C7DC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF90AF60-EAB1-44A6-A9C7-542BDA5C7DC6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F7D7C26-F57A-48DC-9BC5-ADC401EB7857}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F7D7C26-F57A-48DC-9BC5-ADC401EB7857}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F7D7C26-F57A-48DC-9BC5-ADC401EB7857}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F7D7C26-F57A-48DC-9BC5-ADC401EB7857}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
