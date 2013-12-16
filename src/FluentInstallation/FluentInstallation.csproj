@@ -91,6 +91,9 @@
     <Compile Include="UninstallCommand.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\FluentInstallation.TestAssembly\Deploy.ps1">
+      <Link>Deploy.ps1</Link>
+    </Content>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
