@@ -15,7 +15,7 @@ namespace FluentInstallation.TestAssembly
         public void Install(IInstallerContext context)
         {
 
-            var parameters = context.GetParameters<ProjectParameters>();
+            var parameters = context.Parameters.Cast<ProjectParameters>();
 
             System.Diagnostics.Debugger.Break();
 

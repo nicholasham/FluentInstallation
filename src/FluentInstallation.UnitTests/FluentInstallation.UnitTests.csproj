@@ -57,6 +57,7 @@
     <Compile Include="ConfigureExtensionsTests.cs" />
     <Compile Include="DisposableAction.cs" />
     <Compile Include="DisposableTestFixture.cs" />
+    <Compile Include="ParametersCastExtensionsTests.cs" />
     <Compile Include="Web\ApplicationConfigurerTest.cs" />
     <Compile Include="Web\ApplicationPoolConfigurerTests.cs" />
     <Compile Include="Web\BindingConfigurerTests.cs" />

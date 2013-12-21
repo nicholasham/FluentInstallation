@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Management.Automation;
+using System.Linq;
 
 namespace FluentInstallation
 {
@@ -30,7 +31,7 @@ namespace FluentInstallation
             IInstallerFactory factory = Finder.Find();
             IEnumerable<IInstaller> installers = factory.Create();
 
-            var context = new InstallerContext(this);
+            var context = new InstallerContext(Parameters, new CommandLogger(this));
 
             foreach (IInstaller installer in installers)
             {

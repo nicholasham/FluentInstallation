@@ -1,67 +1,35 @@
 ﻿using System;
-using System.Linq.Expressions;
-using System.Management.Automation;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
 namespace FluentInstallation
 {
     public class InstallerContext : IInstallerContext
     {
-        private ICommand Command { get; set; }
-        
-        public InstallerContext(ICommand command)
+        public InstallerContext(IDictionary parameters, ILogger logger)
         {
-            if (command == null)
+           
+            if (parameters == null)
             {
-                throw new ArgumentNullException("command");
+                throw new ArgumentNullException("parameters");
             }
 
-            if (command.Parameters == null)
+            if (logger == null)
             {
-                throw new ArgumentException("The command parameters can not be null", "command");
+                throw new ArgumentNullException("logger");
             }
-            
-            
-            Command = command;
+
+            Parameters = parameters;
+            Logger = logger;
+
         }
 
-        public T GetParameters<T>() where T : class, new()
-        {
-            var result = new T();
-            
+        public IDictionary Parameters { get; private set; }
 
-            foreach (var property in typeof (T).GetProperties())
-            {
-                var required = property.GetCustomAttributes(false).Any(a => a.GetType() == typeof (RequiredAttribute));
+      
 
-                object keyValue = Command.Parameters.GetValueWithLowerInvariantKey(property.Name);
-
-                if (required && keyValue == null)
-                    throw new RequiredParameterNotGivenException(property.Name);
-
-                if (keyValue != null)
-                {
-                    if (property.PropertyType != typeof(string))
-                    {
-                        try
-                        {
-                            keyValue = Convert.ChangeType(keyValue, property.PropertyType);
-                        }
-                        catch (FormatException)
-                        {
-                            throw new ParameterCastException(property.Name, property.PropertyType);
-                        }
-                    }
-                    property.SetValue(result, keyValue, null);
-                }
-
-
-            }
-
-
-
-            return result;
-        }
-        
+        public ILogger Logger { get; private set; }
     }
 }

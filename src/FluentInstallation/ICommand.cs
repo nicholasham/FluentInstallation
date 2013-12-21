@@ -14,6 +14,7 @@ namespace FluentInstallation
 
         void WriteVerbose(string text);
 
-        void WriteCommandDetail(string text);
+        void WriteError(System.Management.Automation.ErrorRecord errorRecord);
+
     }
 }
