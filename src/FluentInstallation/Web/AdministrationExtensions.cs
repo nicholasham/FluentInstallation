@@ -1,8 +1,10 @@
 ﻿using System.Linq;
+using System.Text;
 using Microsoft.Web.Administration;
 
 namespace FluentInstallation.Web
 {
+    
     public static class AdministrationExtensions
     {
         public static VirtualDirectory VirtualDirectory(this Application application)
@@ -71,7 +73,16 @@ namespace FluentInstallation.Web
         }
 
 
-        
+        internal static void ContructCreationMessage(this ApplicationPool applicationPool, IMessageBuilder builder)
+        {
+            builder
+                .WriteLine("Creating Application Pool")
+                .Indent()
+                .WriteLine("Name: {0}", applicationPool.Name)
+                .WriteLine("Managed Pipe Line Mode: {0}", applicationPool.ManagedPipelineMode)
+                .WriteLine("Runtime version: {0}", applicationPool.ManagedRuntimeVersion);
+
+        }
 
         
 

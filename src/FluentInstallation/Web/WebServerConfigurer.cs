@@ -4,24 +4,27 @@ using Microsoft.Web.Administration;
 
 namespace FluentInstallation.Web
 {
-    internal class WebServerConfigurer : IWebServerConfigurer
+    internal sealed class WebServerConfigurer : IWebServerConfigurer
     {
         
         public static Func<Site, IWebsiteConfigurer> CreateWebsiteConfigurer = (configurer) =>  new WebsiteConfigurer(configurer);
         public static Func<ApplicationPool, IApplicationPoolConfigurer> CreateApplicationPoolConfigurer = (configurer) => new ApplicationPoolConfigurer(configurer);
         public static Func<Application, IApplicationConfigurer> CreateApplicationConfigurer = (configurer) => new ApplicationConfigurer(configurer);
         
-        public WebServerConfigurer()
-            : this(new WrappedServerManager())
+        public WebServerConfigurer(ILogger logger) 
+            : this(logger, new WrappedServerManager())
         {            
         }
 
-        internal WebServerConfigurer(IServerManager serverManager)
+        internal WebServerConfigurer(ILogger logger, IServerManager serverManager)
         {
+            Logger = logger;
             ServerManager = serverManager;
         }
 
         public IServerManager ServerManager { get; private set; }
+
+        public ILogger Logger { get; private set; }
 
         public void Commit()
         {            
@@ -33,6 +36,9 @@ namespace FluentInstallation.Web
             var defaultName = string.Format("ApplicationPool{0}", ServerManager.ApplicationPools.Count + 1);
             var applicationPool = ServerManager.ApplicationPools.Add(defaultName);
             configurer(CreateApplicationPoolConfigurer(applicationPool));
+
+            Logger.Info(applicationPool.ContructCreationMessage);
+
             return this;
         }
 
@@ -42,6 +48,8 @@ namespace FluentInstallation.Web
             var uniquePath = string.Format("/{0}", Guid.NewGuid().ToString("N"));
             var site = ServerManager.Sites.Add(defaultSiteName, uniquePath, 80);
             website(CreateWebsiteConfigurer(site));
+
+            
             return this;
         }
 

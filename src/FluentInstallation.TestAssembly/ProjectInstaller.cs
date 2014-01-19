@@ -17,7 +17,6 @@ namespace FluentInstallation.TestAssembly
 
             var parameters = context.Parameters.Cast<ProjectParameters>();
 
-            System.Diagnostics.Debugger.Break();
 
             context
                 .ConfigureWebServer()
@@ -29,7 +28,7 @@ namespace FluentInstallation.TestAssembly
                 .ConfigureWebServer()
                     .CreateApplicationPool(applicationPool =>
                     {
-                        applicationPool.Named(parameters.SiteName);
+                        applicationPool.Named("TestAppPool");
                         applicationPool.UseClassicPipelineMode();
                         applicationPool.UseCustomIdentity("Nick", "password");
                     })

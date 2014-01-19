@@ -7,7 +7,7 @@ namespace FluentInstallation
 
         public static IWebServerConfigurer ConfigureWebServer(this IInstallerContext context)
         {
-            return new WebServerConfigurer(new WrappedServerManager());
+            return new WebServerConfigurer(context.Logger, new WrappedServerManager());
         }
 
     }
