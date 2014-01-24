@@ -7,7 +7,6 @@ using System.Security.Cryptography.X509Certificates;
 namespace FluentInstallation
 {
   
-
     public class InstallerFactory : IInstallerFactory
     {
         private  Func<Assembly> GetAssembly { get; set; }
@@ -29,6 +28,22 @@ namespace FluentInstallation
                         .Select(Activator.CreateInstance)
                         .Cast<IInstaller>()
                         .FirstOrDefault();
+        }
+
+        public IInstaller Create(string typeName)
+        {
+
+            if (string.IsNullOrEmpty(typeName))
+            {
+                throw new ArgumentNullException("typeName");
+            }
+
+            return GetAssembly()
+                       .FindInstallerTypes()
+                       .Where(type => type.Name.Equals(typeName))
+                       .Select(Activator.CreateInstance)
+                       .Cast<IInstaller>()
+                       .FirstOrDefault();
         }
     }
 }

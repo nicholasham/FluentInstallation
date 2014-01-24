@@ -52,7 +52,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssemblyInstallerFactoryTests.cs" />
+    <Compile Include="InstallerFactoryTests.cs" />
     <Compile Include="AssemblyLoaderTests.cs" />
     <Compile Include="Catch.cs" />
     <Compile Include="Certificates\CertificateFinderTests.cs" />

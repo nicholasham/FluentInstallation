@@ -22,6 +22,12 @@ namespace FluentInstallation.Web
 
         public IWebsiteConfigurer Named(string name)
         {
+            
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new ArgumentNullException("name");
+            }
+
             return Configure(site => site.Name = name);
         }
 

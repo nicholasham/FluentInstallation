@@ -46,6 +46,16 @@ namespace FluentInstallation.Web
         }
 
         [Fact]
+        public void Named_ThrowsWhenNull()
+        {
+            var website = WebAdministrationFactory.CreateWebsite();
+            var sut = new WebsiteConfigurer(website);
+
+            Assert.Throws<ArgumentNullException>(() => sut.Named(null));
+        }
+
+
+        [Fact]
         public void UseApplicationPool_SetsTheApplicationPoolCorrectly()
         {
             var website = WebAdministrationFactory.CreateWebsite();

@@ -32,6 +32,15 @@ namespace FluentInstallation.Web
         }
 
         [Fact]
+        public void Named_ThrowsWhenNull()
+        {
+            var applicationPool = WebAdministrationFactory.CreateApplicationPool();
+            var sut = new ApplicationPoolConfigurer(applicationPool);
+
+            Assert.Throws<ArgumentNullException>(() => sut.Named(null));
+        }
+
+        [Fact]
         public void UseNetworkServiceIdentity_SetsIndentityCorrectly()
         {
             var applicationPool = WebAdministrationFactory.CreateApplicationPool();

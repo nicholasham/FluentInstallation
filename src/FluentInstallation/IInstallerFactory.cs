@@ -6,6 +6,8 @@ namespace FluentInstallation
     public interface IInstallerFactory
     {
         IInstaller Create();
-      
+
+        IInstaller Create(string typeName);
+
     }
 }

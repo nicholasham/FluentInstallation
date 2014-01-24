@@ -20,6 +20,11 @@ namespace FluentInstallation.Web
 
         public IApplicationPoolConfigurer Named(string name)
         {
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new ArgumentNullException("name");
+            }
+
             return Configure(x =>  x.Name = name);
         }
 
