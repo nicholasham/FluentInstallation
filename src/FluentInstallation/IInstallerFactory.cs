@@ -5,6 +5,7 @@ namespace FluentInstallation
 {
     public interface IInstallerFactory
     {
-        IEnumerable<IInstaller> Create();
+        IInstaller Create();
+      
     }
 }

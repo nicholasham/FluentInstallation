@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 
 namespace FluentInstallation
@@ -16,5 +18,24 @@ namespace FluentInstallation
         {
             return Path.GetDirectoryName(assembly.Location);
         }
+
+        public static IEnumerable<Type> FindTypesImplementing<T>(this Assembly assembly)
+        {
+           return assembly.GetTypes().Where(type => typeof (T).IsAssignableFrom(type));
+        }
+
+        public static IEnumerable<Type> FindInstallerTypes(this Assembly assembly)
+        {
+            return assembly.FindTypesImplementing<IInstaller>();
+        }
+
+
+        public static IEnumerable<Type> FindInstallerTypesMarkedAsDefault(this Assembly assembly)
+        {
+            return assembly.FindInstallerTypes().Where(type => type.GetCustomAttributes<DefaultInstallerAttribute>().Any());
+        }
+
+
+
     }
 }

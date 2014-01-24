@@ -9,7 +9,7 @@ namespace FluentInstallation.TestAssembly
         public string SiteName { get; set; }
     }
 
-    
+    [DefaultInstaller]
     public class ProjectInstaller : IInstaller
     {
         public void Install(IInstallerContext context)

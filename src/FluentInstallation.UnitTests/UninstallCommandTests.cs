@@ -9,29 +9,25 @@ namespace FluentInstallation
         [Fact]
         public void SutIsCmdlet()
         {
-            var sut = new InstallCommand(Substitute.For<IInstallerFactoryFinder>());
+            var sut = new InstallCommand(Substitute.For<IInstallerFactory>());
 
             Assert.IsAssignableFrom<Cmdlet>(sut);
         }
 
         [Fact]
-        public void Invoke_CallsUninstallOnAllInstallers()
+        public void Invoke_CallsUninstallOnAllInstaller()
         {
-            var factoryLoader = Substitute.For<IInstallerFactoryFinder>();
             var installerFactory = Substitute.For<IInstallerFactory>();
 
             var installer1 = Substitute.For<IInstaller>();
-            var installer2 = Substitute.For<IInstaller>();
 
-            factoryLoader.Find().Returns(installerFactory);
-            installerFactory.Create().Returns(new[] { installer1, installer2 });
+            installerFactory.Create().Returns(installer1);
 
-            var sut = new UninstallCommand(factoryLoader);
+            var sut = new UninstallCommand(installerFactory);
 
             sut.Invoke().GetEnumerator().MoveNext();
 
             installer1.Received().Uninstall(Arg.Is<IInstallerContext>(context => context is InstallerContext));
-            installer2.Received().Uninstall(Arg.Is<IInstallerContext>(context => context is InstallerContext));
 
         }
 

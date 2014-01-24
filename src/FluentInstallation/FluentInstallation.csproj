@@ -50,12 +50,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyExtensions.cs" />
-    <Compile Include="AssemblyInstallerFactoryFinder.cs" />
+    <Compile Include="InstallerFactory.cs" />
+    <Compile Include="AssemblyLoader.cs" />
     <Compile Include="Certificates\CertificateFindResult.cs" />
     <Compile Include="Certificates\CertificateFinder.cs" />
     <Compile Include="Certificates\ICertificateFinder.cs" />
     <Compile Include="CommandLogger.cs" />
     <Compile Include="ConfigureExtensions.cs" />
+    <Compile Include="DefaultInstallerAttribute.cs" />
+    <Compile Include="IAssemblyLoader.cs" />
     <Compile Include="ILogger.cs" />
     <Compile Include="IMessageBuilder.cs" />
     <Compile Include="Logger.cs" />
@@ -88,7 +91,6 @@
     <Compile Include="InstallationException.cs" />
     <Compile Include="InstallCommand.cs" />
     <Compile Include="InstallerContext.cs" />
-    <Compile Include="IInstallerFactoryFinder.cs" />
     <Compile Include="ParameterCastException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RequiredAttribute.cs" />

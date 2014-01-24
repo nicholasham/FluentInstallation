@@ -8,19 +8,20 @@ namespace FluentInstallation
     /// </summary>
     public abstract class BaseCommand :Cmdlet, ICommand
     {
-        protected BaseCommand(IInstallerFactoryFinder finder)
+        protected BaseCommand(IInstallerFactory installerFactory)
         {
-            Finder = finder;
+            InstallerFactory = installerFactory;
             Parameters = new Hashtable();
         }
 
         protected BaseCommand() 
         {
-            Finder = new AssemblyInstallerFactoryFinder(this);
+            var assemblyLoader = new AssemblyLoader(() => this.AssemblyFile);
+            InstallerFactory = new InstallerFactory(assemblyLoader.Load);
             Parameters = new Hashtable();
         }
 
-        protected IInstallerFactoryFinder Finder { get; set; }
+        protected IInstallerFactory InstallerFactory { get; set; }
 
         [Parameter(Mandatory = true)]
         public string AssemblyFile { get; set; }

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Management.Automation;
-using System.Linq;
+﻿using System.Management.Automation;
 
 namespace FluentInstallation
 {
@@ -10,8 +8,8 @@ namespace FluentInstallation
     [Cmdlet(VerbsLifecycle.Uninstall, "Fluent")]
     public class UninstallCommand : BaseCommand
     {
-        public UninstallCommand(IInstallerFactoryFinder finder)
-            : base(finder)
+        public UninstallCommand(IInstallerFactory installerFactory)
+            : base(installerFactory)
         {
         }
 
@@ -19,24 +17,14 @@ namespace FluentInstallation
         {
         }
 
-        protected override void BeginProcessing()
-        {
-            base.BeginProcessing();
-        }
-
         protected override void ProcessRecord()
         {
             base.ProcessRecord();
 
-            IInstallerFactory factory = Finder.Find();
-            IEnumerable<IInstaller> installers = factory.Create();
-
             var context = new InstallerContext(Parameters, new CommandLogger(this));
 
-            foreach (IInstaller installer in installers)
-            {
-                installer.Uninstall(context);
-            }
+            IInstaller installer = InstallerFactory.Create();
+            installer.Uninstall(context);
         }
     }
 }
