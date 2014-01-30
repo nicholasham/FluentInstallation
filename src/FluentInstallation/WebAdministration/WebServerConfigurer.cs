@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using Microsoft.Web.Administration;
 
-namespace FluentInstallation.Web
+namespace FluentInstallation.WebAdministration
 {
     internal sealed class WebServerConfigurer : IWebServerConfigurer
     {
@@ -106,5 +106,24 @@ namespace FluentInstallation.Web
             return this;
         }
 
+        public IWebServerConfigurer AssertWebsiteExists(string name)
+        {
+            if (!ServerManager.SiteExists(name))
+            {
+                throw Exceptions.NoSiteFoundMatchingName(name);
+            }
+
+            return this;
+        }
+
+        public IWebServerConfigurer AssertApplicationPoolExists(string name)
+        {
+            if (!ServerManager.ApplicationPoolExists(name))
+            {
+                throw Exceptions.NoApplicationPoolFoundMatchingName(name);
+            }
+
+            return this;
+        }
     }
 }

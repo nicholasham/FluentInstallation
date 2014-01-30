@@ -47,5 +47,6 @@ namespace FluentInstallation
         {
             return new InstallationException(Message("Unable to find virtual directory in site {0} with alias {1}.", site.Name, alias));
         }
+
     }
 }

@@ -1,8 +1,9 @@
-using FluentInstallation.Web;
-
-namespace FluentInstallation
+namespace FluentInstallation.WebAdministration
 {
-    public static class ConfigureExtensions
+   
+
+    
+    public static class WebAdministrationExtensions
     {
 
         public static IWebServerConfigurer ConfigureWebServer(this IInstallerContext context)

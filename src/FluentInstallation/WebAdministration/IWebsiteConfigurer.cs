@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Web.Administration;
 
-namespace FluentInstallation.Web
+namespace FluentInstallation.WebAdministration
 {
     public interface IWebsiteConfigurer : IFluentSyntax
     {

@@ -1,4 +1,4 @@
-﻿using FluentInstallation.Web;
+﻿using FluentInstallation.WebAdministration;
 using NSubstitute;
 using Xunit;
 

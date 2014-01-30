@@ -1,8 +1,7 @@
 ﻿using System.Linq;
-using System.Text;
 using Microsoft.Web.Administration;
 
-namespace FluentInstallation.Web
+namespace FluentInstallation.WebAdministration
 {
     
     public static class AdministrationExtensions

@@ -4,7 +4,7 @@ using Microsoft.Web.Administration;
 using NSubstitute;
 using Xunit;
 
-namespace FluentInstallation.Web
+namespace FluentInstallation.WebAdministration
 {
     public class WebServerConfigurerTests
     {
@@ -173,6 +173,45 @@ namespace FluentInstallation.Web
             string randomName = Guid.NewGuid().ToString();
 
             Assert.Throws<InstallationException>(() => sut.AlterApplicationPool(randomName, (x) => { }));
+        }
+
+        [Fact]
+        public void AssertWebsiteExists_ThrowsWhenNoWebsiteExistsWithTheGivenName()
+        {
+            var sut = CreateSut();
+
+            Assert.Throws<InstallationException>(() => sut.AssertWebsiteExists("somerandomsitename"));
+        }
+
+        [Fact]
+        public void AssertWebsiteExists_DoesNotThrowWhenItFindsASiteThatExistsWithTheGivenName()
+        {
+            var sut = CreateSut();
+
+            Site expected = WebAdministrationFactory.CreateWebsite();
+            sut.ServerManager.Sites.Add(expected);
+
+            sut.AssertWebsiteExists(expected.Name);
+        }
+
+
+        [Fact]
+        public void AssertApplicationPoolExists_ThrowsWhenNoApplicationPoolExistsWithTheGivenName()
+        {
+            var sut = CreateSut();
+
+            Assert.Throws<InstallationException>(() => sut.AssertApplicationPoolExists("somerandomname"));
+        }
+
+        [Fact]
+        public void AssertApplicationPoolExists_DoesNotThrowWhenItFindsAnApplicationPoolThatExistsWithTheGivenName()
+        {
+            var sut = CreateSut();
+
+            ApplicationPool expected = WebAdministrationFactory.CreateApplicationPool();
+            sut.ServerManager.ApplicationPools.Add(expected);
+
+            sut.AssertApplicationPoolExists(expected.Name);
         }
     }
 }

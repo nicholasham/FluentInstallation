@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Security.Cryptography.X509Certificates;
+using FluentInstallation.WebAdministration;
+using Microsoft.Web.Administration;
 
 namespace FluentInstallation.TestAssembly
 {
@@ -17,12 +19,12 @@ namespace FluentInstallation.TestAssembly
 
             var parameters = context.Parameters.Cast<ProjectParameters>();
 
-
             context
                 .ConfigureWebServer()
                     .DeleteApplicationPool(parameters.SiteName)
                     .DeleteWebsite(parameters.SiteName)
-                    .Commit();
+                    .Commit();   
+
 
             context
                 .ConfigureWebServer()
@@ -33,6 +35,7 @@ namespace FluentInstallation.TestAssembly
                         applicationPool.UseCustomIdentity("Nick", "password");
                     })
                     .Commit();
+
 
             context
                 .ConfigureWebServer()

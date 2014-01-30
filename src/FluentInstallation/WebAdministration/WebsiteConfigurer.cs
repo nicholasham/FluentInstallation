@@ -2,7 +2,7 @@
 using System.Linq;
 using Microsoft.Web.Administration;
 
-namespace FluentInstallation.Web
+namespace FluentInstallation.WebAdministration
 {
     public class WebsiteConfigurer : IWebsiteConfigurer
     {

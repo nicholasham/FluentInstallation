@@ -5,7 +5,7 @@ using Microsoft.Web.Administration;
 using NSubstitute;
 using Xunit;
 
-namespace FluentInstallation.Web
+namespace FluentInstallation.WebAdministration
 {
 
     public class CertificateFactory

@@ -1,6 +1,6 @@
 using System;
 
-namespace FluentInstallation.Web
+namespace FluentInstallation.WebAdministration
 {
     public interface IWebServerConfigurer : IRootConfigurer
     {
@@ -11,5 +11,10 @@ namespace FluentInstallation.Web
         IWebServerConfigurer DeleteWebsite(string name);
         
         IWebServerConfigurer AlterWebsite(string name, Action<IWebsiteConfigurer> configurer);
+
+        IWebServerConfigurer AssertWebsiteExists(string name);
+        IWebServerConfigurer AssertApplicationPoolExists(string name);
+
+
     }
 }
