@@ -33,6 +33,8 @@ namespace FluentInstallation.WebAdministration
         public static Binding CreateDefaultBinding(this BindingCollection bindings)
         {
             var protocol = "http";
+
+            
             var bindingInformation = BindingInformation.Default().AssignNextAvailablePort().ToString();
 
             return bindings.Add(bindingInformation, protocol);
@@ -63,7 +65,14 @@ namespace FluentInstallation.WebAdministration
 
         internal static int GetHighestPort(this ServerManager serverManager)
         {
-            return serverManager.Sites.Select(site => site.Bindings.Max(x => x.ToBindingInformation().Port)).Max();
+            var supportedProtocols = new[] {"http", "https"};
+
+            var bindings = (from site in serverManager.Sites
+                                         from binding in site.Bindings
+                                        where supportedProtocols.Contains( binding.Protocol)
+                                         select binding) .ToList();
+
+            return bindings.Max(x => x.ToBindingInformation().Port);
         }
 
         internal static int Increment(this int value)
