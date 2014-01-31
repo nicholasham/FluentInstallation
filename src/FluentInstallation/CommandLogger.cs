@@ -22,7 +22,7 @@ namespace FluentInstallation
             _command.WriteVerbose(string.Format(message, args));
         }
 
-        public override void Warning(string message, params object[] args)
+        public override void Warn(string message, params object[] args)
         {
             _command.WriteWarning(string.Format(message, args));
         }

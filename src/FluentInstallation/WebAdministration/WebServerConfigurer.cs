@@ -33,10 +33,8 @@ namespace FluentInstallation.WebAdministration
 
         public IWebServerConfigurer CreateApplicationPool(Action<IApplicationPoolConfigurer> configurer)
         {
-            var defaultName = string.Format("ApplicationPool{0}", ServerManager.ApplicationPools.Count + 1);
-            var applicationPool = ServerManager.ApplicationPools.Add(defaultName);
+            var applicationPool = ServerManager.ApplicationPools.CreateDefaultApplicationPool();
             configurer(CreateApplicationPoolConfigurer(applicationPool));
-
             Logger.Info(applicationPool.ContructCreationMessage);
 
             return this;

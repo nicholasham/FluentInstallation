@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using Microsoft.Web.Administration;
 
 namespace FluentInstallation.WebAdministration
@@ -21,7 +22,12 @@ namespace FluentInstallation.WebAdministration
         {
             return Configure(x => x.PhysicalPath = path);
         }
-        
+
+        public IVirtualDirectoryConfigurer UseWebProjectDirectoryAsPhysicalPath()
+        {
+            return OnPhysicalPath(Assembly.GetCallingAssembly().ParentDirectoryPath());
+        }
+
         public IVirtualDirectoryConfigurer Configure(Action<VirtualDirectory> options)
         {
             options(_virtualDirectory);

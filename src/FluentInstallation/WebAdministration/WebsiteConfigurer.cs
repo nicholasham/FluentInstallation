@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Reflection;
 using Microsoft.Web.Administration;
 
 namespace FluentInstallation.WebAdministration
@@ -39,6 +40,11 @@ namespace FluentInstallation.WebAdministration
         public IWebsiteConfigurer OnPhysicalPath(string path)
         {
             return Configure(site => site.Application().VirtualDirectory().PhysicalPath = path);
+        }
+
+        public IWebsiteConfigurer UseWebProjectDirectoryAsPhysicalPath()
+        {
+            return OnPhysicalPath(Assembly.GetCallingAssembly().ParentDirectoryPath());
         }
 
         public IWebsiteConfigurer AddBinding(Action<IBindingConfigurer> action)

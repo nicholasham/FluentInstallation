@@ -25,11 +25,11 @@ namespace FluentInstallation
             Info(BuildMessage(message));
         }
 
-        public abstract void Warning(string message, params object[] args);
+        public abstract void Warn(string message, params object[] args);
 
-        public void Warning(Action<IMessageBuilder> message)
+        public void Warn(Action<IMessageBuilder> message)
         {
-            Warning(BuildMessage(message));
+            Warn(BuildMessage(message));
         }
 
         public abstract void Error(string message, params object[] args);

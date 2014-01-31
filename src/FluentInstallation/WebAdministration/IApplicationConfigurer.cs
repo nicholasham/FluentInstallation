@@ -8,6 +8,7 @@ namespace FluentInstallation.WebAdministration
         IApplicationConfigurer UseAlias(string alias);
         IApplicationConfigurer OnPhysicalPath(string path);
         IApplicationConfigurer UseApplicationPool(string applicationPoolName);
+        IApplicationConfigurer UseWebProjectDirectoryAsPhysicalPath();
         IApplicationConfigurer Configure(Action<Application> application);
     }
 }

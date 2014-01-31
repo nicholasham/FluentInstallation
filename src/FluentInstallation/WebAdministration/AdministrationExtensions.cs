@@ -40,7 +40,7 @@ namespace FluentInstallation.WebAdministration
             return bindings.Add(bindingInformation, protocol);
             
         }
-
+        
         public static Application CreateDefaultApplication(this ApplicationCollection applications)
         {
             var defaultApplication = applications.DefaultApplication();
@@ -92,8 +92,15 @@ namespace FluentInstallation.WebAdministration
 
         }
 
-        
 
+        public static ApplicationPool CreateDefaultApplicationPool(this ApplicationPoolCollection applicationPools)
+        {
+            var defaultName = string.Format("ApplicationPool{0}", applicationPools.Count + 1);
+            var applicationPool = applicationPools.Add(defaultName);
+            applicationPool.ManagedRuntimeVersion = "v4.0";
+
+            return applicationPool;
+        }
 
     }
 }

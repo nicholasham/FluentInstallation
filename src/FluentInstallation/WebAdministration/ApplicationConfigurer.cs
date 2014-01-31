@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Reflection;
 using Microsoft.Web.Administration;
 
 namespace FluentInstallation.WebAdministration
@@ -28,6 +30,11 @@ namespace FluentInstallation.WebAdministration
             {
                 application.VirtualDirectory().PhysicalPath = path ;
             });
+        }
+
+        public IApplicationConfigurer UseWebProjectDirectoryAsPhysicalPath()
+        {
+            return   OnPhysicalPath(Assembly.GetCallingAssembly().ParentDirectoryPath());
         }
 
         public IApplicationConfigurer UseApplicationPool(string applicationPoolName)

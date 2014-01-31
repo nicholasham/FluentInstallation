@@ -19,7 +19,7 @@ namespace FluentInstallation
             LogToConsole(message);
         }
 
-        public override void Warning(string message, params object[] args)
+        public override void Warn(string message, params object[] args)
         {
             LogToConsole(message);
 

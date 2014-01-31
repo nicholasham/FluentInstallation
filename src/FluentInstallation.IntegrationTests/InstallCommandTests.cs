@@ -7,9 +7,10 @@ using Xunit;
 
 namespace FluentInstallation.IntegrationTests
 {
-    public class InstallerTests
+    public class InstallerContextTests
     {
 
+        
         public IInstallerContext CreateSut(Hashtable parameters)
         {
             return new TestInstallerContext(parameters);

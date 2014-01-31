@@ -56,8 +56,7 @@ namespace FluentInstallation.WebAdministration
 
             Assert.Equal(@"C:\", application.VirtualDirectory().PhysicalPath);
         }
-
-
+        
         [Fact]
         public void UseApplicationPool_SetsTheApplicationPoolName()
         {

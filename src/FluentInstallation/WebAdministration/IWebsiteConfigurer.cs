@@ -11,6 +11,8 @@ namespace FluentInstallation.WebAdministration
 
         IWebsiteConfigurer OnPhysicalPath(string path);
 
+        IWebsiteConfigurer UseWebProjectDirectoryAsPhysicalPath();
+
         IWebsiteConfigurer AddBinding(Action<IBindingConfigurer> action);
 
         IWebsiteConfigurer RemoveApplication(string alias);

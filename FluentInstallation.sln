@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentInstallation", "src\FluentInstallation\FluentInstallation.csproj", "{E3CBFFCA-62C8-482F-B85A-437B09F4CC64}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentInstallation.UnitTests", "src\FluentInstallation.UnitTests\FluentInstallation.UnitTests.csproj", "{BAE643DF-4CD8-42ED-BE17-03381009920E}"
@@ -23,6 +21,13 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentInstallation.TestEmptyAssembly", "src\FluentInstallation.TestEmptyAssembly\FluentInstallation.TestEmptyAssembly.csproj", "{FF90AF60-EAB1-44A6-A9C7-542BDA5C7DC6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentInstallation.IntegrationTests", "src\FluentInstallation.IntegrationTests\FluentInstallation.IntegrationTests.csproj", "{4F7D7C26-F57A-48DC-9BC5-ADC401EB7857}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{DEE44FF8-9979-49EE-98BF-E519A09D5B0F}"
+	ProjectSection(SolutionItems) = preProject
+		build\build.ps1 = build\build.ps1
+		build\Run-CI-Build.cmd = build\Run-CI-Build.cmd
+		build\Run-CI-Build.ps1 = build\Run-CI-Build.ps1
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

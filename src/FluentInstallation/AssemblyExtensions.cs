@@ -19,6 +19,11 @@ namespace FluentInstallation
             return Path.GetDirectoryName(assembly.Location);
         }
 
+        public static string ParentDirectoryPath( this Assembly assembly)
+        {
+            return Directory.GetParent(assembly.DirectoryPath()).FullName;
+        }
+
         public static IEnumerable<Type> FindTypesImplementing<T>(this Assembly assembly)
         {
            return assembly.GetTypes().Where(type => typeof (T).IsAssignableFrom(type));

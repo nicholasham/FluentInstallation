@@ -72,7 +72,7 @@ namespace FluentInstallation.WebAdministration
 
             Assert.Equal(0, sut.ServerManager.ApplicationPools.Count(appPool => appPool.Name == applicationPool.Name));
         }
-
+        
         [Fact]
         public void CreateWebsite_CreatesWebsiteOnServerManager()
         {

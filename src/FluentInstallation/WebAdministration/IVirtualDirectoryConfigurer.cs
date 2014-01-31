@@ -6,7 +6,8 @@ namespace FluentInstallation.WebAdministration
     public interface IVirtualDirectoryConfigurer : IFluentSyntax
     {
         IVirtualDirectoryConfigurer UseAlias(string alias);
-        IVirtualDirectoryConfigurer OnPhysicalPath(string path);        
+        IVirtualDirectoryConfigurer OnPhysicalPath(string path);
+        IVirtualDirectoryConfigurer UseWebProjectDirectoryAsPhysicalPath();
         IVirtualDirectoryConfigurer Configure(Action<VirtualDirectory> options);
     }
 
