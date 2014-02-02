@@ -181,18 +181,7 @@ namespace FluentInstallation.WebAdministration
             Assert.Equal(1, actual);
 
         }
-
-
-        [Fact]
-        public void RemoveApplication_ThrowsWhenApplicationDoesNotExist()
-        {
-            var website = WebAdministrationFactory.CreateWebsite();
-            var sut = new WebsiteConfigurer(website);
-
-            Assert.Throws<InstallationException>(() => { sut.RemoveApplication("somemissingapplication"); });
-            
-        }
-
+        
         [Fact]
         public void RemoveApplication_RemovesApplicationFromSite()
         {
@@ -234,6 +223,26 @@ namespace FluentInstallation.WebAdministration
 
         }
 
+        [Fact]
+        public void AssertApplicationExists_ThrowsWhenApplicationDoesNotExistWithAlias()
+        {
+            var website = WebAdministrationFactory.CreateWebsite();
+
+            var sut = new WebsiteConfigurer(website);
+
+            Assert.Throws<InstallationException>(() => sut.AssertApplicationExists("some alias"));
+        }
+
+
+        [Fact]
+        public void AssertVirtualDirectoryExists_ThrowsWhenVirtualDirectoryDoesNotExistWithAlias()
+        {
+            var website = WebAdministrationFactory.CreateWebsite();
+
+            var sut = new WebsiteConfigurer(website);
+
+            Assert.Throws<InstallationException>(() => sut.AssertVirtualDirectoryExists("some alias"));
+        }
 
                 
     }

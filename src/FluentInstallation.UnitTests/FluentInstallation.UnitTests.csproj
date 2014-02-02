@@ -59,6 +59,7 @@
     <Compile Include="ConfigureExtensionsTests.cs" />
     <Compile Include="DisposableAction.cs" />
     <Compile Include="DisposableTestFixture.cs" />
+    <Compile Include="MessageBuilderTests.cs" />
     <Compile Include="ParametersCastExtensionsTests.cs" />
     <Compile Include="TestInstaller1.cs" />
     <Compile Include="TestInstaller2.cs" />

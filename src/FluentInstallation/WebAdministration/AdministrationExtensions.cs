@@ -85,7 +85,7 @@ namespace FluentInstallation.WebAdministration
         {
             builder
                 .WriteLine("Creating Application Pool")
-                .Indent()
+                .IncreaseIndent()
                 .WriteLine("Name: {0}", applicationPool.Name)
                 .WriteLine("Managed Pipe Line Mode: {0}", applicationPool.ManagedPipelineMode)
                 .WriteLine("Runtime version: {0}", applicationPool.ManagedRuntimeVersion);
@@ -100,6 +100,28 @@ namespace FluentInstallation.WebAdministration
             applicationPool.ManagedRuntimeVersion = "v4.0";
 
             return applicationPool;
+        }
+
+        public static bool Exists(this ApplicationCollection applications, string alias)
+        {
+            return applications.Find(alias) != null;
+        }
+
+        public static Application Find(this ApplicationCollection applications, string alias)
+        {
+            var foundApplication = applications.FirstOrDefault(x => x.Path.Equals(alias.ToPath()));
+            return foundApplication;
+        }
+
+        public static VirtualDirectory Find(this VirtualDirectoryCollection virtualDirectories, string alias)
+        {
+            var foundVirtualDirectory = virtualDirectories.FirstOrDefault(x => x.Path.Equals(alias.ToPath()));
+            return foundVirtualDirectory;
+        }
+
+        public static bool Exists(this VirtualDirectoryCollection virtualDirectories, string alias)
+        {
+            return virtualDirectories.Find(alias) != null;
         }
 
     }

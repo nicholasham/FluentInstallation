@@ -22,9 +22,12 @@ namespace FluentInstallation.WebAdministration
         IWebsiteConfigurer AddApplication(Action<IApplicationConfigurer> application);
         
         IWebsiteConfigurer AddVirtualDirectory(Action<IVirtualDirectoryConfigurer> virtualDirectory);
-        
-        IWebsiteConfigurer Configure(Action<Site> action);
 
+        IWebsiteConfigurer AssertApplicationExists(string alias);
+
+        IWebsiteConfigurer AssertVirtualDirectoryExists(string alias);
+
+        IWebsiteConfigurer Configure(Action<Site> action);
       
     }
 }

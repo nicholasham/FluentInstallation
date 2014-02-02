@@ -2,7 +2,7 @@
 {
     public interface IMessageBuilder
     {
-        IMessageBuilder Indent();
+        IMessageBuilder IncreaseIndent();
         IMessageBuilder DecreaseIndent();
         IMessageBuilder WriteLine(string text, params object[] args);
 

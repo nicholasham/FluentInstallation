@@ -61,15 +61,12 @@ namespace FluentInstallation.WebAdministration
 
             return Configure(site =>
             {
-                var foundApplication = site.Applications.FirstOrDefault(x => x.Path.Equals(alias.ToPath()));
+                var foundApplication = site.Applications.Find(alias);
 
-                if (foundApplication == null)
+                if (foundApplication != null)
                 {
-                    throw Exceptions.ApplicationNotFoundInSite(site, alias);
+                    site.Applications.Remove(foundApplication);
                 }
-
-                site.Applications.Remove(foundApplication);
-
             });
         }
 
@@ -105,6 +102,26 @@ namespace FluentInstallation.WebAdministration
                 var configurer = new VirtualDirectoryConfigurer(site.Application().VirtualDirectories.CreateDefaultVirtualDirectory());
                 virtualDirectory(configurer);
             });
+        }
+
+        public IWebsiteConfigurer AssertApplicationExists(string alias)
+        {
+            if (!_website.Applications.Exists(alias))
+            {
+                throw Exceptions.ApplicationNotFoundInSite(_website, alias);
+            }
+
+            return this;
+        }
+
+        public IWebsiteConfigurer AssertVirtualDirectoryExists(string alias)
+        {
+            if (!_website.Application().VirtualDirectories.Exists(alias))
+            {
+                throw Exceptions.VirtualDirectoryNotFoundInSite(_website, alias);
+            }
+
+            return this;
         }
 
         public IWebsiteConfigurer Configure(Action<Site> action)

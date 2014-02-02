@@ -5,17 +5,23 @@ namespace FluentInstallation
     public class MessageBuilder : IMessageBuilder
     {
         private const int IndentSize = 4;
-        private readonly StringBuilder _builder = new StringBuilder();
+        private readonly StringBuilder _builder;
         private int _indentLevel = 1;
-        
 
-        public IMessageBuilder Indent()
+        public MessageBuilder()
         {
+            _builder = new StringBuilder();
+        }
+
+        public IMessageBuilder IncreaseIndent()
+        {
+            _indentLevel ++;
             return this;
         }
 
         public IMessageBuilder DecreaseIndent()
         {
+            _indentLevel --;
             return this;
         }
 
