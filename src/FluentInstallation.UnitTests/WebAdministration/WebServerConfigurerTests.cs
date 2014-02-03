@@ -22,16 +22,16 @@ namespace FluentInstallation.WebAdministration
         }
 
         [Fact]
-        public void CreateApplicationPool_ChainsCorrectly()
+        public void AddApplicationPool_ChainsCorrectly()
         {
             var sut = CreateSut();
-            IWebServerConfigurer actual = sut.CreateApplicationPool(applicationPool => { });
+            IWebServerConfigurer actual = sut.AddApplicationPool(applicationPool => { });
 
             Assert.Equal(sut, actual);
         }
 
         [Fact]
-        public void CreateApplicationPool_PassesNewApplicationPoolToOptionsAction()
+        public void AddApplicationPool_PassesNewApplicationPoolToOptionsAction()
         {
             var sut = CreateSut();
 
@@ -40,19 +40,19 @@ namespace FluentInstallation.WebAdministration
             Action<IApplicationPoolConfigurer> action = (options) => { actual = options != null; };
 
 
-            sut.CreateApplicationPool(action);
+            sut.AddApplicationPool(action);
 
             Assert.True(actual);
         }
 
         [Fact]
-        public void CreateApplicationPool_AddsNewApplicationPoolToServerManager()
+        public void AddApplicationPool_AddsNewApplicationPoolToServerManager()
         {
             var sut = CreateSut();
 
             int expected = sut.ServerManager.ApplicationPools.Count + 1;
 
-            sut.CreateApplicationPool((options) => { });
+            sut.AddApplicationPool((options) => { });
 
             int actual = sut.ServerManager.ApplicationPools.Count;
 
@@ -74,13 +74,13 @@ namespace FluentInstallation.WebAdministration
         }
         
         [Fact]
-        public void CreateWebsite_CreatesWebsiteOnServerManager()
+        public void AddWebsite_CreatesWebsiteOnServerManager()
         {
             var sut = CreateSut();
 
             int expected = sut.ServerManager.Sites.Count + 1;
 
-            sut.CreateWebsite(options => { });
+            sut.AddWebsite(options => { });
 
             int actual = sut.ServerManager.Sites.Count;
 

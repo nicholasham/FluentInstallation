@@ -244,6 +244,28 @@ namespace FluentInstallation.WebAdministration
             Assert.Throws<InstallationException>(() => sut.AssertVirtualDirectoryExists("some alias"));
         }
 
+
+        [Fact]
+        public void WithId_SetsIdCorrectly()
+        {
+            var website = WebAdministrationFactory.CreateWebsite();
+            var sut = new WebsiteConfigurer(website);
+
+            sut.WithId(99999);
+
+            Assert.Equal(99999, website.Id);
+        }
+
+        [Fact]
+        public void WithId_ThrowsWhenTheIdIsAlreadyInUse()
+        {
+            var website = WebAdministrationFactory.CreateWebsite();
+            var sut = new WebsiteConfigurer(website);
+
+            sut.WithId(99999);
+
+            Assert.Equal(99999, website.Id);
+        }
                 
     }
 }

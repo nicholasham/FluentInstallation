@@ -5,6 +5,8 @@ namespace FluentInstallation.WebAdministration
 {
     public interface IWebsiteConfigurer : IFluentSyntax
     {
+        IWebsiteConfigurer WithId(int id);
+
         IWebsiteConfigurer Named(string name);
 
         IWebsiteConfigurer UseApplicationPool(string applicationPoolName);

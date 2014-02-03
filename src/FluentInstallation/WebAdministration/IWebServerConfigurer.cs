@@ -4,8 +4,8 @@ namespace FluentInstallation.WebAdministration
 {
     public interface IWebServerConfigurer : IRootConfigurer
     {
-        IWebServerConfigurer CreateApplicationPool(Action<IApplicationPoolConfigurer> configurer);
-        IWebServerConfigurer CreateWebsite(Action<IWebsiteConfigurer> website);
+        IWebServerConfigurer AddApplicationPool(Action<IApplicationPoolConfigurer> configurer);
+        IWebServerConfigurer AddWebsite(Action<IWebsiteConfigurer> website);
 
         IWebServerConfigurer RemoveApplicationPool(string name);
         IWebServerConfigurer RemoveWebsite(string name);

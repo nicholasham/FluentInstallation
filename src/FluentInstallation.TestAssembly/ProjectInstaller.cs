@@ -28,7 +28,7 @@ namespace FluentInstallation.TestAssembly
 
             context
                 .ConfigureWebServer()
-                    .CreateApplicationPool(applicationPool =>
+                    .AddApplicationPool(applicationPool =>
                     {
                         applicationPool.Named("TestAppPool");
                         applicationPool.UseClassicPipelineMode();
@@ -39,7 +39,7 @@ namespace FluentInstallation.TestAssembly
 
             context
                 .ConfigureWebServer()
-                    .CreateWebsite(site =>
+                    .AddWebsite(site =>
                     {
                         site.Named(parameters.SiteName);
                         site.OnPhysicalPath(@"C:\");

@@ -21,6 +21,11 @@ namespace FluentInstallation.WebAdministration
             
         }
 
+        public IWebsiteConfigurer WithId(int id)
+        {
+            return Configure(site => site.Id = id);
+        }
+
         public IWebsiteConfigurer Named(string name)
         {
             

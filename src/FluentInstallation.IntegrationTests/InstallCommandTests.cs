@@ -25,7 +25,7 @@ namespace FluentInstallation.IntegrationTests
             sut
                 .ConfigureWebServer()
                 .RemoveWebsite("Test")
-                .CreateWebsite(website =>
+                .AddWebsite(website =>
                 {
                     website.Named("Test");
                     website.OnPhysicalPath(@"C:\");

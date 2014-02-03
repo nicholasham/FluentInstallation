@@ -31,7 +31,7 @@ namespace FluentInstallation.WebAdministration
             ServerManager.CommitChanges();
         }
 
-        public IWebServerConfigurer CreateApplicationPool(Action<IApplicationPoolConfigurer> configurer)
+        public IWebServerConfigurer AddApplicationPool(Action<IApplicationPoolConfigurer> configurer)
         {
             var applicationPool = ServerManager.ApplicationPools.CreateDefaultApplicationPool();
             configurer(CreateApplicationPoolConfigurer(applicationPool));
@@ -40,7 +40,7 @@ namespace FluentInstallation.WebAdministration
             return this;
         }
 
-        public IWebServerConfigurer CreateWebsite(Action<IWebsiteConfigurer> website)
+        public IWebServerConfigurer AddWebsite(Action<IWebsiteConfigurer> website)
         {
             var defaultSiteName = string.Format("Site{0}", ServerManager.Sites.Count + 1);
             var uniquePath = string.Format("/{0}", Guid.NewGuid().ToString("N"));

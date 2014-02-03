@@ -10,7 +10,7 @@
 	<description>Fluent installation is a server installation framework for .net that lets you write installers fluently in C#  and then invoke them directly through powershell cmdlets.</description>
     <language>en-US</language>
         <copyright>Nicholas Hammond, Kevin Holditch and contributors</copyright>
-        <iconUrl>https://github.com/nicholasham/blob/master/Fluent-Installation-Nuget.png</iconUrl>
+        <iconUrl>https://raw.github.com/nicholasham/FluentInstallation/master/fluent-installation-nuget.png</iconUrl>
     <licenseUrl>https://github.com/nicholasham/blob/master/license.txt</licenseUrl>
     <projectUrl>https://github.com/nicholasham/FluentInstallation</projectUrl>
     <tags>FluentInstallation Web.Administration IIS</tags>

@@ -50,5 +50,19 @@ namespace FluentInstallation
 
             Assert.Equal(expected, actual);
         }
+
+        [Fact]
+        public void Load_LoadsAssemblyWithAllItsDependenciesCorrectly()
+        {
+
+            var sut = new AssemblyLoader(() => "FluentInstallation.TestAssembly.dll");
+
+            var assembly = sut.Load();
+
+            var types = assembly.GetTypes();
+
+            Assert.Equal("FluentInstallation.TestAssembly", assembly.GetName().Name);
+
+        }
     }
 }
