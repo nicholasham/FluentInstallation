@@ -20,7 +20,7 @@ namespace FluentInstallation
 
             var actual = builder.Build();
             
-            Assert.Equal("    Some text\r\n", actual);
+            Assert.Equal("Some text\r\n", actual);
         }
 
         [Fact]
@@ -31,7 +31,7 @@ namespace FluentInstallation
             builder.WriteLine("Some text");
             var actual = builder.Build();
 
-            Assert.Equal("        Some text\r\n", actual);
+            Assert.Equal("    Some text\r\n", actual);
         }
 
         [Fact]
@@ -45,7 +45,7 @@ namespace FluentInstallation
 
             var actual = builder.Build();
 
-            Assert.Equal("    Some text\r\n", actual);
+            Assert.Equal("Some text\r\n", actual);
         }
     }
 }

@@ -96,6 +96,7 @@
     </Content>
     <Content Include="..\FluentInstallation.TestAssembly\bin\FluentInstallation.TestDependency.dll">
       <Link>FluentInstallation.TestDependency.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

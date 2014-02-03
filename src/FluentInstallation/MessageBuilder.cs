@@ -6,7 +6,7 @@ namespace FluentInstallation
     {
         private const int IndentSize = 4;
         private readonly StringBuilder _builder;
-        private int _indentLevel = 1;
+        private int _indentLevel = 0;
 
         public MessageBuilder()
         {

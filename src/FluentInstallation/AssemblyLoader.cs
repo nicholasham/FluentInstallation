@@ -7,11 +7,6 @@ namespace FluentInstallation
     public class AssemblyLoader : IAssemblyLoader
     {
         private Func<string> GetAssemblyFilePath { get; set; }
-
-        static AssemblyLoader()
-        {
-            AppDomain.CurrentDomain.AssemblyResolve += AssemblyResolveHandler;
-        }
         
         public AssemblyLoader(Func<string> getAssemblyFilePath)
         {
@@ -37,14 +32,8 @@ namespace FluentInstallation
                throw Exceptions.AssemblyNotFound(assemblyFilePath);
             }
             
-            return Assembly.LoadFile(assemblyFilePath);
+            return Assembly.LoadFrom(assemblyFilePath);
         }
 
-        private static Assembly AssemblyResolveHandler(object sender, ResolveEventArgs args)
-        {
-            var assemblyDirectory = Path.GetDirectoryName(args.RequestingAssembly.DirectoryPath());
-            var assemblyFile = Path.Combine(assemblyDirectory, args.Name);
-            return Assembly.LoadFile(assemblyFile);
-        }
     }
 }

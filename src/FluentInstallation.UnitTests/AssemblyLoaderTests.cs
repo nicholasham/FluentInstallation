@@ -52,16 +52,17 @@ namespace FluentInstallation
         }
 
         [Fact]
-        public void Load_LoadsAssemblyWithAllItsDependenciesCorrectly()
+        public void Load_LoadsAssemblyAlongWithAllDependentAssembliesCorrectly()
         {
 
             var sut = new AssemblyLoader(() => "FluentInstallation.TestAssembly.dll");
 
             var assembly = sut.Load();
 
+            // Trigger dependent assembly by loading all types
             var types = assembly.GetTypes();
 
-            Assert.Equal("FluentInstallation.TestAssembly", assembly.GetName().Name);
+            Assert.NotEmpty(types);
 
         }
     }
