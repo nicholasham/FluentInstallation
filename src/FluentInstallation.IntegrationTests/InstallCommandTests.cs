@@ -24,7 +24,7 @@ namespace FluentInstallation.IntegrationTests
             
             sut
                 .ConfigureWebServer()
-                .DeleteWebsite("Test")
+                .RemoveWebsite("Test")
                 .CreateWebsite(website =>
                 {
                     website.Named("Test");

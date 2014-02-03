@@ -7,8 +7,8 @@ namespace FluentInstallation.WebAdministration
         IWebServerConfigurer CreateApplicationPool(Action<IApplicationPoolConfigurer> configurer);
         IWebServerConfigurer CreateWebsite(Action<IWebsiteConfigurer> website);
 
-        IWebServerConfigurer DeleteApplicationPool(string name);
-        IWebServerConfigurer DeleteWebsite(string name);
+        IWebServerConfigurer RemoveApplicationPool(string name);
+        IWebServerConfigurer RemoveWebsite(string name);
         
         IWebServerConfigurer AlterWebsite(string name, Action<IWebsiteConfigurer> configurer);
 

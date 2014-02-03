@@ -51,7 +51,7 @@ namespace FluentInstallation.WebAdministration
             return this;
         }
 
-        public IWebServerConfigurer DeleteApplicationPool(string name)
+        public IWebServerConfigurer RemoveApplicationPool(string name)
         {
             var applicationPool = ServerManager.ApplicationPools.FirstOrDefault(appPool => appPool.Name == name);
 
@@ -63,7 +63,7 @@ namespace FluentInstallation.WebAdministration
             return this;
         }
 
-        public IWebServerConfigurer DeleteWebsite(string name)
+        public IWebServerConfigurer RemoveWebsite(string name)
         {
             var webSite = ServerManager.Sites.FirstOrDefault(site => site.Name == name);
             if (webSite != null)

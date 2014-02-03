@@ -61,14 +61,14 @@ namespace FluentInstallation.WebAdministration
         }
 
         [Fact]
-        public void DeleteApplicationPool_DeletesApplicationPoolFromServerManager()
+        public void RemoveApplicationPool_RemovesApplicationPoolFromServerManager()
         {
             var sut = CreateSut();
 
             ApplicationPool applicationPool = WebAdministrationFactory.CreateApplicationPool();
             sut.ServerManager.ApplicationPools.Add(applicationPool);
 
-            sut.DeleteApplicationPool(applicationPool.Name);
+            sut.RemoveApplicationPool(applicationPool.Name);
 
             Assert.Equal(0, sut.ServerManager.ApplicationPools.Count(appPool => appPool.Name == applicationPool.Name));
         }
@@ -88,19 +88,19 @@ namespace FluentInstallation.WebAdministration
         }
 
         [Fact]
-        public void DeleteWebsite_DeletesWebSiteFromTheServerManager()
+        public void RemoveWebsite_RemovesWebSiteFromTheServer()
         {
             var sut = CreateSut();
             Site webSite = WebAdministrationFactory.CreateWebsite();
             sut.ServerManager.Sites.Add(webSite);
 
-            sut.DeleteWebsite(webSite.Name);
+            sut.RemoveWebsite(webSite.Name);
 
             Assert.Equal(0, sut.ServerManager.Sites.Count(site => site.Name == webSite.Name));
         }
 
         [Fact]
-        public void Commit_AppliesChangesOnServerManager()
+        public void Commit_AppliesChangesOnServer()
         {
             var serverManager = Substitute.For<IServerManager>();
             var sut = new WebServerConfigurer(Substitute.For<ILogger>(), serverManager); ;

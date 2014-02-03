@@ -29,6 +29,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{DEE44F
 		build\Run-CI-Build.ps1 = build\Run-CI-Build.ps1
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".assembly", ".assembly", "{ADA5748F-EF95-4769-8736-CB89A169FFC8}"
+	ProjectSection(SolutionItems) = preProject
+		src\assembly\SharedAssemblyInfo.cs = src\assembly\SharedAssemblyInfo.cs
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
