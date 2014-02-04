@@ -53,6 +53,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Hosts\HostsFilePersistorTests.cs" />
     <Compile Include="InstallerFactoryTests.cs" />
     <Compile Include="AssemblyLoaderTests.cs" />
     <Compile Include="Catch.cs" />
@@ -98,6 +99,7 @@
       <Link>FluentInstallation.TestDependency.dll</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <EmbeddedResource Include="Hosts\Hosts.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

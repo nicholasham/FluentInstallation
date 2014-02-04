@@ -54,7 +54,13 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="AssemblyExtensions.cs" />
+    <Compile Include="Hosts\HostEntry.cs" />
+    <Compile Include="Hosts\HostsConfigurer.cs" />
     <Compile Include="Hosts\HostsEntry.cs" />
+    <Compile Include="Hosts\HostsExtensions.cs" />
+    <Compile Include="Hosts\IHostsFilePersistor.cs" />
+    <Compile Include="Hosts\IHostEntryConfigurer.cs" />
+    <Compile Include="Hosts\IHostsConfigurer.cs" />
     <Compile Include="InstallerFactory.cs" />
     <Compile Include="AssemblyLoader.cs" />
     <Compile Include="Certificates\CertificateFindResult.cs" />

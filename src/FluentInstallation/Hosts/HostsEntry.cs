@@ -1,21 +1,37 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+using FluentInstallation.WebAdministration;
 
 namespace FluentInstallation.Hosts
 {
-    public class HostsEntry
+    public class HostsFile 
     {
-        public string Description { get; set; }
-        public string IpAddress { get; set; }
-        public string HostName { get; set; } 
-    }
+        private readonly List<HostEntry> _hostEntries;
 
-    public class HostsEntries : List<HostsEntry>
-    {
-        public static HostsEntries FromFile(string  path)
+        public HostsFile()
         {
-            return new HostsEntries();      
+            _hostEntries = new List<HostEntry>();
         }
+        
+        public IEnumerable<HostEntry> AllEntries()
+        {
+            return _hostEntries.ToArray();
+        }
+
+        public HostEntry AddEntry(HostEntry hostEntry)
+        {
+            _hostEntries.Add(hostEntry);
+            return hostEntry;
+        }
+
+        public void RemoveEntry(HostEntry hostEntry)
+        {
+            _hostEntries.Remove(hostEntry);
+        }
+
+      
     }
 
 }

@@ -1,0 +1,3 @@
+﻿127.0.0.1       mysite.co.uk
+127.0.0.2       mysite.de
+127.0.0.3		mysite.ie
