@@ -29,6 +29,13 @@ namespace FluentInstallation
             }
         }
 
+        public static string ReadToEnd(this Stream stream)
+        {
+            stream.Position = 0;
+            return new StreamReader(stream).ReadToEnd();
+        }
+
+
         public static Stream GetResourceStream(string resourceName)
         {
             var assembly = typeof (TestContext).Assembly;

@@ -1,3 +1,5 @@
-﻿127.0.0.1       mysite.co.uk
+﻿# This is a test comment line 1
+# This is a test comment line 2
+127.0.0.1       mysite.co.uk
 127.0.0.2       mysite.de
-127.0.0.3		mysite.ie
+127.0.0.3		mysite.ie # This is a comment

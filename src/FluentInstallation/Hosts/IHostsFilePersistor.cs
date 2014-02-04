@@ -20,7 +20,7 @@ namespace FluentInstallation.Hosts
         public HostsFile Load(Stream  stream)
         {
 
-            var matchPattern = @"^(?<IP>[0-9a-f.:]+)\s+(?<Name>[^\s#]+)(?<Description>.*)$";
+            var matchPattern = @"^(?<IP>[0-9a-f.:]+)\s+(?<HostName>[^\s#]+)(?<Comment>.*)$";
             
             var hostsFile = new HostsFile();
 
@@ -30,18 +30,27 @@ namespace FluentInstallation.Hosts
                 while (reader.Peek() >= 0)
                 {
                     var data = reader.ReadLine();
-                    var matches = Regex.Matches(data, matchPattern);
 
-                    foreach (Match match in matches)
+                    if (data.StartsWith("#"))
                     {
-                        var ip = match.Groups["IP"].ToString();
-                        var name = match.Groups["Name"].ToString();
-                        var description = match.Groups["Description"].ToString();
-
-                        hostsFile.AddEntry(new HostEntry() {Ip = ip, Name = name, Description = description});
-
+                        hostsFile.AddComment(data.TrimStart('#'));
                     }
+                    else
+                    {
+                        var matches = Regex.Matches(data, matchPattern);
 
+                        foreach (Match match in matches)
+                        {
+                            var ip = match.Groups["IP"].ToString();
+                            var hostName = match.Groups["HostName"].ToString();
+                            var comment = match.Groups["Comment"].ToString().Replace("#", string.Empty).TrimStart();
+
+                            hostsFile.AddEntry(new HostEntry() { Ip = ip, HostName = hostName, Comment = comment });
+
+                        }
+    
+                    }
+                    
                 }
                 
                 return hostsFile;
@@ -53,7 +62,26 @@ namespace FluentInstallation.Hosts
 
         public void Save(Stream stream, HostsFile entries)
         {
-            throw new NotImplementedException();
+            using (var writer = new StreamWriter(stream))
+            {
+                foreach (var comment in entries.AllComments())
+                {
+                    writer.Write("# {0}", comment);
+                }
+
+                foreach (var entry in entries.AllEntries())
+                {
+                    if (string.IsNullOrEmpty(entry.Comment))
+                    {
+                        writer.Write("{0} {1}", entry.Ip, entry.HostName);
+                    }
+                    else
+                    {
+                        writer.Write("{0} {1} #{2}", entry.Ip, entry.HostName, entry.Comment);
+                        
+                    }
+                }
+            }
         }
         
     }
