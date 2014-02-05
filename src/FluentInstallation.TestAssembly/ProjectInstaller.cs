@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Security.Cryptography.X509Certificates;
+using FluentInstallation.Hosts;
 using FluentInstallation.WebAdministration;
 using Microsoft.Web.Administration;
 
@@ -66,7 +67,20 @@ namespace FluentInstallation.TestAssembly
                         });
                     })
                     .Commit();
-            
+
+            context
+                .ConfigureHosts()
+                    .RemoveHostEntry("local.mysite.co.uk")
+                    .AddHostEntry(hostEntry =>
+                        {
+                            hostEntry
+                                .OnIpAddress("127.0.0.1")
+                                .UseHostName("local.mysite.co.uk")
+                                .Description("local test site");
+
+                        })
+                    .Commit();
+
         }
 
         public void Uninstall(IInstallerContext context)

@@ -2,8 +2,8 @@
 {
     public class HostEntry
     {
-        public string Comment { get; set; }
-        public string Ip { get; set; }
+        public string Description { get; set; }
+        public string IpAddress { get; set; }
         public string HostName { get; set; } 
     }
 }

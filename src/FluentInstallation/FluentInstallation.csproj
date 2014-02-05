@@ -55,10 +55,12 @@
     </Compile>
     <Compile Include="AssemblyExtensions.cs" />
     <Compile Include="Hosts\HostEntry.cs" />
+    <Compile Include="Hosts\HostEntryConfigurer.cs" />
     <Compile Include="Hosts\HostsConfigurer.cs" />
     <Compile Include="Hosts\HostsEntry.cs" />
     <Compile Include="Hosts\HostsExtensions.cs" />
-    <Compile Include="Hosts\IHostsFilePersistor.cs" />
+    <Compile Include="Hosts\HostsFileRepository.cs" />
+    <Compile Include="Hosts\IHostsFileRepository.cs" />
     <Compile Include="Hosts\IHostEntryConfigurer.cs" />
     <Compile Include="Hosts\IHostsConfigurer.cs" />
     <Compile Include="InstallerFactory.cs" />
