@@ -6,8 +6,7 @@ namespace FluentInstallation.WebAdministration
 {
     internal sealed class WebServerConfigurer : IWebServerConfigurer
     {
-        
-        public static Func<Site, IWebsiteConfigurer> CreateWebsiteConfigurer = (configurer) =>  new WebsiteConfigurer(configurer);
+
         public static Func<ApplicationPool, IApplicationPoolConfigurer> CreateApplicationPoolConfigurer = (configurer) => new ApplicationPoolConfigurer(configurer);
         public static Func<Application, IApplicationConfigurer> CreateApplicationConfigurer = (configurer) => new ApplicationConfigurer(configurer);
         
@@ -33,21 +32,18 @@ namespace FluentInstallation.WebAdministration
 
         public IWebServerConfigurer AddApplicationPool(Action<IApplicationPoolConfigurer> configurer)
         {
-            var applicationPool = ServerManager.ApplicationPools.CreateDefaultApplicationPool();
+            var applicationPool = ServerManager.ApplicationPools.AddNewWithDefaults();
             configurer(CreateApplicationPoolConfigurer(applicationPool));
-            Logger.Info(applicationPool.ContructCreationMessage);
+            Logger.Info(applicationPool.ContructAddMessage);
 
             return this;
         }
 
-        public IWebServerConfigurer AddWebsite(Action<IWebsiteConfigurer> website)
+        public IWebServerConfigurer AddWebsite(Action<IWebsiteConfigurer> configurer)
         {
-            var defaultSiteName = string.Format("Site{0}", ServerManager.Sites.Count + 1);
-            var uniquePath = string.Format("/{0}", Guid.NewGuid().ToString("N"));
-            var site = ServerManager.Sites.Add(defaultSiteName, uniquePath, 80);
-            website(CreateWebsiteConfigurer(site));
-
-            
+            var site = ServerManager.Sites.AddNewWithDefaults();
+            configurer(new WebsiteConfigurer(Logger, site));
+            Logger.Info(site.ContructAddMessage);
             return this;
         }
 
@@ -99,7 +95,7 @@ namespace FluentInstallation.WebAdministration
                 throw Exceptions.NoSiteFoundMatchingName(name);
             }
 
-            configurer(CreateWebsiteConfigurer(foundSite));
+            configurer( new WebsiteConfigurer(Logger, foundSite));
 
             return this;
         }

@@ -114,20 +114,13 @@ namespace FluentInstallation.WebAdministration
         public void AlterWebsite_FindsFirstMatchingSiteAndPassesItToANewConfigurer()
         {
             var sut = CreateSut();
-            var configurer = Substitute.For<IWebsiteConfigurer>();
-
 
             Site expected = WebAdministrationFactory.CreateWebsite();
             sut.ServerManager.Sites.Add(expected);
 
             Site actual = default(Site);
-            WebServerConfigurer.CreateWebsiteConfigurer = (x) =>
-                {
-                    actual = x;
-                    return configurer;
-                };
-
-            sut.AlterWebsite(expected.Name, website => { });
+          
+            sut.AlterWebsite(expected.Name, configurer => configurer.Configure((site) => actual = site));
 
             Assert.Equal(expected.Name, actual.Name);
         }

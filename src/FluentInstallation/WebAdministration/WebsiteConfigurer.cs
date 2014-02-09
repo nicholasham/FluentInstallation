@@ -9,17 +9,25 @@ namespace FluentInstallation.WebAdministration
     {
         private readonly Site _website;
 
-        public WebsiteConfigurer(Site website)
+        public WebsiteConfigurer(ILogger logger, Site website)
         {
-            
+
+            if (logger == null)
+            {
+                throw new ArgumentNullException("logger");
+            }
+
             if (website == null)
             {
                 throw new ArgumentNullException("website");
             }
 
+            Logger = logger;
             _website = website;
-            
+
         }
+
+        public ILogger Logger { get; private set; }
 
         public IWebsiteConfigurer WithId(int id)
         {
@@ -59,8 +67,9 @@ namespace FluentInstallation.WebAdministration
         {
             return Configure(site =>
             {
-                var configurer = new BindingConfigurer(site.Bindings.CreateDefaultBinding());
-                action(configurer);
+                var binding = site.Bindings.AddNewWithDefaults();
+                action(new BindingConfigurer(binding));
+                Logger.Info(binding.ContructAddMessage);
             });
         }
 
@@ -74,7 +83,9 @@ namespace FluentInstallation.WebAdministration
                 if (foundApplication != null)
                 {
                     site.Applications.Remove(foundApplication);
+                    Logger.Info(foundApplication.ContructAddMessage);
                 }
+
             });
         }
 
@@ -90,25 +101,28 @@ namespace FluentInstallation.WebAdministration
                 }
 
                 site.Application().VirtualDirectories.Remove(foundVirtualDirectory);
+                Logger.Info(foundVirtualDirectory.ContructAddMessage);
 
             });
         }
 
-        public IWebsiteConfigurer AddApplication(Action<IApplicationConfigurer> application)
+        public IWebsiteConfigurer AddApplication(Action<IApplicationConfigurer> configurer)
         {
             return Configure(site =>
             {
-                var configurer = new ApplicationConfigurer(site.Applications.CreateDefaultApplication());
-                application(configurer);
+                Application application = site.Applications.AddNewWithDefaults();
+                configurer(new ApplicationConfigurer(application));
+                Logger.Info(application.ContructAddMessage);
             });
         }
 
-        public IWebsiteConfigurer AddVirtualDirectory(Action<IVirtualDirectoryConfigurer> virtualDirectory)
+        public IWebsiteConfigurer AddVirtualDirectory(Action<IVirtualDirectoryConfigurer> configurer)
         {
             return Configure(site =>
             {
-                var configurer = new VirtualDirectoryConfigurer(site.Application().VirtualDirectories.CreateDefaultVirtualDirectory());
-                virtualDirectory(configurer);
+                VirtualDirectory virtualDirectory = site.Application().VirtualDirectories.AddNewWithDefaults();
+                configurer(new VirtualDirectoryConfigurer(virtualDirectory));
+                Logger.Info(virtualDirectory.ContructAddMessage);
             });
         }
 

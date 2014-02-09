@@ -67,6 +67,7 @@
     <Compile Include="Certificates\CertificateFinder.cs" />
     <Compile Include="Certificates\ICertificateFinder.cs" />
     <Compile Include="CommandLogger.cs" />
+    <Compile Include="WebAdministration\LoggingExtensions.cs" />
     <Compile Include="WebAdministration\WebAdministrationExtensions.cs" />
     <Compile Include="DefaultInstallerAttribute.cs" />
     <Compile Include="IAssemblyLoader.cs" />

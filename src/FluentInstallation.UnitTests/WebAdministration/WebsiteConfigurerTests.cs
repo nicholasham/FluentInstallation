@@ -2,31 +2,45 @@
 using System.IO;
 using System.Linq;
 using Microsoft.Web.Administration;
+using NSubstitute;
 using Xunit;
 
 namespace FluentInstallation.WebAdministration
 {
     public class WebsiteConfigurerTests
     {
+        private readonly ILogger _logger;
+
+        public WebsiteConfigurerTests()
+        {
+            _logger = Substitute.For<ILogger>();
+        }
+
         [Fact]
         public void SutIsWebsiteConfigurer()
         {
             var website = WebAdministrationFactory.CreateWebsite();
-            var sut = new WebsiteConfigurer(website);
+            var sut = new WebsiteConfigurer(_logger, website);
             Assert.IsAssignableFrom<IWebsiteConfigurer>(sut);
         }
         
         [Fact]
         public void Constructor_ThrowsWhenWebsiteIsNull()
         {
-            Assert.Throws<ArgumentNullException>(() => new WebsiteConfigurer(null));
+            Assert.Throws<ArgumentNullException>(() => new WebsiteConfigurer(_logger, null));
+        }
+
+        [Fact]
+        public void Constructor_ThrowsWhenLoggerIsNull()
+        {
+            Assert.Throws<ArgumentNullException>(() => new WebsiteConfigurer(null, WebAdministrationFactory.CreateWebsite()));
         }
 
         [Fact]
         public void Configure_GivesDirectAccessToTheWebsite()
         {
             var expected = WebAdministrationFactory.CreateWebsite();
-            var sut = new WebsiteConfigurer(expected);
+            var sut = new WebsiteConfigurer(_logger, expected);
             var actual = default(Site);
 
             sut.Configure(x => actual = x);
@@ -38,7 +52,7 @@ namespace FluentInstallation.WebAdministration
         public void Named_SetsTheName()
         {
             var website = WebAdministrationFactory.CreateWebsite();
-            var sut = new WebsiteConfigurer(website);
+            var sut = new WebsiteConfigurer(_logger, website);
 
             sut.Named("TestWebsite");
 
@@ -49,7 +63,7 @@ namespace FluentInstallation.WebAdministration
         public void Named_ThrowsWhenNull()
         {
             var website = WebAdministrationFactory.CreateWebsite();
-            var sut = new WebsiteConfigurer(website);
+            var sut = new WebsiteConfigurer(_logger, website);
 
             Assert.Throws<ArgumentNullException>(() => sut.Named(null));
         }
@@ -59,7 +73,7 @@ namespace FluentInstallation.WebAdministration
         public void UseApplicationPool_SetsTheApplicationPoolCorrectly()
         {
             var website = WebAdministrationFactory.CreateWebsite();
-            var sut = new WebsiteConfigurer(website);
+            var sut = new WebsiteConfigurer(_logger, website);
             
             sut.UseApplicationPool("TestApplicationPool");
 
@@ -71,7 +85,7 @@ namespace FluentInstallation.WebAdministration
         public void OnPhysicalPath_SetsThePathCorrectly()
         {
             var website = WebAdministrationFactory.CreateWebsite();
-            var sut = new WebsiteConfigurer(website);
+            var sut = new WebsiteConfigurer(_logger, website);
             
             var expected = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
             
@@ -87,7 +101,7 @@ namespace FluentInstallation.WebAdministration
         public void AddBinding_PassesBindingToConfigurer()
         {
             var website = WebAdministrationFactory.CreateWebsite();
-            var sut = new WebsiteConfigurer(website);
+            var sut = new WebsiteConfigurer(_logger, website);
             var actual = false;
 
             Action<IBindingConfigurer> action = (binding) =>
@@ -105,7 +119,7 @@ namespace FluentInstallation.WebAdministration
         public void AddBinding_AddsANewBindingToTheSite()
         {
             var website = WebAdministrationFactory.CreateWebsite();
-            var sut = new WebsiteConfigurer(website);
+            var sut = new WebsiteConfigurer(_logger, website);
 
             website.Bindings.Clear();
 
@@ -121,7 +135,7 @@ namespace FluentInstallation.WebAdministration
         public void AddApplication_PassesApplicationToConfigurer()
         {
             var website = WebAdministrationFactory.CreateWebsite();
-            var sut = new WebsiteConfigurer(website);
+            var sut = new WebsiteConfigurer(_logger, website);
             var actual = false;
 
             Action<IApplicationConfigurer> action = (configurer) =>
@@ -139,7 +153,7 @@ namespace FluentInstallation.WebAdministration
         public void AddApplication_AddsANewApplicationToTheSite()
         {
             var website = WebAdministrationFactory.CreateWebsite();
-            var sut = new WebsiteConfigurer(website);
+            var sut = new WebsiteConfigurer(_logger, website);
 
             sut.AddApplication((application) => { });
 
@@ -154,7 +168,7 @@ namespace FluentInstallation.WebAdministration
         public void AddVirtualDirectory_PassesNewVirtualDirectoryToConfigurer()
         {
             var website = WebAdministrationFactory.CreateWebsite();
-            var sut = new WebsiteConfigurer(website);
+            var sut = new WebsiteConfigurer(_logger, website);
             var actual = false;
 
             Action<IVirtualDirectoryConfigurer> action = (configurer) =>
@@ -172,7 +186,7 @@ namespace FluentInstallation.WebAdministration
         public void AddVirtualDirectory_AddsANewVirtualDirectoryToTheSite()
         {
             var website = WebAdministrationFactory.CreateWebsite();
-            var sut = new WebsiteConfigurer(website);
+            var sut = new WebsiteConfigurer(_logger, website);
 
             sut.AddVirtualDirectory((application) => { });
 
@@ -188,7 +202,7 @@ namespace FluentInstallation.WebAdministration
             var website = WebAdministrationFactory.CreateWebsite();
             website.Applications.Add("/SomeAlias", @"C:\");
 
-            var sut = new WebsiteConfigurer(website);
+            var sut = new WebsiteConfigurer(_logger, website);
 
             sut.RemoveApplication("SomeAlias");
 
@@ -201,7 +215,7 @@ namespace FluentInstallation.WebAdministration
         public void RemoveVirtualDirectory_ThrowsWhenApplicationDoesNotExist()
         {
             var website = WebAdministrationFactory.CreateWebsite();
-            var sut = new WebsiteConfigurer(website);
+            var sut = new WebsiteConfigurer(_logger, website);
 
             Assert.Throws<InstallationException>(() => { sut.RemoveVirtualDirectory("somemissingapplication"); });
 
@@ -215,7 +229,7 @@ namespace FluentInstallation.WebAdministration
             var website = WebAdministrationFactory.CreateWebsite();
             website.Application().VirtualDirectories.Add("/SomeAlias", @"C:\");
 
-            var sut = new WebsiteConfigurer(website);
+            var sut = new WebsiteConfigurer(_logger, website);
 
             sut.RemoveVirtualDirectory("SomeAlias");
 
@@ -228,7 +242,7 @@ namespace FluentInstallation.WebAdministration
         {
             var website = WebAdministrationFactory.CreateWebsite();
 
-            var sut = new WebsiteConfigurer(website);
+            var sut = new WebsiteConfigurer(_logger, website);
 
             Assert.Throws<InstallationException>(() => sut.AssertApplicationExists("some alias"));
         }
@@ -239,7 +253,7 @@ namespace FluentInstallation.WebAdministration
         {
             var website = WebAdministrationFactory.CreateWebsite();
 
-            var sut = new WebsiteConfigurer(website);
+            var sut = new WebsiteConfigurer(_logger, website);
 
             Assert.Throws<InstallationException>(() => sut.AssertVirtualDirectoryExists("some alias"));
         }
@@ -249,7 +263,7 @@ namespace FluentInstallation.WebAdministration
         public void WithId_SetsIdCorrectly()
         {
             var website = WebAdministrationFactory.CreateWebsite();
-            var sut = new WebsiteConfigurer(website);
+            var sut = new WebsiteConfigurer(_logger, website);
 
             sut.WithId(99999);
 
@@ -260,7 +274,7 @@ namespace FluentInstallation.WebAdministration
         public void WithId_ThrowsWhenTheIdIsAlreadyInUse()
         {
             var website = WebAdministrationFactory.CreateWebsite();
-            var sut = new WebsiteConfigurer(website);
+            var sut = new WebsiteConfigurer(_logger, website);
 
             sut.WithId(99999);
 

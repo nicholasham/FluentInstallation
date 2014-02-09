@@ -1,9 +1,11 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using Microsoft.Web.Administration;
 
 namespace FluentInstallation.WebAdministration
 {
-    
     public static class AdministrationExtensions
     {
         public static VirtualDirectory VirtualDirectory(this Application application)
@@ -15,6 +17,7 @@ namespace FluentInstallation.WebAdministration
         {
             return virtualDirectories["/"];
         }
+
         public static Application DefaultApplication(this ApplicationCollection applications)
         {
             return applications["/"];
@@ -29,32 +32,38 @@ namespace FluentInstallation.WebAdministration
         {
             return alias.StartsWith("/") ? alias : "/" + alias;
         }
-        
-        public static Binding CreateDefaultBinding(this BindingCollection bindings)
-        {
-            var protocol = "http";
 
-            
-            var bindingInformation = BindingInformation.Default().AssignNextAvailablePort().ToString();
+        public static Site AddNewWithDefaults(this SiteCollection sites)
+        {
+            string defaultSiteName = string.Format("Site{0}", sites.Count + 1);
+            string uniquePath = string.Format("/{0}", Guid.NewGuid().ToString("N"));
+            return sites.Add(defaultSiteName, uniquePath, 80);
+        }
+
+        public static Binding AddNewWithDefaults(this BindingCollection bindings)
+        {
+            string protocol = "http";
+
+
+            string bindingInformation = BindingInformation.Default().AssignNextAvailablePort().ToString();
 
             return bindings.Add(bindingInformation, protocol);
-            
         }
-        
-        public static Application CreateDefaultApplication(this ApplicationCollection applications)
-        {
-            var defaultApplication = applications.DefaultApplication();
 
-            var path = "/application" + applications.Count;
+        public static Application AddNewWithDefaults(this ApplicationCollection applications)
+        {
+            Application defaultApplication = applications.DefaultApplication();
+
+            string path = "/application" + applications.Count;
 
             return applications.Add(path, defaultApplication.VirtualDirectory().PhysicalPath);
         }
 
 
-        public static VirtualDirectory CreateDefaultVirtualDirectory(this VirtualDirectoryCollection virtualDirectories)
+        public static VirtualDirectory AddNewWithDefaults(this VirtualDirectoryCollection virtualDirectories)
         {
-            var defaultVirtualDirectory = virtualDirectories.DefaultVirtualDirectory();
-            var path = "/virtualdirectories" + virtualDirectories.Count;
+            VirtualDirectory defaultVirtualDirectory = virtualDirectories.DefaultVirtualDirectory();
+            string path = "/virtualdirectories" + virtualDirectories.Count;
             return virtualDirectories.Add(path, defaultVirtualDirectory.PhysicalPath);
         }
 
@@ -67,10 +76,10 @@ namespace FluentInstallation.WebAdministration
         {
             var supportedProtocols = new[] {"http", "https"};
 
-            var bindings = (from site in serverManager.Sites
-                                         from binding in site.Bindings
-                                        where supportedProtocols.Contains( binding.Protocol)
-                                         select binding) .ToList();
+            List<Binding> bindings = (from site in serverManager.Sites
+                from binding in site.Bindings
+                where supportedProtocols.Contains(binding.Protocol)
+                select binding).ToList();
 
             return bindings.Max(x => x.ToBindingInformation().Port);
         }
@@ -80,23 +89,10 @@ namespace FluentInstallation.WebAdministration
             return value + 1;
         }
 
-
-        internal static void ContructCreationMessage(this ApplicationPool applicationPool, IMessageBuilder builder)
+        public static ApplicationPool AddNewWithDefaults(this ApplicationPoolCollection applicationPools)
         {
-            builder
-                .WriteLine("Creating Application Pool")
-                .IncreaseIndent()
-                .WriteLine("Name: {0}", applicationPool.Name)
-                .WriteLine("Managed Pipe Line Mode: {0}", applicationPool.ManagedPipelineMode)
-                .WriteLine("Runtime version: {0}", applicationPool.ManagedRuntimeVersion);
-
-        }
-
-
-        public static ApplicationPool CreateDefaultApplicationPool(this ApplicationPoolCollection applicationPools)
-        {
-            var defaultName = string.Format("ApplicationPool{0}", applicationPools.Count + 1);
-            var applicationPool = applicationPools.Add(defaultName);
+            string defaultName = string.Format("ApplicationPool{0}", applicationPools.Count + 1);
+            ApplicationPool applicationPool = applicationPools.Add(defaultName);
             applicationPool.ManagedRuntimeVersion = "v4.0";
 
             return applicationPool;
@@ -109,13 +105,14 @@ namespace FluentInstallation.WebAdministration
 
         public static Application Find(this ApplicationCollection applications, string alias)
         {
-            var foundApplication = applications.FirstOrDefault(x => x.Path.Equals(alias.ToPath()));
+            Application foundApplication = applications.FirstOrDefault(x => x.Path.Equals(alias.ToPath()));
             return foundApplication;
         }
 
         public static VirtualDirectory Find(this VirtualDirectoryCollection virtualDirectories, string alias)
         {
-            var foundVirtualDirectory = virtualDirectories.FirstOrDefault(x => x.Path.Equals(alias.ToPath()));
+            VirtualDirectory foundVirtualDirectory =
+                virtualDirectories.FirstOrDefault(x => x.Path.Equals(alias.ToPath()));
             return foundVirtualDirectory;
         }
 
@@ -123,6 +120,5 @@ namespace FluentInstallation.WebAdministration
         {
             return virtualDirectories.Find(alias) != null;
         }
-
     }
 }
