@@ -53,7 +53,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Hosts\HostsFilePersistorTests.cs" />
+    <Compile Include="Hosts\HostEntryTests.cs" />
+    <Compile Include="Hosts\HostsConfigurerTests.cs" />
+    <Compile Include="Hosts\HostsFileTests.cs" />
     <Compile Include="InstallerFactoryTests.cs" />
     <Compile Include="AssemblyLoaderTests.cs" />
     <Compile Include="Catch.cs" />

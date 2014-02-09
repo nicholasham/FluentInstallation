@@ -1,23 +1,24 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 
 namespace FluentInstallation.Hosts
 {
     class HostsConfigurer : IHostsConfigurer
     {
-        private IHostsFileRepository _hostsFileRepository;
-        private HostsFile _hostsFile;
+        public HostsFile HostsFile { get; private set; }
 
-        public HostsConfigurer(IHostsFileRepository hostsFileRepository)
+        private Func<Stream> GetStream { get; set; }
+        
+        public HostsConfigurer(Func<Stream> getStream )
         {
-            _hostsFileRepository = hostsFileRepository;
-            _hostsFile = hostsFileRepository.Load();
+            GetStream = getStream;
+            HostsFile = HostsFile.Load(GetStream());
         }
-
 
         public void Commit()
         {
-            _hostsFileRepository.Save(_hostsFile);
+            HostsFile.Save(GetStream());
         }
 
         public IHostsConfigurer AddHostEntry(Action<IHostEntryConfigurer> configurer)
@@ -25,7 +26,7 @@ namespace FluentInstallation.Hosts
             var entry = new HostEntry();
             configurer(new HostEntryConfigurer(entry));
 
-            _hostsFile.AddEntry(entry);
+            HostsFile.AddHostEntry(entry);
 
             return this;
         }
@@ -33,14 +34,7 @@ namespace FluentInstallation.Hosts
 
         public IHostsConfigurer RemoveHostEntry(string hostName)
         {
-            var entry =
-                _hostsFile.AllEntries()
-                          .FirstOrDefault(x => x.HostName.Equals(hostName, StringComparison.InvariantCultureIgnoreCase));
-
-            if (entry != null)
-            {
-                _hostsFile.RemoveEntry(entry);
-            }
+            HostsFile.RemoveHostEntry(hostName);
 
             return this;
         }

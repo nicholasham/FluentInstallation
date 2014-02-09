@@ -8,10 +8,10 @@ namespace FluentInstallation
     {
         public static IHostsConfigurer ConfigureHosts(this IInstallerContext context)
         {
-            return new HostsConfigurer(new HostsFileRepository( () => GetHostsFileStream())); 
+            return new HostsConfigurer(CreateHostsFileStream); 
         }
 
-        private static Stream GetHostsFileStream()
+        private static Stream CreateHostsFileStream()
         {
             var windowsDirectoryPath = Environment.GetEnvironmentVariable("windir");
             var hostsFilePath = Path.Combine(windowsDirectoryPath, @"system32\drivers\etc\hosts");
