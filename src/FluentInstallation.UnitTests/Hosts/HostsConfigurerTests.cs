@@ -18,7 +18,7 @@ namespace FluentInstallation.Hosts
 
         private HostsConfigurer CreateSut()
         {
-            return new HostsConfigurer(() => TestContext.GetResourceStream("FluentInstallation.Hosts.Hosts.txt"));
+            return new HostsConfigurer(new TestLogger(),  () => TestContext.GetResourceStream("FluentInstallation.Hosts.Hosts.txt"));
         }
 
         [Fact]

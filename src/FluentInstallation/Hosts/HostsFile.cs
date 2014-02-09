@@ -74,12 +74,9 @@ namespace FluentInstallation.Hosts
             return hostEntry;
         }
 
-        public void RemoveHostEntry(string hostName)
+        public void RemoveHostEntry(HostEntry entry)
         {
-            foreach (HostEntry entry in FindHostEntry(hostName))
-            {
-                _hostEntries.Remove(entry);
-            }
+            _hostEntries.Remove(entry);
         }
 
         public string AddComment(string comment)

@@ -54,8 +54,8 @@ namespace FluentInstallation.Hosts
             var sut = new HostsFile();
             var entry = new HostEntry(){HostName = "mysite.co.uk"};
             sut.AddHostEntry(entry);
-           
-            sut.RemoveHostEntry("mysite.co.uk");
+
+            sut.RemoveHostEntry(entry);
 
             Assert.Empty(sut.AllHostEntries());
 

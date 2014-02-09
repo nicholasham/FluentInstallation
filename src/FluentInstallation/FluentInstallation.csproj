@@ -61,6 +61,7 @@
     <Compile Include="Hosts\HostsExtensions.cs" />
     <Compile Include="Hosts\IHostEntryConfigurer.cs" />
     <Compile Include="Hosts\IHostsConfigurer.cs" />
+    <Compile Include="Hosts\LoggerExtensions.cs" />
     <Compile Include="InstallerFactory.cs" />
     <Compile Include="AssemblyLoader.cs" />
     <Compile Include="Certificates\CertificateFindResult.cs" />

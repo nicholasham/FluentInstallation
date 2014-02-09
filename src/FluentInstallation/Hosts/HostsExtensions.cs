@@ -8,7 +8,7 @@ namespace FluentInstallation
     {
         public static IHostsConfigurer ConfigureHosts(this IInstallerContext context)
         {
-            return new HostsConfigurer(CreateHostsFileStream); 
+            return new HostsConfigurer(context.Logger,  CreateHostsFileStream); 
         }
 
         private static Stream CreateHostsFileStream()
