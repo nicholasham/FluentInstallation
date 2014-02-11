@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using System.IO;
+using Xunit;
 
 namespace FluentInstallation.WebAdministration
 {
@@ -33,9 +34,19 @@ namespace FluentInstallation.WebAdministration
             var virtualDirectory = WebAdministrationFactory.CreateVirtualDirectory();
             var sut = new VirtualDirectoryConfigurer(virtualDirectory);
 
-            sut.OnPhysicalPath("X:\\mySite");
+            sut.OnPhysicalPath("C:\\");
 
-            Assert.Equal("X:\\mySite", virtualDirectory.PhysicalPath);
+            Assert.Equal("C:\\", virtualDirectory.PhysicalPath);
+        }
+
+        [Fact]
+        public void OnPhysicalPath_ThrowsIfPathDoesNotExist()
+        {
+            var virtualDirectory = WebAdministrationFactory.CreateVirtualDirectory();
+            var sut = new VirtualDirectoryConfigurer(virtualDirectory);
+
+            Assert.Throws<DirectoryNotFoundException>(() => sut.OnPhysicalPath("C:\\mySite282829"));
+            
         }
         
    }

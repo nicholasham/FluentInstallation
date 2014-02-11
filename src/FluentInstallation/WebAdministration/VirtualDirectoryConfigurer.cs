@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Reflection;
 using Microsoft.Web.Administration;
 
@@ -20,6 +21,11 @@ namespace FluentInstallation.WebAdministration
 
         public IVirtualDirectoryConfigurer OnPhysicalPath(string path)
         {
+            if (!Directory.Exists(path))
+            {
+               throw Exceptions.PhysicalPathDoesNotExist(path);
+            }
+
             return Configure(x => x.PhysicalPath = path);
         }
 

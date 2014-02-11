@@ -139,5 +139,21 @@ namespace FluentInstallation.WebAdministration
 
             Assert.Throws<InstallationException>(() => sut.UseCertificateWithThumbprint(thumbprint));
         }
+
+        [Fact]
+        public void UseCertificateWithThumbprint_ThrowsWhenThumbprintIsNull()
+        {
+            Binding binding = WebAdministrationFactory.CreateBinding();
+
+            var finder = Substitute.For<ICertificateFinder>();
+
+            var result = new CertificateFindResult();
+
+            string thumbprint = null;
+                
+            var sut = new BindingConfigurer(binding) { CertificateFinder = finder };
+
+            Assert.Throws<ArgumentNullException>(() => sut.UseCertificateWithThumbprint(thumbprint));
+        }
     }
 }

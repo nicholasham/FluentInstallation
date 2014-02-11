@@ -48,8 +48,8 @@
     <Compile Include="Dependency.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\FluentInstallation.TestDependency\FluentInstallation.TestDependency.csproj">
-      <Project>{562fb777-d851-4eed-b399-20852b66e86b}</Project>
+    <ProjectReference Include="..\FluentInstallation.TestDependency\FluentInstallation.TestDependency.csproj">
+      <Project>{562FB777-D851-4EED-B399-20852B66E86B}</Project>
       <Name>FluentInstallation.TestDependency</Name>
     </ProjectReference>
     <ProjectReference Include="..\FluentInstallation\FluentInstallation.csproj">

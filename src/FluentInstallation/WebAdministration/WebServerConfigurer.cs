@@ -54,6 +54,7 @@ namespace FluentInstallation.WebAdministration
             if (applicationPool != null)
             {
                 ServerManager.ApplicationPools.Remove(applicationPool);
+                Logger.Info(applicationPool.ContructRemoveMessage);
             }
 
             return this;
@@ -65,22 +66,8 @@ namespace FluentInstallation.WebAdministration
             if (webSite != null)
             {
                 ServerManager.Sites.Remove(webSite);
+                Logger.Info(webSite.ContructRemoveMessage);
             }
-
-            return this;
-        }
-
-
-        public IWebServerConfigurer AlterApplicationPool(string name, Action<IApplicationPoolConfigurer> configurer)
-        {
-            var foundApplicationPool = ServerManager.ApplicationPools.FirstOrDefault(site => site.Name == name);
-
-            if (foundApplicationPool == null)
-            {
-                throw Exceptions.NoSiteFoundMatchingName(name);
-            }
-
-            configurer(CreateApplicationPoolConfigurer(foundApplicationPool));
 
             return this;
         }
@@ -96,6 +83,9 @@ namespace FluentInstallation.WebAdministration
             }
 
             configurer( new WebsiteConfigurer(Logger, foundSite));
+
+            Logger.Info(foundSite.ContructRemoveMessage);
+
 
             return this;
         }

@@ -98,6 +98,17 @@ namespace FluentInstallation.WebAdministration
 
 
         [Fact]
+        public void OnPhysicalPath_ThrowsIfPathDoesNotExist()
+        {
+            var website = WebAdministrationFactory.CreateWebsite();
+            var sut = new WebsiteConfigurer(_logger, website);
+            
+            Assert.Throws<DirectoryNotFoundException>(() => sut.OnPhysicalPath("C:\\mySite282829"));
+            
+        }
+
+
+        [Fact]
         public void AddBinding_PassesBindingToConfigurer()
         {
             var website = WebAdministrationFactory.CreateWebsite();

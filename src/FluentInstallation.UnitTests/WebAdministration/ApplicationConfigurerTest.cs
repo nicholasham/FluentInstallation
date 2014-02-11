@@ -1,4 +1,5 @@
-﻿using Microsoft.Web.Administration;
+﻿using System.IO;
+using Microsoft.Web.Administration;
 using Xunit;
 
 namespace FluentInstallation.WebAdministration
@@ -55,6 +56,17 @@ namespace FluentInstallation.WebAdministration
             sut.OnPhysicalPath(@"C:\");
 
             Assert.Equal(@"C:\", application.VirtualDirectory().PhysicalPath);
+        }
+
+
+        [Fact]
+        public void OnPhysicalPath_ThrowsIfPathDoesNotExist()
+        {
+            var application = WebAdministrationFactory.CreateApplication();
+            var sut = new ApplicationConfigurer(application);
+
+            Assert.Throws<DirectoryNotFoundException>(() => sut.OnPhysicalPath("C:\\mySite282829"));
+
         }
         
         [Fact]

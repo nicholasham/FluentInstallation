@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30110.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentInstallation", "src\FluentInstallation\FluentInstallation.csproj", "{E3CBFFCA-62C8-482F-B85A-437B09F4CC64}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentInstallation.UnitTests", "src\FluentInstallation.UnitTests\FluentInstallation.UnitTests.csproj", "{BAE643DF-4CD8-42ED-BE17-03381009920E}"
@@ -34,7 +36,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".assembly", ".assembly", "{
 		src\assembly\SharedAssemblyInfo.cs = src\assembly\SharedAssemblyInfo.cs
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentInstallation.TestDependency", "FluentInstallation.TestDependency\FluentInstallation.TestDependency.csproj", "{562FB777-D851-4EED-B399-20852B66E86B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentInstallation.TestDependency", "src\FluentInstallation.TestDependency\FluentInstallation.TestDependency.csproj", "{562FB777-D851-4EED-B399-20852B66E86B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

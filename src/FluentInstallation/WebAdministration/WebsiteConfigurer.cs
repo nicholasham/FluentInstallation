@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using Microsoft.Web.Administration;
@@ -55,6 +56,11 @@ namespace FluentInstallation.WebAdministration
 
         public IWebsiteConfigurer OnPhysicalPath(string path)
         {
+            if (!Directory.Exists(path))
+            {
+                throw Exceptions.PhysicalPathDoesNotExist(path);
+            }
+
             return Configure(site => site.Application().VirtualDirectory().PhysicalPath = path);
         }
 
@@ -83,7 +89,7 @@ namespace FluentInstallation.WebAdministration
                 if (foundApplication != null)
                 {
                     site.Applications.Remove(foundApplication);
-                    Logger.Info(foundApplication.ContructAddMessage);
+                    Logger.Info(foundApplication.ContructRemoveMessage);
                 }
 
             });
@@ -101,7 +107,7 @@ namespace FluentInstallation.WebAdministration
                 }
 
                 site.Application().VirtualDirectories.Remove(foundVirtualDirectory);
-                Logger.Info(foundVirtualDirectory.ContructAddMessage);
+                Logger.Info(foundVirtualDirectory.ContructRemoveMessage);
 
             });
         }

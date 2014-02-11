@@ -8,7 +8,7 @@ namespace FluentInstallation.WebAdministration
         internal static void ContructAddMessage(this ApplicationPool applicationPool, IMessageBuilder builder)
         {
             builder
-                .WriteLine("Added Application Pool")
+                .WriteLine("Adding Application Pool")
                 .IncreaseIndent()
                 .WriteLine("Name: {0}", applicationPool.Name)
                 .WriteLine("Managed Pipe Line Mode: {0}", applicationPool.ManagedPipelineMode)
@@ -18,29 +18,30 @@ namespace FluentInstallation.WebAdministration
         internal static void ContructAddMessage(this VirtualDirectory virtualDirectory, IMessageBuilder builder)
         {
             builder
-                .WriteLine("Added Virtual Directory")
+                .WriteLine("Adding Virtual Directory")
                 .IncreaseIndent()
                 .WriteLine("Alias: {0}", virtualDirectory.Path)
-                .WriteLine("Physcial Path {0}", virtualDirectory.PhysicalPath);
+                .WriteLine("Physical Path {0}", virtualDirectory.PhysicalPath);
         }
 
         internal static void ContructAddMessage(this Application application, IMessageBuilder builder)
         {
             builder
-                .WriteLine("Added Application")
+                .WriteLine("Adding Application")
                 .IncreaseIndent()
-                .WriteLine("Alias: {0}", application.VirtualDirectory().Path)
-                .WriteLine("Physcial Path {0}", application.VirtualDirectory().PhysicalPath)
+                .WriteLine("Alias: {0}", application.Path)
+                .WriteLine("Physical Path {0}", application.VirtualDirectory().PhysicalPath)
                 .WriteLine("Application Pool: {0}", application.ApplicationPoolName);
         }
 
         internal static void ContructAddMessage(this Site site, IMessageBuilder builder)
         {
             builder
-                .WriteLine("Added Website")
+                .WriteLine("Adding Website")
                 .IncreaseIndent()
                 .WriteLine("Name: {0}", site.Name)
                 .WriteLine("Id: {0}", site.Id)
+                .WriteLine("Physical Path {0}", site.Application().VirtualDirectory().PhysicalPath)
                 .WriteLine("Application Pool: {0}", site.Application().ApplicationPoolName);
         }
 
@@ -49,7 +50,7 @@ namespace FluentInstallation.WebAdministration
             var bindingInformation = binding.ToBindingInformation();
 
             builder
-                .WriteLine("Added Binding")
+                .WriteLine("Adding Binding")
                 .IncreaseIndent()
                 .WriteLine("Protocol: {0}", binding.Protocol)
                 .WriteLine("Port: {0}", bindingInformation.Port)
@@ -60,7 +61,7 @@ namespace FluentInstallation.WebAdministration
         internal static void ContructRemoveMessage(this ApplicationPool applicationPool, IMessageBuilder builder)
         {
             builder
-                .WriteLine("Removed Application Pool")
+                .WriteLine("Removing Application Pool")
                 .IncreaseIndent()
                 .WriteLine("Name: {0}", applicationPool.Name)
                 .WriteLine("Managed Pipe Line Mode: {0}", applicationPool.ManagedPipelineMode)
@@ -70,26 +71,36 @@ namespace FluentInstallation.WebAdministration
         internal static void ContructRemoveMessage(this VirtualDirectory virtualDirectory, IMessageBuilder builder)
         {
             builder
-                .WriteLine("Removed Virtual Directory")
+                .WriteLine("Removing Virtual Directory")
                 .IncreaseIndent()
                 .WriteLine("Alias: {0}", virtualDirectory.Path)
-                .WriteLine("Physcial Path {0}", virtualDirectory.PhysicalPath);
+                .WriteLine("Physical Path {0}", virtualDirectory.PhysicalPath);
         }
 
         internal static void ContructRemoveMessage(this Application application, IMessageBuilder builder)
         {
             builder
-                .WriteLine("Removed Application")
+                .WriteLine("Removing Application")
                 .IncreaseIndent()
-                .WriteLine("Alias: {0}", application.VirtualDirectory().Path)
-                .WriteLine("Physcial Path {0}", application.VirtualDirectory().PhysicalPath)
+                .WriteLine("Alias: {0}", application.Path)
+                .WriteLine("Physical Path {0}", application.VirtualDirectory().PhysicalPath)
                 .WriteLine("Application Pool: {0}", application.ApplicationPoolName);
         }
 
         internal static void ContructRemoveMessage(this Site site, IMessageBuilder builder)
         {
             builder
-                .WriteLine("Removed Website")
+                .WriteLine("Removing Website")
+                .IncreaseIndent()
+                .WriteLine("Name: {0}", site.Name)
+                .WriteLine("Id: {0}", site.Id)
+                .WriteLine("Application Pool: {0}", site.Application().ApplicationPoolName);
+        }
+
+        internal static void ContructAlterMessage(this Site site, IMessageBuilder builder)
+        {
+            builder
+                .WriteLine("Altering Website")
                 .IncreaseIndent()
                 .WriteLine("Name: {0}", site.Name)
                 .WriteLine("Id: {0}", site.Id)
@@ -101,7 +112,7 @@ namespace FluentInstallation.WebAdministration
             var bindingInformation = binding.ToBindingInformation();
 
             builder
-                .WriteLine("Removed Binding")
+                .WriteLine("Removing Binding")
                 .IncreaseIndent()
                 .WriteLine("Protocol: {0}", binding.Protocol)
                 .WriteLine("Port: {0}", bindingInformation.Port)

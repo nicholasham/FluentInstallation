@@ -26,6 +26,11 @@ namespace FluentInstallation.WebAdministration
 
         public IApplicationConfigurer OnPhysicalPath(string path)
         {
+            if (!Directory.Exists(path))
+            {
+                throw Exceptions.PhysicalPathDoesNotExist(path);
+            }
+
             return Configure(application =>
             {
                 application.VirtualDirectory().PhysicalPath = path ;
@@ -34,7 +39,7 @@ namespace FluentInstallation.WebAdministration
 
         public IApplicationConfigurer UseWebProjectDirectoryAsPhysicalPath()
         {
-            return   OnPhysicalPath(Assembly.GetCallingAssembly().ParentDirectoryPath());
+            return OnPhysicalPath(Assembly.GetCallingAssembly().ParentDirectoryPath());
         }
 
         public IApplicationConfigurer UseApplicationPool(string applicationPoolName)

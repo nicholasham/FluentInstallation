@@ -54,6 +54,11 @@ namespace FluentInstallation.WebAdministration
         
         public IBindingConfigurer UseCertificateWithThumbprint(string thumbprint)
         {
+            if (string.IsNullOrEmpty(thumbprint))
+            {
+                throw new ArgumentNullException("thumbprint");
+            }
+
             return Configure(binding =>
             {
                 var result = CertificateFinder.Find(X509FindType.FindByThumbprint, thumbprint);

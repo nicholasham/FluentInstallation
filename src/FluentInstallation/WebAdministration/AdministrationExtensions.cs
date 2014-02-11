@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.Remoting.Messaging;
 using Microsoft.Web.Administration;
 
@@ -36,14 +37,16 @@ namespace FluentInstallation.WebAdministration
         public static Site AddNewWithDefaults(this SiteCollection sites)
         {
             string defaultSiteName = string.Format("Site{0}", sites.Count + 1);
-            string uniquePath = string.Format("/{0}", Guid.NewGuid().ToString("N"));
-            return sites.Add(defaultSiteName, uniquePath, 80);
+            string uniquePath = Assembly.GetCallingAssembly().ParentDirectoryPath();
+            var site = sites.Add(defaultSiteName, uniquePath, 80);
+            site.Id = sites.Max(x => x.Id) + 1;
+            site.Bindings.Clear();
+            return site;
         }
 
         public static Binding AddNewWithDefaults(this BindingCollection bindings)
         {
-            string protocol = "http";
-
+            const string protocol = "http";
 
             string bindingInformation = BindingInformation.Default().AssignNextAvailablePort().ToString();
 
@@ -76,7 +79,7 @@ namespace FluentInstallation.WebAdministration
         {
             var supportedProtocols = new[] {"http", "https"};
 
-            List<Binding> bindings = (from site in serverManager.Sites
+            var bindings = (from site in serverManager.Sites
                 from binding in site.Bindings
                 where supportedProtocols.Contains(binding.Protocol)
                 select binding).ToList();

@@ -134,40 +134,7 @@ namespace FluentInstallation.WebAdministration
 
             Assert.Throws<InstallationException>(() => sut.AlterWebsite(randomName, (x) => { }));
         }
-
-        [Fact]
-        public void AlterAppPool_FindsFirstMatchingAppPoolAndPassesItToANewConfigurer()
-        {
-            var sut = CreateSut();
-            var configurer = Substitute.For<IApplicationPoolConfigurer>();
-
-
-            ApplicationPool expected = WebAdministrationFactory.CreateApplicationPool();
-            sut.ServerManager.ApplicationPools.Add(expected);
-
-            ApplicationPool actual = default(ApplicationPool);
-            WebServerConfigurer.CreateApplicationPoolConfigurer = (x) =>
-                {
-                    actual = x;
-                    return configurer;
-                };
-
-            sut.AlterApplicationPool(expected.Name, applicationPool => { });
-
-            Assert.Equal(expected.Name, actual.Name);
-        }
-
-
-        [Fact]
-        public void AlterAppPool_ThrowsWhenUnableToMatchAnAppPoolWithTheSameName()
-        {
-            var sut = CreateSut();
-
-            string randomName = Guid.NewGuid().ToString();
-
-            Assert.Throws<InstallationException>(() => sut.AlterApplicationPool(randomName, (x) => { }));
-        }
-
+        
         [Fact]
         public void AssertWebsiteExists_ThrowsWhenNoWebsiteExistsWithTheGivenName()
         {

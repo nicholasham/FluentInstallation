@@ -7,6 +7,12 @@ namespace FluentInstallation
 {
     public static class Exceptions
     {
+
+        public static Exception PhysicalPathDoesNotExist(string path)
+        {
+            return new DirectoryNotFoundException(Message("Unable to find any directory on path {0}", path));
+        }
+
         public static Exception AssemblyNotFound(string assemblyFileName)
         {
             return new FileNotFoundException(Message("Assembly not found on path {0}", assemblyFileName));
