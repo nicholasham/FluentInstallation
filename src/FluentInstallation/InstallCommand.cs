@@ -1,4 +1,6 @@
-﻿using System.Management.Automation;
+﻿using System;
+using System.Management.Automation;
+using System.Security.Cryptography.X509Certificates;
 
 namespace FluentInstallation
 {
@@ -25,10 +27,18 @@ namespace FluentInstallation
         {
             base.ProcessRecord();
 
-            var context = new InstallerContext(Parameters, new CommandLogger(this));
+            var logger = new CommandLogger(this);
+            var context = new InstallerContext(Parameters, logger);
 
             IInstaller installer = InstallerFactory.Create();
-            installer.Install(context);
+            try
+            {
+                installer.Install(context);
+            }
+            catch (Exception exception)
+            {
+                logger.Error(exception);
+            }
         }
     }
 }

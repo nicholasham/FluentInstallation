@@ -31,5 +31,10 @@ namespace FluentInstallation
         {
             _command.WriteError(new ErrorRecord(new InstallationException(string.Format(message, args)), string.Empty, ErrorCategory.NotSpecified, _command));
         }
+
+        public override void Error(Exception exception)
+        {
+            _command.WriteError(new ErrorRecord(exception, "Exception", ErrorCategory.NotSpecified, null));
+        }
     }
 }

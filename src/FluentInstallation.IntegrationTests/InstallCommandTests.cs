@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Management.Automation;
 using System.Management.Automation.Runspaces;
-using FluentInstallation.WebAdministration;
+using FluentInstallation.Web.Administration;
 using Xunit;
 
 namespace FluentInstallation.IntegrationTests

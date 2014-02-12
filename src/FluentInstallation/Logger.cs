@@ -38,5 +38,7 @@ namespace FluentInstallation
         {
             Error(BuildMessage(message));
         }
+
+        public abstract void Error(Exception exception);
     }
 }

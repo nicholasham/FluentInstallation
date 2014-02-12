@@ -53,9 +53,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Hosts\HostEntryTests.cs" />
-    <Compile Include="Hosts\HostsConfigurerTests.cs" />
-    <Compile Include="Hosts\HostsFileTests.cs" />
+    <Compile Include="Web\Hosts\HostEntryTests.cs" />
+    <Compile Include="Web\Hosts\HostsConfigurerTests.cs" />
+    <Compile Include="Web\Hosts\HostsFileTests.cs" />
     <Compile Include="InstallerFactoryTests.cs" />
     <Compile Include="AssemblyLoaderTests.cs" />
     <Compile Include="Catch.cs" />
@@ -68,14 +68,14 @@
     <Compile Include="TestInstaller1.cs" />
     <Compile Include="TestInstaller2.cs" />
     <Compile Include="TestLogger.cs" />
-    <Compile Include="WebAdministration\ApplicationConfigurerTest.cs" />
-    <Compile Include="WebAdministration\ApplicationPoolConfigurerTests.cs" />
-    <Compile Include="WebAdministration\BindingConfigurerTests.cs" />
-    <Compile Include="WebAdministration\BindingInformationTests.cs" />
-    <Compile Include="WebAdministration\VirtualDirectoryConfigurerTests.cs" />
-    <Compile Include="WebAdministration\WebAdministrationFactory.cs" />
-    <Compile Include="WebAdministration\WebServerConfigurerTests.cs" />
-    <Compile Include="WebAdministration\WebsiteConfigurerTests.cs" />
+    <Compile Include="Web\Administration\ApplicationConfigurerTest.cs" />
+    <Compile Include="Web\Administration\ApplicationPoolConfigurerTests.cs" />
+    <Compile Include="Web\Administration\BindingConfigurerTests.cs" />
+    <Compile Include="Web\Administration\BindingInformationTests.cs" />
+    <Compile Include="Web\Administration\VirtualDirectoryConfigurerTests.cs" />
+    <Compile Include="Web\Administration\WebAdministrationFactory.cs" />
+    <Compile Include="Web\Administration\WebServerConfigurerTests.cs" />
+    <Compile Include="Web\Administration\WebsiteConfigurerTests.cs" />
     <Compile Include="InstallCommandTests.cs" />
     <Compile Include="InstallerContextTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -101,7 +101,7 @@
       <Link>FluentInstallation.TestDependency.dll</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <EmbeddedResource Include="Hosts\Hosts.txt" />
+    <EmbeddedResource Include="Web\Hosts\Hosts.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

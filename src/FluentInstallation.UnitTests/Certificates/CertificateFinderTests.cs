@@ -1,5 +1,5 @@
 ﻿using System.Security.Cryptography.X509Certificates;
-using FluentInstallation.WebAdministration;
+using FluentInstallation.Web.Administration;
 using Xunit;
 
 namespace FluentInstallation.Certificates

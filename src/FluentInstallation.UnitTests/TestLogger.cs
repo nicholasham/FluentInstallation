@@ -30,5 +30,10 @@ namespace FluentInstallation
             LogToConsole(message);
 
         }
+
+        public override void Error(Exception exception)
+        {
+            LogToConsole(exception.Message);
+        }
     }
 }

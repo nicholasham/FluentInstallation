@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Security.Cryptography.X509Certificates;
-using FluentInstallation.Hosts;
-using FluentInstallation.WebAdministration;
+using FluentInstallation.Web.Administration;
+using FluentInstallation.Web.Hosts;
 using Microsoft.Web.Administration;
 
 namespace FluentInstallation.TestAssembly
@@ -74,7 +74,7 @@ namespace FluentInstallation.TestAssembly
                     .AddHostEntry(hostEntry =>
                         {
                             hostEntry
-                                .OnIpAddress("127.0.0.1")
+                                .UseIpAddress("127.0.0.1")
                                 .UseHostName("local.mysite.co.uk")
                                 .Description("local test site");
 

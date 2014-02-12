@@ -12,5 +12,6 @@ namespace FluentInstallation
         void Warn(Action<IMessageBuilder> message);
         void Error(string message, params object[] args);
         void Error(Action<IMessageBuilder> message);
+        void Error(Exception exception);
     }
 }
