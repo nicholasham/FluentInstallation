@@ -54,22 +54,9 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="AssemblyExtensions.cs" />
-    <Compile Include="Web\Hosts\HostEntry.cs" />
-    <Compile Include="Web\Hosts\HostEntryConfigurer.cs" />
-    <Compile Include="Web\Hosts\HostsConfigurer.cs" />
-    <Compile Include="Web\Hosts\HostsFile.cs" />
-    <Compile Include="Web\Hosts\HostsExtensions.cs" />
-    <Compile Include="Web\Hosts\IHostEntryConfigurer.cs" />
-    <Compile Include="Web\Hosts\IHostsConfigurer.cs" />
-    <Compile Include="Web\Hosts\LoggerExtensions.cs" />
     <Compile Include="InstallerFactory.cs" />
     <Compile Include="AssemblyLoader.cs" />
-    <Compile Include="Certificates\CertificateFindResult.cs" />
-    <Compile Include="Certificates\CertificateFinder.cs" />
-    <Compile Include="Certificates\ICertificateFinder.cs" />
     <Compile Include="CommandLogger.cs" />
-    <Compile Include="Web\Administration\LoggingExtensions.cs" />
-    <Compile Include="Web\Administration\WebAdministrationExtensions.cs" />
     <Compile Include="DefaultInstallerAttribute.cs" />
     <Compile Include="IAssemblyLoader.cs" />
     <Compile Include="ILogger.cs" />
@@ -77,22 +64,7 @@
     <Compile Include="Logger.cs" />
     <Compile Include="MessageBuilder.cs" />
     <Compile Include="ParametersExtensions.cs" />
-    <Compile Include="Web\Administration\AdministrationExtensions.cs" />
-    <Compile Include="Web\Administration\ApplicationConfigurer.cs" />
-    <Compile Include="Web\Administration\ApplicationPoolConfigurer.cs" />
-    <Compile Include="Web\Administration\BindingConfigurer.cs" />
-    <Compile Include="Web\Administration\BindingInformation.cs" />
-    <Compile Include="Web\Administration\IApplicationConfigurer.cs" />
-    <Compile Include="Web\Administration\IApplicationPoolConfigurer.cs" />
-    <Compile Include="Web\Administration\IBindingConfigurer.cs" />
-    <Compile Include="Web\Administration\IServerManager.cs" />
-    <Compile Include="Web\Administration\IVirtualDirectoryConfigurer.cs" />
-    <Compile Include="Web\Administration\VirtualDirectoryConfigurer.cs" />
-    <Compile Include="Web\Administration\WebsiteConfigurer.cs" />
-    <Compile Include="Web\Administration\WrappedServerManager.cs" />
     <Compile Include="IRootConfigurer.cs" />
-    <Compile Include="Web\Administration\IWebServerConfigurer.cs" />
-    <Compile Include="Web\Administration\IWebsiteConfigurer.cs" />
     <Compile Include="Exceptions.cs" />
     <Compile Include="IFluentSyntax.cs" />
     <Compile Include="ICommand.cs" />
@@ -100,7 +72,6 @@
     <Compile Include="IInstallerContext.cs" />
     <Compile Include="IInstallerFactory.cs" />
     <Compile Include="BaseCommand.cs" />
-    <Compile Include="Web\Administration\WebServerConfigurer.cs" />
     <Compile Include="InstallationException.cs" />
     <Compile Include="InstallCommand.cs" />
     <Compile Include="InstallerContext.cs" />
@@ -111,7 +82,6 @@
     <Compile Include="UninstallCommand.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="FluentInstallation.ps1" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

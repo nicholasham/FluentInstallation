@@ -52,6 +52,10 @@
       <Project>{562FB777-D851-4EED-B399-20852B66E86B}</Project>
       <Name>FluentInstallation.TestDependency</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FluentInstallation.Web\FluentInstallation.Web.csproj">
+      <Project>{47B0A745-8F14-4392-843D-9BBD5038CDB7}</Project>
+      <Name>FluentInstallation.Web</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FluentInstallation\FluentInstallation.csproj">
       <Project>{e3cbffca-62c8-482f-b85a-437b09f4cc64}</Project>
       <Name>FluentInstallation</Name>

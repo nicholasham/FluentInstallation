@@ -1,6 +1,6 @@
 ﻿using System.Security.Cryptography.X509Certificates;
 
-namespace FluentInstallation.Certificates
+namespace FluentInstallation.Web.Certificates
 {
     public interface ICertificateFinder
     {

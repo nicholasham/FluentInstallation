@@ -38,6 +38,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".assembly", ".assembly", "{
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentInstallation.TestDependency", "src\FluentInstallation.TestDependency\FluentInstallation.TestDependency.csproj", "{562FB777-D851-4EED-B399-20852B66E86B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentInstallation.Web", "src\FluentInstallation.Web\FluentInstallation.Web.csproj", "{47B0A745-8F14-4392-843D-9BBD5038CDB7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentInstallation.Octopus", "src\FluentInstallation.Octopus\FluentInstallation.Octopus.csproj", "{56104946-3A2B-450D-84B5-56D82A761ACC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -68,6 +72,14 @@ Global
 		{562FB777-D851-4EED-B399-20852B66E86B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{562FB777-D851-4EED-B399-20852B66E86B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{562FB777-D851-4EED-B399-20852B66E86B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47B0A745-8F14-4392-843D-9BBD5038CDB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47B0A745-8F14-4392-843D-9BBD5038CDB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47B0A745-8F14-4392-843D-9BBD5038CDB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47B0A745-8F14-4392-843D-9BBD5038CDB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56104946-3A2B-450D-84B5-56D82A761ACC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56104946-3A2B-450D-84B5-56D82A761ACC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56104946-3A2B-450D-84B5-56D82A761ACC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56104946-3A2B-450D-84B5-56D82A761ACC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -87,6 +87,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FluentInstallation.Web\FluentInstallation.Web.csproj">
+      <Project>{47B0A745-8F14-4392-843D-9BBD5038CDB7}</Project>
+      <Name>FluentInstallation.Web</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FluentInstallation\FluentInstallation.csproj">
       <Project>{E3CBFFCA-62C8-482F-B85A-437B09F4CC64}</Project>
       <Name>FluentInstallation</Name>

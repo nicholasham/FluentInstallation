@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Security.Cryptography.X509Certificates;
 using FluentInstallation.Certificates;
+using FluentInstallation.Web.Certificates;
 using Microsoft.Web.Administration;
 using NSubstitute;
 using Xunit;

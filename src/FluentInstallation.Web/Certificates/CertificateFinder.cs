@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 
-namespace FluentInstallation.Certificates
+namespace FluentInstallation.Web.Certificates
 {
     /// <summary>
     ///     Does a search on the local computer looking for the first certificate matching the search criteria
