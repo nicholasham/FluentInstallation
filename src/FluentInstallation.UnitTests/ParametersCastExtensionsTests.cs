@@ -193,6 +193,16 @@ namespace FluentInstallation
             Assert.Equal("Parameter SiteName is required please specify it.", sut.Message);
         }
 
+
+        [Fact]
+        public void Cast_OnlySetsWritableProperties()
+        {
+            var parameters = new Hashtable { { "Port", 80 } };
+            var sut = parameters.Cast<ReadonlyParameter>();
+
+            Assert.Equal(90, sut.Port);
+        }
+
         public class MultipleParameters
         {
             public int Port { get; set; }
@@ -236,6 +246,11 @@ namespace FluentInstallation
         public class SingleShortParameter
         {
             public short Port { get; set; }
+        }
+
+        public class ReadonlyParameter
+        {
+            public short Port { get { return 90; } }
         }
     }
 }

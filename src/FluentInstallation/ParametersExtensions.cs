@@ -22,7 +22,9 @@ namespace FluentInstallation
         {
             var result = new T();
 
-            foreach (PropertyInfo property in typeof (T).GetProperties())
+            var writableProperties = typeof (T).GetProperties().Where(property => property.CanWrite);
+
+            foreach (PropertyInfo property in writableProperties)
             {
                 bool required = property.GetCustomAttributes(false).Any(a => a.GetType() == typeof (RequiredAttribute));
 
@@ -33,6 +35,7 @@ namespace FluentInstallation
 
                 if (keyValue != null)
                 {
+
                     if (property.PropertyType != typeof (string))
                     {
                         try
