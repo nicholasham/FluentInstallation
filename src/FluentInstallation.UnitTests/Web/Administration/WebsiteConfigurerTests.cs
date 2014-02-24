@@ -115,11 +115,13 @@ namespace FluentInstallation.Web.Administration
             var sut = new WebsiteConfigurer(_logger, website);
             var actual = false;
 
+            website.Bindings.Clear();
+
             Action<IBindingConfigurer> action = (binding) =>
             {
                 actual = binding != null;
             };
-
+            
             sut.AddBinding(action);
 
             Assert.True(actual);

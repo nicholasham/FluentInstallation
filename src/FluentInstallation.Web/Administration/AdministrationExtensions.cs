@@ -46,7 +46,7 @@ namespace FluentInstallation.Web.Administration
         {
             const string protocol = "http";
 
-            string bindingInformation = BindingInformation.Default().AssignNextAvailablePort().ToString();
+            string bindingInformation = BindingInformation.Default().ToString();
 
             return bindings.Add(bindingInformation, protocol);
         }
@@ -82,7 +82,12 @@ namespace FluentInstallation.Web.Administration
                 where supportedProtocols.Contains(binding.Protocol)
                 select binding).ToList();
 
-            return bindings.Max(x => x.ToBindingInformation().Port);
+            if (bindings.Count > 0)
+            {
+                return bindings.Max(x => x.ToBindingInformation().Port);    
+            }
+            
+            return 0;
         }
 
         internal static int Increment(this int value)

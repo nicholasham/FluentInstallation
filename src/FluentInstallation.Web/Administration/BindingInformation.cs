@@ -6,7 +6,6 @@ namespace FluentInstallation.Web.Administration
     internal class BindingInformation
     {
 
-        public static Func<int> NextAvailablePort = () => new ServerManager().GetHighestPort().Increment();
         public int Port { get; set; }
         public string IpAddress { get; set; }
         public string HostName { get; set; }
@@ -18,13 +17,6 @@ namespace FluentInstallation.Web.Administration
             HostName = null;
         }
         
-
-        public BindingInformation AssignNextAvailablePort()
-        {
-            Port = NextAvailablePort();
-            return this;
-        }
-
         public static BindingInformation Default()
         {
             return new BindingInformation();
