@@ -203,6 +203,15 @@ namespace FluentInstallation
             Assert.Equal(90, sut.Port);
         }
 
+        [Fact]
+        public void Cast_CastsParametersWithDotNotation()
+        {
+            var parameters = new Hashtable { { "Octopus.Machine.Name", "some machine name" } };
+            var sut = parameters.Cast<DotNotationParameter>();
+
+            Assert.Equal("some machine name", sut.OctopusMachineName);
+        }
+
         public class MultipleParameters
         {
             public int Port { get; set; }
@@ -251,6 +260,11 @@ namespace FluentInstallation
         public class ReadonlyParameter
         {
             public short Port { get { return 90; } }
+        }
+
+        public class DotNotationParameter
+        {
+            public string OctopusMachineName { get; set; }
         }
     }
 }

@@ -19,8 +19,10 @@
   </dependencies>
 </metadata>
   <files>
-    <file src="FluentInstallation.ps1" target="content" />
-    <file src="Deploy.ps1" target="content" />
+    <file src="FluentInstallation.ps1.pp" target="content" />
+    <file src="Deploy.ps1.pp" target="content" />
+    <file src="Deployment\ProjectInstaller.cs.pp" target="content\Deployment" />
+    <file src="Deployment\ProjectParameters.cs.pp" target="content\Deployment" />
   </files>
   
 </package>

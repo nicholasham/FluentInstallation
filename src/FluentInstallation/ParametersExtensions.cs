@@ -10,7 +10,7 @@ namespace FluentInstallation
         public static object GetValueWithLowerInvariantKey(this IDictionary dictionary, string keyname)
         {
             string key =
-                dictionary.Keys.Cast<string>().FirstOrDefault(k => k.ToLowerInvariant() == keyname.ToLowerInvariant());
+                dictionary.Keys.Cast<string>().FirstOrDefault(k => k.ToLowerInvariant().Replace(".", "") == keyname.ToLowerInvariant());
 
             if (key == null)
                 return null;
@@ -47,6 +47,7 @@ namespace FluentInstallation
                             throw new ParameterCastException(property.Name, property.PropertyType);
                         }
                     }
+                   
                     property.SetValue(result, keyValue, null);
                 }
             }

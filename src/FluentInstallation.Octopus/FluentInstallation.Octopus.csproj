@@ -42,14 +42,16 @@
     <Compile Include="..\assembly\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <None Include="Deployment\ProjectInstaller.cs.pp" />
+    <None Include="Deployment\ProjectParameters.cs.pp" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Deploy.ps1" />
+    <None Include="Deploy.ps1.pp" />
     <None Include="FluentInstallation.Octopus.nuspec">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="FluentInstallation.ps1" />
+    <None Include="FluentInstallation.ps1.pp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -76,6 +76,7 @@
     <Compile Include="Hosts\IHostEntryConfigurer.cs" />
     <Compile Include="Hosts\IHostsConfigurer.cs" />
     <Compile Include="Hosts\LoggerExtensions.cs" />
+    <Compile Include="WebExceptions.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FluentInstallation\FluentInstallation.csproj">

@@ -79,7 +79,7 @@ namespace FluentInstallation.Web.Administration
 
             if (foundSite == null)
             {
-                throw Exceptions.NoSiteFoundMatchingName(name);
+                throw WebExceptions.NoSiteFoundMatchingName(name);
             }
 
             configurer( new WebsiteConfigurer(Logger, foundSite));
@@ -94,7 +94,7 @@ namespace FluentInstallation.Web.Administration
         {
             if (!ServerManager.SiteExists(name))
             {
-                throw Exceptions.NoSiteFoundMatchingName(name);
+                throw WebExceptions.NoSiteFoundMatchingName(name);
             }
 
             return this;
@@ -104,7 +104,7 @@ namespace FluentInstallation.Web.Administration
         {
             if (!ServerManager.ApplicationPoolExists(name))
             {
-                throw Exceptions.NoApplicationPoolFoundMatchingName(name);
+                throw WebExceptions.NoApplicationPoolFoundMatchingName(name);
             }
 
             return this;

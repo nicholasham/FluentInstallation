@@ -65,7 +65,7 @@ namespace FluentInstallation.Web.Administration
 
                 if (!result.Found)
                 {
-                   throw Exceptions.NoCertificateFoundMatchingThumbprint(thumbprint);
+                    throw WebExceptions.NoCertificateFoundMatchingThumbprint(thumbprint);
                 }
 
                 binding.Protocol = "https";

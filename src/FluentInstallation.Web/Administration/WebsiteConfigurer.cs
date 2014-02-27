@@ -103,7 +103,7 @@ namespace FluentInstallation.Web.Administration
 
                 if (foundVirtualDirectory == null)
                 {
-                    throw Exceptions.VirtualDirectoryNotFoundInSite(site, alias);
+                    throw WebExceptions.VirtualDirectoryNotFoundInSite(site, alias);
                 }
 
                 site.Application().VirtualDirectories.Remove(foundVirtualDirectory);
@@ -136,7 +136,7 @@ namespace FluentInstallation.Web.Administration
         {
             if (!_website.Applications.Exists(alias))
             {
-                throw Exceptions.ApplicationNotFoundInSite(_website, alias);
+                throw WebExceptions.ApplicationNotFoundInSite(_website, alias);
             }
 
             return this;
@@ -146,7 +146,7 @@ namespace FluentInstallation.Web.Administration
         {
             if (!_website.Application().VirtualDirectories.Exists(alias))
             {
-                throw Exceptions.VirtualDirectoryNotFoundInSite(_website, alias);
+                throw WebExceptions.VirtualDirectoryNotFoundInSite(_website, alias);
             }
 
             return this;
