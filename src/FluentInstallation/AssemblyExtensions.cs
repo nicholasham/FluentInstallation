@@ -26,7 +26,7 @@ namespace FluentInstallation
 
         public static IEnumerable<Type> FindTypesImplementing<T>(this Assembly assembly)
         {
-           return assembly.GetTypes().Where(type => typeof (T).IsAssignableFrom(type));
+            return assembly.GetLoadableTypes().Where(type => typeof(T).IsAssignableFrom(type));
         }
 
         public static IEnumerable<Type> FindInstallerTypes(this Assembly assembly)
@@ -40,7 +40,18 @@ namespace FluentInstallation
             return assembly.FindInstallerTypes().Where(type => type.GetCustomAttributes<DefaultInstallerAttribute>().Any());
         }
 
-
+        public static IEnumerable<Type> GetLoadableTypes(this Assembly assembly)
+        {
+            
+            try
+            {
+                return assembly.GetTypes();
+            }
+            catch (ReflectionTypeLoadException e)
+            {
+                return e.Types.Where(t => t != null && t.Assembly == assembly);
+            }
+        }
 
     }
 }
