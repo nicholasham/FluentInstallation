@@ -6,8 +6,11 @@ namespace FluentInstallation
 {
     public class AssemblyLoader : IAssemblyLoader
     {
-        private Func<string> GetAssemblyFilePath { get; set; }
-        
+        static AssemblyLoader()
+        {
+            AppDomain.CurrentDomain.AssemblyResolve += LoadFromSameFolder;
+        }
+
         public AssemblyLoader(Func<string> getAssemblyFilePath)
         {
             if (getAssemblyFilePath == null)
@@ -18,22 +21,32 @@ namespace FluentInstallation
             GetAssemblyFilePath = getAssemblyFilePath;
         }
 
+        private Func<string> GetAssemblyFilePath { get; set; }
+
         public Assembly Load()
         {
-            var assemblyFilePath = GetAssemblyFilePath();
+            string assemblyFilePath = GetAssemblyFilePath();
 
             if (!Directory.Exists(assemblyFilePath))
             {
-              assemblyFilePath =  Path.Combine(this.Assembly().DirectoryPath(), assemblyFilePath);
+                assemblyFilePath = Path.Combine(this.Assembly().DirectoryPath(), assemblyFilePath);
             }
 
             if (!File.Exists(assemblyFilePath))
             {
-               throw Exceptions.AssemblyNotFound(assemblyFilePath);
+                throw Exceptions.AssemblyNotFound(assemblyFilePath);
             }
-            
+
             return Assembly.LoadFrom(assemblyFilePath);
         }
-
+        
+        private static Assembly LoadFromSameFolder(object sender, ResolveEventArgs args)
+        {
+            string folderPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            string assemblyPath = Path.Combine(folderPath, new AssemblyName(args.Name).Name + ".dll");
+            if (File.Exists(assemblyPath) == false) return null;
+            Assembly assembly = Assembly.LoadFrom(assemblyPath);
+            return assembly;
+        }
     }
 }
