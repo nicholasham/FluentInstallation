@@ -84,7 +84,7 @@ namespace FluentInstallation.Web.Administration
 
             configurer( new WebsiteConfigurer(Logger, foundSite));
 
-            Logger.Info(foundSite.ContructRemoveMessage);
+            Logger.Info(foundSite.ContructAlterMessage);
 
 
             return this;
