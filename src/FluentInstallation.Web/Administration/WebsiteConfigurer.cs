@@ -73,9 +73,19 @@ namespace FluentInstallation.Web.Administration
         {
             return Configure(site =>
             {
-                var binding = site.Bindings.AddNewWithDefaults();
-                action(new BindingConfigurer(binding));
-                Logger.Info(binding.ContructAddMessage);
+                var newBinding = site.Bindings.AddNewWithDefaults();
+                action(new BindingConfigurer(newBinding));
+
+                var bindings = site.Bindings.ToList(); 
+                
+                foreach (var binding in bindings)
+                {
+                    site.Bindings.Remove(binding);
+                    site.Bindings.Add(binding);
+                }
+
+                
+                Logger.Info(newBinding.ContructAddMessage);
             });
         }
 
