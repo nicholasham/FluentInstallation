@@ -1,9 +1,10 @@
 ﻿
 $path = Split-Path -Parent $MyInvocation.MyCommand.path
-$moduleFile = @(Get-ChildItem $path  -Filter FluentInstallation.dll -Recurse )[0].FullName
 
+$projectBinPath = Join-Path $path "Bin"
 $projectAssemblyFileName = "$OutputFileName$"
-$projectAssemblyFile = @(Get-ChildItem $path  -Filter $projectAssemblyFileName -Recurse )[0].FullName
+$projectAssemblyFile = @(Get-ChildItem $projectBinPath  -Filter $projectAssemblyFileName -Recurse )[0].FullName
+$moduleFile = @(Get-ChildItem $projectBinPath  -Filter FluentInstallation.dll -Recurse )[0].FullName
 
 Remove-Module FluentInstallation -ErrorAction SilentlyContinue
 Import-Module $moduleFile
