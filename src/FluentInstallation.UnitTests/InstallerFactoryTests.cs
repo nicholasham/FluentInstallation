@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using FluentInstallation.TestNoDefaultInstallerAssembly;
 using Xunit;
 
 namespace FluentInstallation
@@ -26,6 +27,13 @@ namespace FluentInstallation
             var result = sut.Create();
 
             Assert.IsType<TestInstaller1>(result);
+        }
+
+        [Fact]
+        public void Create_ThrowsWhenUnableToFindADefaultInstallerInAnAssembly()
+        {
+            var sut = new InstallerFactory(() => typeof(MyInstaller).Assembly);
+            Assert.Throws<InvalidOperationException>(() => sut.Create());
         }
 
         [Fact]

@@ -23,11 +23,18 @@ namespace FluentInstallation
 
         public IInstaller Create()
         {
-            return GetAssembly()
+            var installer = GetAssembly()
                         .FindInstallerTypesMarkedAsDefault()
                         .Select(Activator.CreateInstance)
                         .Cast<IInstaller>()
                         .FirstOrDefault();
+
+            if (installer == null)
+            {
+                throw new InvalidOperationException("Unable to find any installer in assembly marked with the DefaultInstaller attribute.");
+            }
+
+            return installer;
         }
 
         public IInstaller Create(string typeName)

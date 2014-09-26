@@ -87,6 +87,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\FluentInstallation.TestNoDefaultInstallerAssembly\FluentInstallation.TestNoDefaultInstallerAssembly.csproj">
+      <Project>{8BF02481-7344-4BFE-9291-739400B06881}</Project>
+      <Name>FluentInstallation.TestNoDefaultInstallerAssembly</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FluentInstallation.Web\FluentInstallation.Web.csproj">
       <Project>{47B0A745-8F14-4392-843D-9BBD5038CDB7}</Project>
       <Name>FluentInstallation.Web</Name>
